@@ -1,0 +1,10 @@
+<map id="Magmio::BookHandlerApi" name="Magmio::BookHandlerApi">
+<area shape="rect" id="node2" href="$class_magmio_1_1_counters.html" title="Magmio::Counters" alt="" coords="5,5,144,32"/>
+<area shape="rect" id="node3" href="$class_magmio_1_1_mapping.html" title="Library for convering SID to address. " alt="" coords="9,96,145,123"/>
+<area shape="rect" id="node4" href="$class_magmio_1_1_common.html" title="Class for simple pass of the most commonly used references. " alt="" coords="543,96,684,123"/>
+<area shape="rect" id="node5" href="$class_magmio_1_1_fw_info.html" title="Reads detailed info from FPGA. " alt="" coords="169,5,295,32"/>
+<area shape="rect" id="node6" href="$class_magmio_1_1_exception_queue.html" title="Magmio::ExceptionQueue" alt="" coords="319,5,507,32"/>
+<area shape="rect" id="node7" href="$class_magmio_1_1_counters_top.html" title="Counters class is used to cover statistics of processed data from all individual modules (decoder..." alt="" coords="532,5,695,32"/>
+<area shape="rect" id="node8" href="$class_magmio_1_1_settings.html" title="Class for loading settings from config class. " alt="" coords="849,5,983,32"/>
+<area shape="rect" id="node9" href="$class_magmio_1_1_log.html" title="Magmio::Log" alt="" coords="719,5,824,32"/>
+</map>

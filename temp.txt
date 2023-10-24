@@ -1,0 +1,134 @@
+Initializing model...
+ Setting sid from main to triggerstretegy...7959882
+ create thread with swUpdHandler 7959882
+thread created  7959882
+Running Magmio model...
+sw_update: run strategy from SW for SID #7959882
+!!!!!!!!!!!!!!!!!!!!!!!!in startegy
+!!!!!!!!symbol_id406930
+!!!!!!!!!!!!!!!!!!!!!!!!in startegy
+!!!!!!!!symbol_id406930
+!!!!!!!!!!!!!!!!!!!!!!!!in startegy
+!!!!!!!!symbol_id406930
+!!!!!!!!!!!!!!!!!!!!!!!!in startegy
+!!!!!!!!symbol_id406930
+!!!!!!!!!!!!!!!!!!!!!!!!in startegy
+!!!!!!!!symbol_id406930
+!!!!!!!!!!!!!!!!!!!!!!!!in startegy
+!!!!!!!!symbol_id406930
+!!!!!!!!!!!!!!!!!!!!!!!!in startegy
+!!!!!!!!symbol_id406930
+
++===============================================================+
+| Statistics of processed data                                  |
++---------------------------------------------+-----------------+
+| Unit                                        | Value           |
++---------------------------------------------+-----------------+
+| Packet Filter    0  - received packets      |          100000 | 
+| Packet Filter    1  - received packets      |               0 | 
+| Packet Filter    3  - received packets      |               0 | 
+| Packet Filter    0  - discarded packets     |           43563 | 
+| Packet Filter    1  - discarded packets     |               0 | 
+| Packet Filter    3  - discarded packets     |               0 | 
+| Packet Filter    0  - bad CRC packets       |               0 | 
+| Packet Filter    1  - bad CRC packets       |               0 | 
+| Packet Filter    3  - bad CRC packets       |               0 | 
+| Packet Filter    0  - passed to SW          |               0 | 
+| Packet Filter    1  - passed to SW          |               0 | 
+| Packet Filter    3  - passed to SW          |               0 | 
+| Packet Filter    0  - overflow SW           |               0 | 
+| Packet Filter    1  - overflow SW           |               0 | 
+| Packet Filter    3  - overflow SW           |               0 | 
+| Packet Filter    0  - forwarded market      |           56437 | 
+| Packet Filter    0  - overflow market       |               0 | 
+| Packet Filter    0  - forwarded ord.dec     |               0 | 
+| Packet Filter    1  - forwarded ord.dec     |               0 | 
+| Packet Filter    0  - overflow ord.dec      |               0 | 
+| Packet Filter    1  - overflow ord.dec      |               0 | 
+| Packet Filter    3  - overflow ord.dec      |               0 | 
+| Arbitrage A      0  - received packets      |           56437 | 
+| Arbitrage A      0  - forwarded packets     |           52443 | 
+| Arbitrage A      0  - discarded packets     |            3994 | 
+| Arbitrage A      0  - not found packets     |               0 | 
+| Recovery buffer  0  - received packets      |           52443 | 
+| Recovery buffer  0  - forwarded packets     |           52443 | 
+| Recovery buffer  0  - discarded packets     |               0 | 
+| Recovery buffer  0  - buffered packets      |               0 | 
+| Decoder          0  - received packets      |           52443 | 
+| Decoder          0  - exported messages     |          101517 | 
+| Decoder          0  - dummy EOP messages    |               0 | 
+| Decoder          0  - corrupt packets       |               0 | 
+| Order Decoder    0  - received packets      |               0 | 
+| Order Decoder    1  - received packets      |               0 | 
+| Order Decoder    2  - received packets      |               0 | 
+| Order Decoder    3  - received packets      |               0 | 
+| Order Decoder    0  - exported messages     |               0 | 
+| Order Decoder    1  - exported messages     |               0 | 
+| Order Decoder    2  - exported messages     |               0 | 
+| Order Decoder    3  - exported messages     |               0 | 
+| Order Decoder    0  - SidMap written        |               0 | 
+| Order Decoder    1  - SidMap written        |               0 | 
+| Order Decoder    2  - SidMap written        |               0 | 
+| Order Decoder    3  - SidMap written        |               0 | 
+| Order Decoder    0  - SidMap added          |               0 | 
+| Order Decoder    1  - SidMap added          |               0 | 
+| Order Decoder    2  - SidMap added          |               0 | 
+| Order Decoder    3  - SidMap added          |               0 | 
+| Order Decoder    0  - SidMap deleted        |               0 | 
+| Order Decoder    1  - SidMap deleted        |               0 | 
+| Order Decoder    2  - SidMap deleted        |               0 | 
+| Order Decoder    3  - SidMap deleted        |               0 | 
+| Order Decoder    0  - SidMap searched       |               0 | 
+| Order Decoder    1  - SidMap searched       |               0 | 
+| Order Decoder    2  - SidMap searched       |               0 | 
+| Order Decoder    3  - SidMap searched       |               0 | 
+| Order Decoder    0  - SidMap missed         |               0 | 
+| Order Decoder    1  - SidMap missed         |               0 | 
+| Order Decoder    2  - SidMap missed         |               0 | 
+| Order Decoder    3  - SidMap missed         |               0 | 
+| Trigg. Strategy     - exported messages     |               1 | 
+| Seqnum filter    0  - received messages     |          101518 | 
+| Seqnum filter    0  - forwarded messages    |          101518 | 
+| Seqnum filter    0  - discarded messages    |               0 | 
+| Mapping             - search requests       |           50363 | 
+| Mapping             - symbol found          |               4 | 
+| Mapping             - symbol missed         |           50359 | 
+| Book                - received messages     |          101518 | 
+| Book                - SW sync received      |               0 | 
+| Book                - discarded by OT       |           51152 | 
+| Book                - unknown symbols       |           50359 | 
+| Book                - exported updates      |               7 | 
+| Strategy Engine     - book updates          |               7 | 
+| Strategy Engine     - sent feedback         |               7 | 
+| Strategy Engine     - sent orders           |               4 | 
+| Order Sender     0  - requests from HLS     |               4 | 
+| Order Sender     1  - requests from HLS     |               0 | 
+| Order Sender     2  - requests from HLS     |               0 | 
+| Order Sender     3  - requests from HLS     |               0 | 
+| Order Sender     0  - requests from SW      |               0 | 
+| Order Sender     1  - requests from SW      |               0 | 
+| Order Sender     2  - requests from SW      |               0 | 
+| Order Sender     3  - requests from SW      |               0 | 
+| Order Sender     0  - session disabled      |               4 | 
+| Order Sender     1  - session disabled      |               0 | 
+| Order Sender     2  - session disabled      |               0 | 
+| Order Sender     3  - session disabled      |               0 | 
+| Order Sender     0  - input fifo full       |               0 | 
+| Order Sender     1  - input fifo full       |               0 | 
+| Order Sender     2  - input fifo full       |               0 | 
+| Order Sender     3  - input fifo full       |               0 | 
+| Order Sender     0  - TCP window full       |               0 | 
+| Order Sender     1  - TCP window full       |               0 | 
+| Order Sender     2  - TCP window full       |               0 | 
+| Order Sender     3  - TCP window full       |               0 | 
+| Order Sender     0  - bad requests          |               0 | 
+| Order Sender     1  - bad requests          |               0 | 
+| Order Sender     2  - bad requests          |               0 | 
+| Order Sender     3  - bad requests          |               0 | 
+| Order Sender     0  - generated orders      |               0 | 
+| Order Sender     1  - generated orders      |               0 | 
+| Order Sender     2  - generated orders      |               0 | 
+| Order Sender     3  - generated orders      |               0 | 
++---------------------------------------------+-----------------+
+
+joining thread7959882

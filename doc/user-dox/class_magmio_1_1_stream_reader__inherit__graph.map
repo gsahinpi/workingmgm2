@@ -1,0 +1,9 @@
+<map id="Magmio::StreamReader" name="Magmio::StreamReader">
+<area shape="rect" id="node2" href="$class_magmio_1_1_book_channel.html" title="API for reading book channel (stream) " alt="" coords="233,5,401,32"/>
+<area shape="rect" id="node3" href="$class_magmio_1_1_decoder.html" title="API for reading from Decoder stream. " alt="" coords="249,56,385,83"/>
+<area shape="rect" id="node4" href="$class_magmio_1_1_decoder_in.html" title="API for reading from Decoder INPUT stream. " alt="" coords="243,107,391,133"/>
+<area shape="rect" id="node5" href="$class_magmio_1_1_etob.html" title="API for reading from Enhanced Top of Book stream. " alt="" coords="262,157,373,184"/>
+<area shape="rect" id="node7" href="$class_magmio_1_1_pcap_reader.html" title="API class for recording all incoming traffic to a pcap file. " alt="" coords="238,208,397,235"/>
+<area shape="rect" id="node8" href="$class_magmio_1_1_status_channel.html" title="API for reading events from status channel. " alt="" coords="229,259,405,285"/>
+<area shape="rect" id="node6" href="$class_magmio_1_1_strategy.html" title="API for reading from Strategy Engine stream. This file shows how to correctly read from Strategy Engi..." alt="" coords="454,157,591,184"/>
+</map>

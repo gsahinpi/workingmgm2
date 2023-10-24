@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Magmio a.s." />
+      <link rel="shortcut icon" href="img/favicon.ico" />
+    <title>API - Magmio User's Manual</title>
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/theme_extra.css" />
+        <link href="css/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "API";
+        var mkdocs_page_input_path = "api.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+    <![endif]--> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="./index.html">
+          <img src="img/magmio-slogan-logo.png" class="logo" alt="Logo"/>
+        </a>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Magmio User Guide</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="index.html">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="exanic_tools.html">Exanic tools</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="api.html">API</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#api-overview">API overview</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#api-examples">API examples</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#api-example">API-Example</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#user-parameters">User parameters</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#strategy-engine-consistency-check">Strategy Engine consistency check</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#reading-outputs">Reading outputs</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#order-sender">Order Sender</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#verbosity-levels-and-log-file">Verbosity levels and log file</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#igmp-tcp-and-udp-connection-recording">IGMP, TCP and UDP connection recording</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#global-persymbolro-persymbolrw-and-pergroup-parameters">Global, persymbolro, persymbolrw and pergroup parameters</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#global-parameters">Global parameters</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#persymbolro-parameters">Persymbolro parameters</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#persymbolrw-parameters">Persymbolrw parameters</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#pergroup-parameters">Pergroup parameters</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="mapping_configuration.html">Mapping and configuration files</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="strategies.html">Writing strategies</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="hls_strategy_simulation.html">Testing strategies in Vivado HLS</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="recovery.html">Recovery</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="book_channel.html">Book Channel</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="strategy_prefilter.html">Strategy Prefilter</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="riskcheck.html">PreTrade Risk Check</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="order_sender.html">Order Sender</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="status_channel.html">Status information</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="firmware_synthesis.html">Firmware synthesis</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="model_verification.html">Software model, simulation and verification</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="about.html">About</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="./index.html">Magmio User's Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><hr/>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="magmio-api">Magmio API</h1>
+<h2 id="api-overview">API overview</h2>
+<p>Magmio application programming interface (API) allows to access and control Magmio application through high-level interface implemented in C++11. The api should be used as a dynamic shared library and accessed through <code>Magmio::</code> namespace.</p>
+<p>The most important functions of the API are:</p>
+<ul>
+<li>Initialization of a FPGA card and Magmio application</li>
+<li>Reading/writing of global, persymbol and pergroup parameters</li>
+<li>Reading messages from Decoder, Book, Enhanced Top of Book and Strategy Engine streams</li>
+<li>Reading events generated by Status channel and Order Sender in the card</li>
+<li>Pre-Trade Risk Check configuration</li>
+<li>Strategy Prefilter configuration</li>
+<li>Managing orders</li>
+</ul>
+<p>Detailed information about API class can be found in <a href="./user-dox/index.html">Doxygen documentation</a>.</p>
+<h2 id="api-examples">API examples</h2>
+<p>Magmio package contains an example application which shows how to use API to initialize Magmio platform, modify all parameters (global, persymbol, pergroup) and read output events/messages from Decoder, Status, Order Sender, Book, Enhanced Top of Book and Strategy Engine streams (channels). It also contains an example of using the Order Sender.</p>
+<p>Structure of Magmio examples:</p>
+<ul>
+<li><strong>~/my-local/examples/api-example/</strong> - Directory with a general example application of using Magmio API<ul>
+<li><strong>book_channel.cpp/.h</strong> - Reading messages from Book channel.</li>
+<li><strong>decoder_stream.cpp/.h</strong> - Reading messages from Decoder stream.</li>
+<li><strong>etob_stream.cpp/.h</strong> - Reading messages from Enhanced Top of Book.</li>
+<li><strong>global_params.cpp/.h</strong> - Reading/writing global parameters.</li>
+<li><strong>init.cpp/.h</strong> - Magmio platform initialization.</li>
+<li><strong>main.cpp</strong> - Main application which links all files into one binary application. Magmio platform can be controlled using this application with appropriate command-line parameters.</li>
+<li><strong>order_sender.cpp/.h</strong> - Order Sender example code.</li>
+<li><strong>pergroup_params.cpp/.h</strong> - Reading/writing pergroup parameters.</li>
+<li><strong>persymbolro_params.cpp/.h</strong> - Reading/writing persymbolro parameters.</li>
+<li><strong>persymbolrw_params.cpp/.h</strong> - Reading/writing persymbolrw parameters.</li>
+<li><strong>risk_check.cpp/.h</strong> - Setting/reading Pre-Trade Risk Check module parameters.</li>
+<li><strong>status_channel.cpp/.h</strong> - Reading events from Status channel.</li>
+<li><strong>strategy_prefilter.cpp/.h</strong> - Setting/reading Strategy prefilter module parameters.</li>
+<li><strong>strategy_stream.cpp/.h</strong> - Reading messages from Strategy Engine stream in blocking/non-blocking mode.</li>
+</ul>
+</li>
+</ul>
+<h3 id="api-example">API-Example</h3>
+<p>Following text shows how to initialize Magmio platform using api-example application. Respective strategies <code>build</code> directories should contain firmware for this example to work. You can <a href="firmware_synthesis.html">synthesise</a> your own firmware using one of the strategies provided in Magmio package. In the example we use <code>fair-price</code> strategy from a local copy of Magmio created for Nasdaq ITCH5 market.</p>
+<p>Required (mandatory) parameters:</p>
+<ul>
+<li><code>-f &lt;firmware_file&gt;</code> - loads firmware into the card</li>
+<li><code>-m &lt;mapping_file&gt;</code> - loads mapping file into the card</li>
+<li><code>-c &lt;config_file&gt;</code> - loads configuration for Magmio application (packet filter rules, network interface settings, order sender settings,&hellip;)</li>
+</ul>
+<pre><code>$ cd ~/my-local/examples/api-example/
+$ make
+$ ./main -f ../../strategies/fair-price/build/fair-price_&lt;build_number&gt;.bit
+         -m ../../configs/itch5/mapping.txt
+         -c ../../configs/itch5/api.xml
+</code></pre>
+<h4 id="user-parameters">User parameters</h4>
+<p>Application can also be used for loading <a href="#global-persymbolro-persymbolrw-and-pergroup-parameters">global, persymbolro, persymbolrw and pergroup parameters</a> into the card. Use command-line parameters <code>-g &lt;global_file&gt;</code>, <code>-l &lt;persymbolro_file&gt;</code>, <code>-r &lt;persymbolrw_file&gt;</code> and <code>-u &lt;pergroup_file&gt;</code> to load parameters in the card.</p>
+<p>To perform basic tests of the parameters, use command-line parameters <code>-G</code>, <code>-L</code>, <code>-R</code> or <code>-U</code>. These parameters show how to manually write parameters into the card and how to read them back.</p>
+<h4 id="strategy-engine-consistency-check">Strategy Engine consistency check</h4>
+<p>The strategy used in the Strategy Engine can be verified using the <code>-C &lt;strategy_file&gt;</code> command-line parameter. If this check succeeds, the consistency between the strategy source file and Strategy Engine is confirmed. This parameter is optional but recommended to use.</p>
+<h4 id="reading-outputs">Reading outputs</h4>
+<p>Example application also shows how to read output messages and events from Decoder, Status, Book, Enhanced Top of Book and Strategy Engine streams (channels). Use optional command-line parameters <code>-d</code>, <code>-E</code>, <code>-w</code>, <code>-e</code> or <code>-s/S</code>. Reading output streams may negatively affect the performance of the card especially when the output is printed on screen or to file. It is caused by the I/O operations in general, therefore we recommend to fine tune your application with stream reading enabled in non production environment, where possibly lower performance is not an issue. For the best performance in production environment it is recomended to disable any stream reading.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It may happen that the CPU is used at 100% when running the application. The reason behind is that internally, we use spin loops to achieve minimum possible latency.</p>
+</div>
+<p>Additional information <em>(Info Channel)</em> is added to almost all of the above mentioned outputs (except messages from Book channel):</p>
+<ul>
+<li><em>Sending Time</em> - Timestamp assigned by the card upon sending data to the software (DMA)</li>
+<li><em>Hardware Time</em> - Timestamp assigned by the card upon packet arrival</li>
+<li><em>Exchange Time</em> - Timestamp assigned by the exchange</li>
+<li><em>Flags</em> - Internal flags, e.g. end of packet signalization</li>
+<li><em>Feed Type</em> - Type of data feed (from api.xml)</li>
+<li><em>Channel ID</em> - Number of packet filter rule that matched this packet</li>
+<li><em>Packet seqnum</em> - Sequence number of the packet that caused this update</li>
+<li><em>Message seqnum</em> - Sequence number of the message that caused this update</li>
+<li><em>Decoder seqnum</em> - Sequence number of the Decoder message within this packet</li>
+<li><em>Message type</em> - Message template identification</li>
+</ul>
+<h4 id="order-sender">Order Sender</h4>
+<p>Example of working with <a href="order_sender.html">Order Sender</a> is enabled with optional command-line parameter <code>-o &lt;num&gt;</code>. Basic test of sending orders through API is activated using parameter <code>-O &lt;sid&gt;</code>.</p>
+<h4 id="verbosity-levels-and-log-file">Verbosity levels and log file</h4>
+<p>By default, only errors are displayed on the screen. This behavior can be adjusted by parameter <code>-v &lt;level&gt;</code> to set desired screen verbosity level. Option <code>-V &lt;level&gt;</code> enables logging into a file. Name of the file can be specified by <code>-D</code> argument, otherwise <strong>log.txt</strong> is used.</p>
+<p>Available verbosity levels are:</p>
+<ul>
+<li>0 - Quiet (no information is displayed)</li>
+<li>1 - Error (only errors are displayed)</li>
+<li>2 - Warning (warnings are displayed)</li>
+<li>3 - Info (displays basic status information)</li>
+<li>4 - Debug (displays detailed information including application variables values)</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Default setting is <code>Error</code> mode at screen and <code>Quiet</code> at file logging.</p>
+</div>
+<h2 id="igmp-tcp-and-udp-connection-recording">IGMP, TCP and UDP connection recording</h2>
+<p>Magmio API can record IGMP, TCP and UDP communication with the market. The record is stored into PCAP file.</p>
+<h2 id="global-persymbolro-persymbolrw-and-pergroup-parameters">Global, persymbolro, persymbolrw and pergroup parameters</h2>
+<p>Magmio application contains following parameters:</p>
+<table>
+<thead>
+<tr>
+<th>Type of parameters</th>
+<th>Access from software</th>
+<th>Access from strategy</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>global parameters</td>
+<td>read/write</td>
+<td>read/write</td>
+<td>shared among all instruments</td>
+</tr>
+<tr>
+<td>pergroup parameters</td>
+<td>read/write</td>
+<td>read/write</td>
+<td>shared among multiple instruments with the same group ID</td>
+</tr>
+<tr>
+<td>persymbolro parameters</td>
+<td>read/write</td>
+<td>read</td>
+<td>private for each instrument</td>
+</tr>
+<tr>
+<td>persymbolrw parameters</td>
+<td>read/write</td>
+<td>read/write</td>
+<td>private for each instrument</td>
+</tr>
+</tbody>
+</table>
+<p>These parameters are used in <a href="strategies.html#trading-logic">trading logic</a> inside of FPGA. Number of parameters can be changed upon request. Every instrument (identified by symbol ID) has a pointer (Group ID) to a memory location where pergroup parameters are stored. There are multiple user parameters for every pointer (Group ID).</p>
+<p><img alt="Relation between persymbol and pergroup parameters" src="img/parameters.png" /></p>
+<p>All parameters are type of <code>int32_t</code> and are available through Magmio API. Parameters can be set and read through Magmio API methods or initialized from file. On top of that, global, persymbolrw and pergroup parameters can be <a href="strategies.html#changing-global-persymbolrw-and-pergroup-parameters">changed from within the strategy</a>. API methods for initialization and working with parameters are described below:</p>
+<h3 id="global-parameters">Global parameters</h3>
+<ul>
+<li>Magmio API methods:<ul>
+<li><code>api.params.global.setParam(param)</code> - Set single parameter</li>
+<li><code>api.params.global.getParam(param)</code> - Read single parameter</li>
+<li><code>api.params.global.setParams(params)</code> - Set up to all parameters</li>
+<li><code>api.params.global.getParams(params)</code> - Read up to all parameters</li>
+<li><code>api.params.global.getNumParams()</code> - Returns maximum number of parameters supported in firmware</li>
+<li>See <a href="./user-dox/class_magmio_1_1_global_params.html">Doxygen documentation</a> and <a href="./user-dox/global_params_8cpp-example.html">API-Example code</a> for more information</li>
+</ul>
+</li>
+<li>Initialization from file:<ul>
+<li>First column - parameter ID</li>
+<li>Second column - parameter value</li>
+<li>Columns are separated by semicolon</li>
+</ul>
+</li>
+</ul>
+<p>Example of initialization file:</p>
+<pre><code>0;1158
+1:59856
+38;15
+127;1024
+</code></pre>
+<h3 id="persymbolro-parameters">Persymbolro parameters</h3>
+<ul>
+<li>Magmio API methods:<ul>
+<li><code>api.params.persymbolro.setParam(symbol_id, param)</code> - Set single parameter</li>
+<li><code>api.params.persymbolro.getParam(symbol_id, param)</code> - Read single parameter</li>
+<li><code>api.params.persymbolro.setParams(symbol_id, params)</code> - Set all parameters assigned to single symbol ID</li>
+<li><code>api.params.persymbolro.getParams(symbol_id, params)</code> - Read all parameters assigned to single symbol ID</li>
+<li><code>api.params.persymbolro.getNumParams()</code> - Returns maximum number of parameters supported in firmware</li>
+<li>See <a href="./user-dox/class_magmio_1_1_per_symbol_ro_params.html">Doxygen documentation</a> and <a href="./user-dox/persymbolro_params_8cpp-example.html">API-Example code</a> for more information</li>
+</ul>
+</li>
+<li>Initialization from file:<ul>
+<li>First column - symbol ID</li>
+<li>Second column - parameter value (USRPARAM0)</li>
+<li>Third column - parameter value (USRPARAM1)</li>
+<li>Following columns - Other parameter values (up to persymbolro parameters count)</li>
+<li>Columns are separated by semicolon</li>
+</ul>
+</li>
+</ul>
+<p>Example of initialization file:</p>
+<pre><code>38401;7;3128;1024;9889
+38402;45;1258;0;0
+38403;789;1000;200;1
+</code></pre>
+<h3 id="persymbolrw-parameters">Persymbolrw parameters</h3>
+<ul>
+<li>Magmio API methods:<ul>
+<li><code>api.params.persymbolrw.setParam(symbol_id, param)</code> - Set single parameter</li>
+<li><code>api.params.persymbolrw.getParam(symbol_id, param)</code> - Read single parameter</li>
+<li><code>api.params.persymbolrw.setParams(symbol_id, params)</code> - Set all parameters to single symbol ID</li>
+<li><code>api.params.persymbolrw.getParams(symbol_id, params)</code> - Read all parameters from single symbol ID</li>
+<li><code>api.params.persymbolrw.getNumParams()</code> - Returns maximum number of parameters supported in firmware</li>
+<li>See <a href="./user-dox/class_magmio_1_1_per_symbol_rw_params.html">Doxygen documentation</a> for more information</li>
+</ul>
+</li>
+<li>Initialization from file:<ul>
+<li>First column - symbol ID</li>
+<li>Second column - parameter value (USRPARAM0)</li>
+<li>Third column - parameter value (USRPARAM1)</li>
+<li>Following columns - Other parameter values (up to persymbolrw parameters count)</li>
+<li>Columns are separated by semicolon</li>
+</ul>
+</li>
+</ul>
+<p>Example of initialization file:</p>
+<pre><code>38401;7;3128;1024;9889
+38402;45;1258;0;0
+38403;789;1000;200;1
+</code></pre>
+<p>The difference between persymbolro and persymbolrw parameters consists in different hardware implementation, which allows persymbolrw parameters to be mutable from within strategy engine. However, keep in mind, that those two are completly different sets of parameters.</p>
+<h3 id="pergroup-parameters">Pergroup parameters</h3>
+<ul>
+<li>Magmio API methods:<ul>
+<li><code>api.params.pergroup.setParam(group_id, param)</code> - Set single parameter</li>
+<li><code>api.params.pergroup.getParam(group_id, param)</code> - Read single parameter</li>
+<li><code>api.params.pergroup.setParams(group_id, params)</code> - Set all parameters assigned to single group ID</li>
+<li><code>api.params.pergroup.getParams(group_id, params)</code> - Read all parameters assigned to single group ID</li>
+<li>See <a href="./user-dox/class_magmio_1_1_per_group_params.html">Doxygen documentation</a> for more information</li>
+</ul>
+</li>
+<li>Initialization from file:<ul>
+<li>First column - group ID</li>
+<li>Second column - parameter value (USRPARAM0)</li>
+<li>Third column - parameter value (USRPARAM1)</li>
+<li>Following columns - Other parameter values (up to pergroup parameters count)</li>
+<li>Columns are separated by semicolon</li>
+</ul>
+</li>
+<li>Linking between Symbol ID and Group ID is done using <a href="mapping_configuration.html">mapping file</a>.</li>
+</ul>
+<p>Example of initialization file:</p>
+<pre><code>276;0;500;1000;1500;2000
+278;2;4;7894;0;45
+288;1111;2222;3333;4444;5555
+</code></pre>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="exanic_tools.html" class="btn btn-neutral float-left" title="Exanic tools"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="mapping_configuration.html" class="btn btn-neutral float-right" title="Mapping and configuration files">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Copyright &copy; 2022 <a href="https://www.magmio.com/contact">Magmio a.s.</a></p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="exanic_tools.html" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="mapping_configuration.html" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '.';</script>
+    <script src="js/theme_extra.js" defer></script>
+    <script src="js/theme.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

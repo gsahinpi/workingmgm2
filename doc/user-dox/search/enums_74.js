@@ -1,0 +1,21 @@
+var searchData=
+[
+  ['tapiextras',['TApiExtras',['../class_magmio_1_1_settings_a260f01ea563af165b23e532ce9176115.html#a260f01ea563af165b23e532ce9176115',1,'Magmio::Settings']]],
+  ['tchanselect',['TChanSelect',['../class_magmio_1_1_packet_filter_api_a44815426b3ff14642d979d7ff17f044e.html#a44815426b3ff14642d979d7ff17f044e',1,'Magmio::PacketFilterApi']]],
+  ['tcountersident',['TCountersIdent',['../class_magmio_1_1_counters_a198564b21ceccb421544dba2292b4d82.html#a198564b21ceccb421544dba2292b4d82',1,'Magmio::Counters']]],
+  ['tdecodertype',['TDecoderType',['../class_magmio_1_1_settings_acd1f5475981f1c790f7f972f3addfe0e.html#acd1f5475981f1c790f7f972f3addfe0e',1,'Magmio::Settings']]],
+  ['terror',['TError',['../namespace_magmio_a08c2d8db6425fc3f425273d3ae56376d.html#a08c2d8db6425fc3f425273d3ae56376d',1,'Magmio']]],
+  ['teventtype',['TEventType',['../namespace_magmio_a20b7608c3449d04d63ddc74abfbdd013.html#a20b7608c3449d04d63ddc74abfbdd013',1,'Magmio']]],
+  ['tfeedtype',['TFeedType',['../class_magmio_1_1_feed_addr_a9947be78297b040cd9bfd45def44c328.html#a9947be78297b040cd9bfd45def44c328',1,'Magmio::FeedAddr']]],
+  ['tfiltermode',['TFilterMode',['../class_magmio_1_1_book_channel_a862caf9813c3940fa42db50e68bcae5e.html#a862caf9813c3940fa42db50e68bcae5e',1,'Magmio::BookChannel']]],
+  ['tfwtype',['TFwType',['../class_magmio_1_1_fw_info_a02333fdb4e81425c12fb3091667abce1.html#a02333fdb4e81425c12fb3091667abce1',1,'Magmio::FwInfo']]],
+  ['tmarkettype',['TMarketType',['../namespace_magmio_a925b364194777341408695284730a621.html#a925b364194777341408695284730a621',1,'Magmio']]],
+  ['tmsgtype',['TMsgType',['../class_magmio_1_1_strategy_af5371f1b8b8ddf7ecc8d2ae51199f37d.html#af5371f1b8b8ddf7ecc8d2ae51199f37d',1,'Magmio::Strategy']]],
+  ['toptmagmio',['TOptMagmio',['../class_magmio_1_1_fw_info_a3274de0803c7563de3b8244d28ce3649.html#a3274de0803c7563de3b8244d28ce3649',1,'Magmio::FwInfo']]],
+  ['torderprotocol',['TOrderProtocol',['../namespace_magmio_ab8b7115b7dc8c8b143645f86ce4664f6.html#ab8b7115b7dc8c8b143645f86ce4664f6',1,'Magmio']]],
+  ['tpackettype',['TPacketType',['../namespace_magmio_a2e21474735a5a45f573a641837388177.html#a2e21474735a5a45f573a641837388177',1,'Magmio']]],
+  ['tstatuseventtype',['TStatusEventType',['../class_magmio_1_1_status_channel_aa41b0e2e995940dea97129f0e6eef854.html#aa41b0e2e995940dea97129f0e6eef854',1,'Magmio::StatusChannel']]],
+  ['tthreadid',['TThreadID',['../class_magmio_1_1_settings_a49f7f5d1489686817f0fc4790c01125a.html#a49f7f5d1489686817f0fc4790c01125a',1,'Magmio::Settings']]],
+  ['tuniqueorderidentificator',['TUniqueOrderIdentificator',['../class_magmio_1_1_settings_aad7cd50668e2a4ddd0af3d12d93a0874.html#aad7cd50668e2a4ddd0af3d12d93a0874',1,'Magmio::Settings']]],
+  ['tverbositylevel',['tVerbosityLevel',['../class_magmio_1_1_log_a1854cd05e26a4ee353788003e8c0a2fe.html#a1854cd05e26a4ee353788003e8c0a2fe',1,'Magmio::Log']]]
+];

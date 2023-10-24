@@ -1,0 +1,37 @@
+<map id="Magmio::MagmioApi" name="Magmio::MagmioApi">
+<area shape="rect" id="node2" href="$class_magmio_1_1_strategy_prefilter.html" title="Magmio::StrategyPrefilter" alt="" coords="1211,853,1399,880"/>
+<area shape="rect" id="node3" href="$class_magmio_1_1_counters.html" title="Magmio::Counters" alt="" coords="703,795,843,821"/>
+<area shape="rect" id="node14" href="$class_magmio_1_1_risk_check_api.html" title="RiskCheckApi class is used to change setting of Pre&#45;Trade Risk Check Module " alt="" coords="1680,779,1851,805"/>
+<area shape="rect" id="node16" href="$class_magmio_1_1_order_sender_base.html" title="Order sender API. API for order sender which allows to monitor or cancel orders that are sent from ha..." alt="" coords="1448,623,1643,649"/>
+<area shape="rect" id="node19" href="$class_magmio_1_1_decoder_api.html" title="API class to control Decoder unit in FPGA. " alt="" coords="1001,876,1159,903"/>
+<area shape="rect" id="node24" href="$class_magmio_1_1_packet_filter_api.html" title="Magmio Packet Filter API. " alt="" coords="991,673,1169,700"/>
+<area shape="rect" id="node26" href="$class_magmio_1_1_strategy.html" title="API for reading from Strategy Engine stream. This file shows how to correctly read from Strategy Engi..." alt="" coords="1477,1056,1614,1083"/>
+<area shape="rect" id="node28" href="$class_magmio_1_1_book_channel.html" title="API for reading book channel (stream) " alt="" coords="996,1129,1164,1156"/>
+<area shape="rect" id="node35" href="$class_magmio_1_1_mapping.html" title="Library for convering SID to address. " alt="" coords="1011,256,1149,283"/>
+<area shape="rect" id="node4" href="$class_magmio_1_1_status_channel.html" title="API for reading events from status channel. " alt="" coords="992,1399,1168,1425"/>
+<area shape="rect" id="node5" href="$class_magmio_1_1_stream_reader.html" title="Parentheses class for reading from DMA interface. " alt="" coords="686,1215,861,1241"/>
+<area shape="rect" id="node27" href="$class_magmio_1_1_etob.html" title="API for reading from Enhanced Top of Book stream. " alt="" coords="1025,1180,1135,1207"/>
+<area shape="rect" id="node29" href="$class_magmio_1_1_pcap_reader.html" title="API class for recording all incoming traffic to a pcap file. " alt="" coords="1226,1353,1385,1380"/>
+<area shape="rect" id="node30" href="$class_magmio_1_1_decoder_in.html" title="API for reading from Decoder INPUT stream. " alt="" coords="1231,1232,1379,1259"/>
+<area shape="rect" id="node31" href="$class_magmio_1_1_decoder.html" title="API for reading from Decoder stream. " alt="" coords="1237,1297,1373,1324"/>
+<area shape="rect" id="node6" href="$class_magmio_1_1_common.html" title="Class for simple pass of the most commonly used references. " alt="" coords="320,1080,461,1107"/>
+<area shape="rect" id="node7" href="$class_magmio_1_1_fw_info.html" title="Reads detailed info from FPGA. " alt="" coords="37,1029,163,1056"/>
+<area shape="rect" id="node8" href="$class_magmio_1_1_exception_queue.html" title="Magmio::ExceptionQueue" alt="" coords="6,1080,194,1107"/>
+<area shape="rect" id="node9" href="$class_magmio_1_1_counters_top.html" title="Counters class is used to cover statistics of processed data from all individual modules (decoder..." alt="" coords="19,1365,181,1392"/>
+<area shape="rect" id="node10" href="$class_magmio_1_1_settings.html" title="Class for loading settings from config class. " alt="" coords="33,1172,167,1199"/>
+<area shape="rect" id="node11" href="$class_magmio_1_1_log.html" title="Magmio::Log" alt="" coords="47,253,153,280"/>
+<area shape="rect" id="node33" href="$class_magmio_1_1_global_params.html" title="Global parameters API. " alt="" coords="486,9,658,36"/>
+<area shape="rect" id="node34" href="$class_magmio_1_1_per_symbol_rw_params.html" title="Persymbolrw parameters reader/updater. " alt="" coords="1435,225,1655,252"/>
+<area shape="rect" id="node36" href="$class_magmio_1_1_per_group_params.html" title="R/W Pergroup parameters reader/updater. " alt="" coords="985,147,1175,173"/>
+<area shape="rect" id="node37" href="$class_magmio_1_1_per_symbol_ro_params.html" title="Persymbolro params updater. Updating persymbolro parameters in FPGA using MI32/DMA interface..." alt="" coords="1437,95,1653,121"/>
+<area shape="rect" id="node13" href="$class_magmio_1_1_book_handler_api_top.html" title="Book Handler API. " alt="" coords="1201,1017,1410,1044"/>
+<area shape="rect" id="node15" href="$class_magmio_1_1_order_sender_top.html" title="Order sender API. API for order sender which allows to monitor or cancel orders that are sent from ha..." alt="" coords="1875,697,2061,724"/>
+<area shape="rect" id="node17" href="$class_magmio_1_1_fpga_config.html" title="Class for SW connections (without offload engine &#45; bypassed) " alt="" coords="1003,521,1157,548"/>
+<area shape="rect" id="node18" href="$class_magmio_1_1_s_w_connections.html" title="Class for SW connections (without offload engine &#45; bypassed) " alt="" coords="989,572,1171,599"/>
+<area shape="rect" id="node20" href="$class_magmio_1_1_trigger_strategy.html" title="Magmio::TriggerStrategy" alt="" coords="683,883,864,909"/>
+<area shape="rect" id="node21" href="$class_magmio_1_1_event_queue.html" title="Queue of commands / packets for safe thread crossing. " alt="" coords="999,369,1161,396"/>
+<area shape="rect" id="node22" href="$class_magmio_1_1_async_queue.html" title="Magmio::AsyncQueue\l\&lt; TEventItem \&gt;" alt="" coords="692,353,855,394"/>
+<area shape="rect" id="node23" href="$class_magmio_1_1_order_params.html" title="Order params class &#45; uses existing instance of params.persymbolro to modify sender persymbol paramete..." alt="" coords="997,623,1163,649"/>
+<area shape="rect" id="node25" href="$class_magmio_1_1_stream.html" title="Reading outputs from card (Strategy Engine, Enhanced Top of Book, Decoder) " alt="" coords="1903,1171,2033,1197"/>
+<area shape="rect" id="node32" href="$class_magmio_1_1_params.html" title="API Class covering Magmio parameters (global, pergroup, persymbolro, persymbolrw) ..." alt="" coords="1903,147,2033,173"/>
+</map>

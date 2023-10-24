@@ -1,0 +1,5 @@
+<map id="Magmio::OrderSenderBase" name="Magmio::OrderSenderBase">
+<area shape="rect" id="node4" href="$class_magmio_1_1_order_sender_api.html" title="Order sender API for TCP communication. " alt="" coords="5,155,189,181"/>
+<area shape="rect" id="node5" href="$class_magmio_1_1_order_sender_top.html" title="Order sender API. API for order sender which allows to monitor or cancel orders that are sent from ha..." alt="" coords="214,155,399,181"/>
+<area shape="rect" id="node2" href="$class_magmio_1_1_counters.html" title="Magmio::Counters" alt="" coords="62,5,201,32"/>
+</map>

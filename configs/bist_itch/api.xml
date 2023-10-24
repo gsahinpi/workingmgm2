@@ -1,0 +1,120 @@
+<magmio>
+    <market type="bist_itch" portA="0" portB="0">
+        <igmp enabled="true">
+            <local_mac>00:15:5D:C6:49:2A</local_mac>
+            <vlan></vlan>
+            <local_ip>10.46.52.205</local_ip>
+        </igmp>
+        <recovery request_port="0" check_arp="false">
+            <local_mac>00:15:5D:C6:49:2A</local_mac>
+            <local_ip>10.46.52.205</local_ip>
+            <local_netmask>255.0.0.0</local_netmask>
+            <local_gateway>10.46.52.195</local_gateway>
+            <vlan></vlan>
+        </recovery>
+        <feed type="incr" id="1">
+            <ruleA>233.113.216.53:21001</ruleA>
+            <ruleB>233.113.216.54:21101</ruleB>
+        </feed>
+        <feed type="request" id="1">
+            <ruleA>194.0.142.147:24001</ruleA>
+        </feed>
+        <feed type="incr" id="2">
+            <ruleA>233.113.216.53:21002</ruleA>
+            <ruleB>233.113.216.54:21102</ruleB>
+        </feed>
+        <feed type="request" id="2"><!-- this is fake, just for testing, not present in pcap-->
+            <ruleA>194.0.142.147:43690</ruleA>
+        </feed>
+    </market>
+
+    <order_sender>
+        <session id="OUCH_port1.0" automap="true" decoder_feed="true">
+            <physical_port>1</physical_port>
+            <protocol type="bist_ouch">
+                <username>USER00</username>
+                <password>passwd</password>
+                <session></session>
+                <account></account>
+                <clientAccount>1834534</clientAccount>
+                <clientCategory>1</clientCategory>
+                <order_id>1000000</order_id>
+            </protocol>
+            <connection>
+                <local_mac>DE:AD:BE:EF:CA:FE</local_mac>
+                <vlan>162</vlan>
+                <local_ip>10.10.10.1</local_ip>
+                <netmask>255.255.255.0</netmask>
+                <default_gw></default_gw>
+                <remote_ip>10.10.10.10</remote_ip>
+                <remote_port>6666</remote_port>
+            </connection>
+        </session>
+
+        <session id="OUCH_port1.1" automap="false" decoder_feed="true">
+            <physical_port>1</physical_port>
+            <protocol type="bist_ouch">
+                <username>USER00</username>
+                <password>passwd</password>
+                <session></session>
+                <account></account>
+                <clientAccount>1834534</clientAccount>
+                <clientCategory>1</clientCategory>
+                <order_id>2000000</order_id>
+            </protocol>
+            <connection>
+                <local_mac>DE:AD:BE:EF:CA:FE</local_mac>
+                <vlan>162</vlan>
+                <local_ip>10.10.10.1</local_ip>
+                <netmask>255.255.255.0</netmask>
+                <default_gw></default_gw>
+                <remote_ip>10.10.10.10</remote_ip>
+                <remote_port>7777</remote_port>
+            </connection>
+        </session>
+
+        <session id="OUCH_port3.0" automap="true" decoder_feed="true">
+            <physical_port>3</physical_port>
+            <protocol type="bist_ouch">
+                <username>USER00</username>
+                <password>passwd</password>
+                <session></session>
+                <account></account>
+                <clientAccount>1834534</clientAccount>
+                <clientCategory>1</clientCategory>
+                <order_id>3000000</order_id>
+            </protocol>
+            <connection>
+                <local_mac>DE:AD:BE:EF:CA:FE</local_mac>
+                <vlan>162</vlan>
+                <local_ip>10.10.10.1</local_ip>
+                <netmask>255.255.255.0</netmask>
+                <default_gw></default_gw>
+                <remote_ip>10.10.10.10</remote_ip>
+                <remote_port>8888</remote_port>
+            </connection>
+        </session>
+
+        <session id="OUCH_port3.1" automap="false" decoder_feed="true">
+            <physical_port>3</physical_port>
+            <protocol type="bist_ouch">
+                <username>USER00</username>
+                <password>passwd</password>
+                <session></session>
+                <account></account>
+                <clientAccount>1834534</clientAccount>
+                <clientCategory>1</clientCategory>
+                <order_id>4000000</order_id>
+            </protocol>
+            <connection>
+                <local_mac>DE:AD:BE:EF:CA:FE</local_mac>
+                <vlan>162</vlan>
+                <local_ip>10.10.10.1</local_ip>
+                <netmask>255.255.255.0</netmask>
+                <default_gw></default_gw>
+                <remote_ip>10.10.10.10</remote_ip>
+                <remote_port>9999</remote_port>
+            </connection>
+        </session>
+    </order_sender>
+</magmio>

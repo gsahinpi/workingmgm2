@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Magmio a.s." />
+      <link rel="shortcut icon" href="img/favicon.ico" />
+    <title>Book Channel - Magmio User's Manual</title>
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/theme_extra.css" />
+        <link href="css/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Book Channel";
+        var mkdocs_page_input_path = "book_channel.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+    <![endif]--> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="./index.html">
+          <img src="img/magmio-slogan-logo.png" class="logo" alt="Logo"/>
+        </a>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Magmio User Guide</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="index.html">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="exanic_tools.html">Exanic tools</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="api.html">API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="mapping_configuration.html">Mapping and configuration files</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="strategies.html">Writing strategies</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="hls_strategy_simulation.html">Testing strategies in Vivado HLS</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="recovery.html">Recovery</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="book_channel.html">Book Channel</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#exported-message">Exported message</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#filtering">Filtering</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#book-channel-api">Book channel API</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#interrupts">Interrupts</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="strategy_prefilter.html">Strategy Prefilter</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="riskcheck.html">PreTrade Risk Check</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="order_sender.html">Order Sender</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="status_channel.html">Status information</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="firmware_synthesis.html">Firmware synthesis</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="model_verification.html">Software model, simulation and verification</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="about.html">About</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="./index.html">Magmio User's Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><hr/>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="book-channel">Book Channel</h1>
+<p><strong>Book channel</strong> module exports book updates from hardware into software through Magmio API. Exported messages are then available for further analysis and decision making in host application. Usage of book channel is optional, user can subscribe to the channel at run-time. If a user is interested only in the specific subset of book updates, the book channel module provides additional filtering options of book updates directly in hardware. The filtering feature is controlled through Magmio API.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Book channel module is an optional feature of Magmio product and must be explicitely enabled in customer profile together with the number of levels to be exported from previous and current book. Therefore, the book channel module presence is bound to the rpm package and chosen customer profile. Please, <a href="https://www.magmio.com/contact">contact</a> Magmio a.s., if you want this feature to be available in the next release.</p>
+</div>
+<h2 id="exported-message">Exported message</h2>
+<p>The exported message consists of two parts:</p>
+<ul>
+<li><code>info</code> - generic information,</li>
+<li><code>etob</code> - information about the exported book levels.</li>
+</ul>
+<p><code>info</code> part contains the following fields:</p>
+<table>
+<thead>
+<tr>
+<th>Field name</th>
+<th>SW Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sendingTime</code></td>
+<td><code>uint64_t</code></td>
+<td>Timestamp when the message was exported from hardware to software</td>
+</tr>
+<tr>
+<td><code>hwTimestamp</code></td>
+<td><code>uint64_t</code></td>
+<td>Timestamp when the trigger packet was received on card&rsquo;s input network interface</td>
+</tr>
+</tbody>
+</table>
+<p><code>etob</code> part contains <em>SID</em> (symbol identificator) and exported levels of <em>previous</em> and <em>current</em> book. The structure of each level is the same, described in the following table:</p>
+<table>
+<thead>
+<tr>
+<th>Field name</th>
+<th>SW Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ask.price</code></td>
+<td>(Market based)</td>
+<td>Ask price at the level</td>
+</tr>
+<tr>
+<td><code>ask.size</code></td>
+<td>(Market based)</td>
+<td>Ask size (quantity) at the level</td>
+</tr>
+<tr>
+<td><code>ask.empty</code></td>
+<td><code>uint8_t</code></td>
+<td>Indicator of empty ask level, i.e. both, ask price and ask size, values are zero</td>
+</tr>
+<tr>
+<td><code>ask.valid</code></td>
+<td><code>uint8_t</code></td>
+<td>Inficator of valid ask level, i.e. both, ask price and ask size, values are valid</td>
+</tr>
+<tr>
+<td><code>bid.price</code></td>
+<td>(Market based)</td>
+<td>Bid price at the level</td>
+</tr>
+<tr>
+<td><code>bid.size</code></td>
+<td>(Market based)</td>
+<td>Bid size (quantity) at the level</td>
+</tr>
+<tr>
+<td><code>bid.empty</code></td>
+<td><code>uint8_t</code></td>
+<td>Indicator of empty bid level, i.e. both, bid price and bid size, values are zero</td>
+</tr>
+<tr>
+<td><code>bid.valid</code></td>
+<td><code>uint8_t</code></td>
+<td>Inficator of valid bid level, i.e. both, bid price and bid size, values are valid</td>
+</tr>
+</tbody>
+</table>
+<p>Example of printed exported message:</p>
+<pre><code>Info
+ - Sending time:    53233
+ - Hardware time:   1588697589553355000
+Symbol
+ - SID:            1979845
+Previous Top of Book
+Ask [level 0]
+ - Price:          114850
+ - Size:           4
+ - Empty:          0
+ - Valid:          1
+Bid [level 0]
+ - Price:          114825
+ - Size:           277
+ - Empty:          0
+ - Valid:          1
+Current Top of Book
+Ask [level 0]
+ - Price:          114850
+ - Size:           4
+ - Empty:          0
+ - Valid:          1
+Bid [level 0]
+ - Price:          114825
+ - Size:           277
+ - Empty:          0
+ - Valid:          1
+</code></pre>
+<h2 id="filtering">Filtering</h2>
+<p>Work in progress!!!</p>
+<h2 id="book-channel-api">Book channel API</h2>
+<p>Magmio API provides several methods to read exported messages and set additional filtering options.</p>
+<p>Subscription to book channel can be done by calling <code>api.stream.book.subscribe()</code> method. If the book channel module is present in hardware, the method enables exporting of book updates in hardware and finishes with <code>SUCCESS</code>. Otherwise, the method fails with <code>NOT_SUPPORTED</code> return code indicating, that book channel module is unavailable.</p>
+<pre><code>if ((book_err = api.stream.book.subscribe()) != Magmio::SUCCESS) {
+    std::cerr &lt;&lt; &quot;ERROR: &quot; &lt;&lt; Magmio::Log::getErrorMessage(book_err) &lt;&lt; std::endl;
+    return -1;
+}
+</code></pre>
+<p>For reading the exported messages, two methods are provided: <code>api.stream.book.getNextMessage()</code> blocks the user application until a new exported message is available in the queue, <code>api.stream.book.getNextMessageNonBlock()</code> is a non-blocking version.</p>
+<pre><code>Magmio::BookChannel::ExportMessage msg;
+
+if ((book_err = api.stream.book.getNextMessage(msg)) != Magmio::SUCCESS) {
+    if (!stop) std::cerr &lt;&lt; &quot;ERROR: &quot; &lt;&lt; Magmio::Log::getErrorMessage(book_err) &lt;&lt; std::endl;
+    break;
+}
+std::cout &lt;&lt; msg &lt;&lt; std::endl;
+</code></pre>
+<p>The book updates export can be disabled by calling <code>api.stream.book.unsubscribe()</code> method. If the book channel module is present in hardware, the method disables (closes) exporting of book updates in hardware and finishes with <code>SUCCESS</code>. Otherwise, the method fails with <code>NOT_SUPPORTED</code> return code indicating, that book channel module is unavailable.</p>
+<pre><code>if ((book_err = api.stream.book.unsubscribe()) != Magmio::SUCCESS) {
+    std::cerr &lt;&lt; &quot;ERROR: &quot; &lt;&lt; Magmio::Log::getErrorMessage(book_err) &lt;&lt; std::endl;
+    return -1;
+}
+</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Example of book channel module configuration through Magmio API is available in source file <strong>book_channel.cpp</strong> inside <strong>api-example</strong>.</p>
+</div>
+<h2 id="interrupts">Interrupts</h2>
+<p>Interrupts related to book channel module are non-maskable, their presence indicates an overflow of internal memories in hardware. The book channel interrupts usually point to the insufficient capacity of the internal memories for the specific customer use cases. If you are experiencing issues with book channel interrupts, please, <a href="https://www.magmio.com/contact">contact</a> Magmio a.s. to enlarge the problematic memory capacities for your profile and release new package.</p>
+<p>Below is an example of book channel interrupt notification about the full internal memory for <code>info</code> data:</p>
+<pre><code>WARNING: Interrupt received at Mon Jun 10 12:53:43 2022
+ERROR: Book channel: Info fifo is full.
+</code></pre>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="recovery.html" class="btn btn-neutral float-left" title="Recovery"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="strategy_prefilter.html" class="btn btn-neutral float-right" title="Strategy Prefilter">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Copyright &copy; 2022 <a href="https://www.magmio.com/contact">Magmio a.s.</a></p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="recovery.html" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="strategy_prefilter.html" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '.';</script>
+    <script src="js/theme_extra.js" defer></script>
+    <script src="js/theme.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

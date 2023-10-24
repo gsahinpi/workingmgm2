@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['bad_5fconfiguration',['BAD_CONFIGURATION',['../namespace_magmio_a08c2d8db6425fc3f425273d3ae56376d.html#a08c2d8db6425fc3f425273d3ae56376da8f41beeb2793c18120c2568c956213bf',1,'Magmio']]],
+  ['bad_5fpackets',['bad_packets',['../struct_magmio_1_1_counters_1_1_t_counters_decoder_adf2f11b976aef775b8d58eb89c602bb0.html#adf2f11b976aef775b8d58eb89c602bb0',1,'Magmio::Counters::TCountersDecoder']]],
+  ['bad_5frequests',['bad_requests',['../struct_magmio_1_1_counters_1_1_t_counters_order_sender_a0186d23e6d0a67935b6a613ea53a1222.html#a0186d23e6d0a67935b6a613ea53a1222',1,'Magmio::Counters::TCountersOrderSender']]],
+  ['base_5faddr',['base_addr',['../class_magmio_1_1_order_sender_base_a60aeb27092e52f525476ee3833f6ca66.html#a60aeb27092e52f525476ee3833f6ca66',1,'Magmio::OrderSenderBase']]],
+  ['bid',['bid',['../struct_magmio_1_1_book_channel_1_1_export_tob_level_aabb88fc0da03d2688163becfd75e56c9.html#aabb88fc0da03d2688163becfd75e56c9',1,'Magmio::BookChannel::ExportTobLevel::bid()'],['../struct_magmio_1_1_etob_1_1_top_of_book_ad618f945dfc421368c31ccb79481c6d7.html#ad618f945dfc421368c31ccb79481c6d7',1,'Magmio::Etob::TopOfBook::bid()']]],
+  ['bidask',['BidAsk',['../struct_magmio_1_1_etob_1_1_bid_ask.html',1,'Magmio::Etob']]],
+  ['bidask',['BidAsk',['../struct_magmio_1_1_etob_1_1_bid_ask_ad7b2a31c75abff687eda54ef8ae7a109.html#ad7b2a31c75abff687eda54ef8ae7a109',1,'Magmio::Etob::BidAsk']]],
+  ['bidprice',['bidPrice',['../struct_t_send_order_aa175c08b01867e40bb8624fce0c4471e.html#aa175c08b01867e40bb8624fce0c4471e',1,'TSendOrder::bidPrice()'],['../struct_t_replace_order_abcf1c604856606d471fbb29fad787cd3.html#abcf1c604856606d471fbb29fad787cd3',1,'TReplaceOrder::bidPrice()'],['../struct_magmio_1_1_strategy_1_1_strategy_out_a9a04c0438f6249037eed946c6b5432ac.html#a9a04c0438f6249037eed946c6b5432ac',1,'Magmio::Strategy::StrategyOut::bidPrice()']]],
+  ['bidsize',['bidSize',['../struct_t_send_order_a971cb5a4dc636d28a78831f47e6b0e41.html#a971cb5a4dc636d28a78831f47e6b0e41',1,'TSendOrder::bidSize()'],['../struct_t_replace_order_af85cb95d4c0a2dc6c4c8d15b42892778.html#af85cb95d4c0a2dc6c4c8d15b42892778',1,'TReplaceOrder::bidSize()'],['../struct_magmio_1_1_strategy_1_1_strategy_out_a78f75f13bc7fe47e16884e738b1375f2.html#a78f75f13bc7fe47e16884e738b1375f2',1,'Magmio::Strategy::StrategyOut::bidSize()']]],
+  ['book',['book',['../class_magmio_1_1_stream_a15ad6373a79cb9ac4f0cd8fb1f307975.html#a15ad6373a79cb9ac4f0cd8fb1f307975',1,'Magmio::Stream']]],
+  ['book_5fchannel_5firq_5fbit',['BOOK_CHANNEL_IRQ_BIT',['../class_magmio_1_1_book_channel_a174b79cf4e791b9536ffa0876d608438.html#a174b79cf4e791b9536ffa0876d608438',1,'Magmio::BookChannel']]],
+  ['book_5fmode',['BOOK_MODE',['../namespace_magmio_a08c2d8db6425fc3f425273d3ae56376d.html#a08c2d8db6425fc3f425273d3ae56376dad066fb3880cde253ffe9b3195135a53b',1,'Magmio']]],
+  ['bookchannel',['BookChannel',['../class_magmio_1_1_book_channel_a8b7633e12f54047886c659a45799377b.html#a8b7633e12f54047886c659a45799377b',1,'Magmio::BookChannel']]],
+  ['bookchannel',['BookChannel',['../class_magmio_1_1_book_channel.html',1,'Magmio']]],
+  ['bookhandler',['bookHandler',['../class_magmio_1_1_magmio_api_aa03a5746cf13a592ddb1e8903c01d732.html#aa03a5746cf13a592ddb1e8903c01d732',1,'Magmio::MagmioApi']]],
+  ['bookhandlerapi',['BookHandlerApi',['../class_magmio_1_1_book_handler_api.html',1,'Magmio']]],
+  ['bookhandlerapi',['BookHandlerApi',['../class_magmio_1_1_book_handler_api_a95a531239e82bda4eecfdf547cd54860.html#a95a531239e82bda4eecfdf547cd54860',1,'Magmio::BookHandlerApi']]],
+  ['bookhandlerapitop',['BookHandlerApiTop',['../class_magmio_1_1_book_handler_api_top_a8e41ed215afc10c72b62fb5eb5b7cb6f.html#a8e41ed215afc10c72b62fb5eb5b7cb6f',1,'Magmio::BookHandlerApiTop']]],
+  ['bookhandlerapitop',['BookHandlerApiTop',['../class_magmio_1_1_book_handler_api_top.html',1,'Magmio']]],
+  ['brokenpacket',['brokenPacket',['../struct_magmio_1_1_status_channel_1_1_t_status_events_aa3fcf57d6e3461bf7474d4e5364ce70a.html#aa3fcf57d6e3461bf7474d4e5364ce70a',1,'Magmio::StatusChannel::TStatusEvents']]],
+  ['bypassed',['bypassed',['../struct_magmio_1_1_counters_1_1_t_counters_active_order_memory_a9fb4c3ab78814ed4864a3bda5288d991.html#a9fb4c3ab78814ed4864a3bda5288d991',1,'Magmio::Counters::TCountersActiveOrderMemory::bypassed()'],['../struct_magmio_1_1_counters_1_1_t_counters_tuple_memory_a38c0bc660cbd2991ea87bf477554596f.html#a38c0bc660cbd2991ea87bf477554596f',1,'Magmio::Counters::TCountersTupleMemory::bypassed()']]],
+  ['bytes',['bytes',['../struct_magmio_1_1_decoder_in_1_1_data_a84aced36cdb6a1c3424531d01f3167bc.html#a84aced36cdb6a1c3424531d01f3167bc',1,'Magmio::DecoderIn::Data']]]
+];

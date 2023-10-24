@@ -1,0 +1,18 @@
+<map id="Magmio::OrderSenderApi" name="Magmio::OrderSenderApi">
+<area shape="rect" id="node2" href="$class_magmio_1_1_order_sender_base.html" title="Order sender API. API for order sender which allows to monitor or cancel orders that are sent from ha..." alt="" coords="643,235,837,261"/>
+<area shape="rect" id="node3" href="$class_magmio_1_1_counters.html" title="Magmio::Counters" alt="" coords="30,56,170,83"/>
+<area shape="rect" id="node7" href="$class_magmio_1_1_decoder_api.html" title="API class to control Decoder unit in FPGA. " alt="" coords="333,208,491,235"/>
+<area shape="rect" id="node18" href="$class_magmio_1_1_packet_filter_api.html" title="Magmio Packet Filter API. " alt="" coords="323,5,501,32"/>
+<area shape="rect" id="node5" href="$class_magmio_1_1_fpga_config.html" title="Class for SW connections (without offload engine &#45; bypassed) " alt="" coords="335,107,489,133"/>
+<area shape="rect" id="node6" href="$class_magmio_1_1_s_w_connections.html" title="Class for SW connections (without offload engine &#45; bypassed) " alt="" coords="321,157,503,184"/>
+<area shape="rect" id="node8" href="$class_magmio_1_1_trigger_strategy.html" title="Magmio::TriggerStrategy" alt="" coords="9,167,191,193"/>
+<area shape="rect" id="node9" href="$class_magmio_1_1_event_queue.html" title="Queue of commands / packets for safe thread crossing. " alt="" coords="331,309,493,336"/>
+<area shape="rect" id="node10" href="$class_magmio_1_1_async_queue.html" title="Magmio::AsyncQueue\l\&lt; TEventItem \&gt;" alt="" coords="19,269,181,310"/>
+<area shape="rect" id="node11" href="$class_magmio_1_1_common.html" title="Class for simple pass of the most commonly used references. " alt="" coords="341,385,483,412"/>
+<area shape="rect" id="node12" href="$class_magmio_1_1_fw_info.html" title="Reads detailed info from FPGA. " alt="" coords="37,436,163,463"/>
+<area shape="rect" id="node13" href="$class_magmio_1_1_exception_queue.html" title="Magmio::ExceptionQueue" alt="" coords="6,487,194,513"/>
+<area shape="rect" id="node14" href="$class_magmio_1_1_counters_top.html" title="Counters class is used to cover statistics of processed data from all individual modules (decoder..." alt="" coords="19,335,181,361"/>
+<area shape="rect" id="node15" href="$class_magmio_1_1_settings.html" title="Class for loading settings from config class. " alt="" coords="33,385,167,412"/>
+<area shape="rect" id="node16" href="$class_magmio_1_1_log.html" title="Magmio::Log" alt="" coords="47,553,153,580"/>
+<area shape="rect" id="node17" href="$class_magmio_1_1_order_params.html" title="Order params class &#45; uses existing instance of params.persymbolro to modify sender persymbol paramete..." alt="" coords="329,436,495,463"/>
+</map>

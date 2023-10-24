@@ -1,0 +1,576 @@
+Initializing model...
+Running Magmio model...
+Info channel
+ - Sending time:    14598
+ - Hardware time:   1621584029307757000
+ - Exchange time:   1621584029310563906
+ - Flags:           1
+ - Feed type:       INCREMENTAL_FEED
+ - Channel ID:      4
+ - Packet seqnum:   1713934
+ - Message seqnum:  1713935
+ - Decoder seqnum:  2
+ - Message type:    65
+ - Message content: 200 Bytes
+Symbol
+ - SID:            406930
+ - MSID:           0
+Previous Top of Book
+Bid [level 0]
+ - Mantisa:        0
+ - Exponent:       0
+ - Size:           0
+ - Customer size:  0
+ - Secondary size: 0
+ - Lvl timestamp:  0
+ - Empty:          1
+ - Valid:          0
+Ask [level 0]
+ - Mantisa:        0
+ - Exponent:       0
+ - Size:           0
+ - Customer size:  0
+ - Secondary size: 0
+ - Lvl timestamp:  0
+ - Empty:          1
+ - Valid:          0
+Last trade
+ - Mantisa:        0
+ - Exponent:       0
+ - Valid:          0
+Attributes
+ - Status:         0
+Current Top of Book
+Bid [level 0]
+ - Mantisa:        0
+ - Exponent:       0
+ - Size:           0
+ - Customer size:  0
+ - Secondary size: 0
+ - Lvl timestamp:  0
+ - Empty:          1
+ - Valid:          0
+Ask [level 0]
+ - Mantisa:        205825
+ - Exponent:       0
+ - Size:           1
+ - Customer size:  1
+ - Secondary size: 0
+ - Lvl timestamp:  0
+ - Empty:          0
+ - Valid:          1
+Last trade
+ - Mantisa:        0
+ - Exponent:       0
+ - Valid:          0
+Attributes
+ - Status:         0
+
+Info channel
+ - Sending time:    15337
+ - Hardware time:   1621584031202616000
+ - Exchange time:   1621584031205500918
+ - Flags:           0
+ - Feed type:       INCREMENTAL_FEED
+ - Channel ID:      4
+ - Packet seqnum:   1714433
+ - Message seqnum:  1714433
+ - Decoder seqnum:  1
+ - Message type:    68
+ - Message content: 200 Bytes
+Symbol
+ - SID:            406930
+ - MSID:           0
+Previous Top of Book
+Bid [level 0]
+ - Mantisa:        0
+ - Exponent:       0
+ - Size:           0
+ - Customer size:  0
+ - Secondary size: 0
+ - Lvl timestamp:  0
+ - Empty:          1
+ - Valid:          0
+Ask [level 0]
+ - Mantisa:        205825
+ - Exponent:       0
+ - Size:           1
+ - Customer size:  1
+ - Secondary size: 0
+ - Lvl timestamp:  0
+ - Empty:          0
+ - Valid:          1
+Last trade
+ - Mantisa:        0
+ - Exponent:       0
+ - Valid:          0
+Attributes
+ - Status:         0
+Current Top of Book
+Bid [level 0]
+ - Mantisa:        0
+ - Exponent:       0
+ - Size:           0
+ - Customer size:  0
+ - Secondary size: 0
+ - Lvl timestamp:  0
+ - Empty:          1
+ - Valid:          0
+Ask [level 0]
+ - Mantisa:        0
+ - Exponent:       0
+ - Size:           0
+ - Customer size:  0
+ - Secondary size: 0
+ - Lvl timestamp:  0
+ - Empty:          1
+ - Valid:          0
+Last trade
+ - Mantisa:        0
+ - Exponent:       0
+ - Valid:          0
+Attributes
+ - Status:         0
+
+Info channel
+ - Sending time:    15337
+ - Hardware time:   1621584031202616000
+ - Exchange time:   1621584031205500918
+ - Flags:           1
+ - Feed type:       INCREMENTAL_FEED
+ - Channel ID:      4
+ - Packet seqnum:   1714433
+ - Message seqnum:  1714434
+ - Decoder seqnum:  2
+ - Message type:    65
+ - Message content: 200 Bytes
+Symbol
+ - SID:            406930
+ - MSID:           0
+Previous Top of Book
+Bid [level 0]
+ - Mantisa:        0
+ - Exponent:       0
+ - Size:           0
+ - Customer size:  0
+ - Secondary size: 0
+ - Lvl timestamp:  0
+ - Empty:          1
+ - Valid:          0
+Ask [level 0]
+ - Mantisa:        0
+ - Exponent:       0
+ - Size:           0
+ - Customer size:  0
+ - Secondary size: 0
+ - Lvl timestamp:  0
+ - Empty:          1
+ - Valid:          0
+Last trade
+ - Mantisa:        0
+ - Exponent:       0
+ - Valid:          0
+Attributes
+ - Status:         0
+Current Top of Book
+Bid [level 0]
+ - Mantisa:        0
+ - Exponent:       0
+ - Size:           0
+ - Customer size:  0
+ - Secondary size: 0
+ - Lvl timestamp:  0
+ - Empty:          1
+ - Valid:          0
+Ask [level 0]
+ - Mantisa:        194625
+ - Exponent:       0
+ - Size:           1
+ - Customer size:  1
+ - Secondary size: 0
+ - Lvl timestamp:  0
+ - Empty:          0
+ - Valid:          1
+Last trade
+ - Mantisa:        0
+ - Exponent:       0
+ - Valid:          0
+Attributes
+ - Status:         0
+
+Info channel
+ - Sending time:    65645
+ - Hardware time:   1621584151295125000
+ - Exchange time:   1621584151297950805
+ - Flags:           0
+ - Feed type:       INCREMENTAL_FEED
+ - Channel ID:      4
+ - Packet seqnum:   1757157
+ - Message seqnum:  1757157
+ - Decoder seqnum:  1
+ - Message type:    68
+ - Message content: 200 Bytes
+Symbol
+ - SID:            406930
+ - MSID:           0
+Previous Top of Book
+Bid [level 0]
+ - Mantisa:        0
+ - Exponent:       0
+ - Size:           0
+ - Customer size:  0
+ - Secondary size: 0
+ - Lvl timestamp:  0
+ - Empty:          1
+ - Valid:          0
+Ask [level 0]
+ - Mantisa:        194625
+ - Exponent:       0
+ - Size:           1
+ - Customer size:  1
+ - Secondary size: 0
+ - Lvl timestamp:  0
+ - Empty:          0
+ - Valid:          1
+Last trade
+ - Mantisa:        0
+ - Exponent:       0
+ - Valid:          0
+Attributes
+ - Status:         0
+Current Top of Book
+Bid [level 0]
+ - Mantisa:        0
+ - Exponent:       0
+ - Size:           0
+ - Customer size:  0
+ - Secondary size: 0
+ - Lvl timestamp:  0
+ - Empty:          1
+ - Valid:          0
+Ask [level 0]
+ - Mantisa:        0
+ - Exponent:       0
+ - Size:           0
+ - Customer size:  0
+ - Secondary size: 0
+ - Lvl timestamp:  0
+ - Empty:          1
+ - Valid:          0
+Last trade
+ - Mantisa:        0
+ - Exponent:       0
+ - Valid:          0
+Attributes
+ - Status:         0
+
+Info channel
+ - Sending time:    65645
+ - Hardware time:   1621584151295125000
+ - Exchange time:   1621584151297950805
+ - Flags:           1
+ - Feed type:       INCREMENTAL_FEED
+ - Channel ID:      4
+ - Packet seqnum:   1757157
+ - Message seqnum:  1757158
+ - Decoder seqnum:  2
+ - Message type:    65
+ - Message content: 200 Bytes
+Symbol
+ - SID:            406930
+ - MSID:           0
+Previous Top of Book
+Bid [level 0]
+ - Mantisa:        0
+ - Exponent:       0
+ - Size:           0
+ - Customer size:  0
+ - Secondary size: 0
+ - Lvl timestamp:  0
+ - Empty:          1
+ - Valid:          0
+Ask [level 0]
+ - Mantisa:        0
+ - Exponent:       0
+ - Size:           0
+ - Customer size:  0
+ - Secondary size: 0
+ - Lvl timestamp:  0
+ - Empty:          1
+ - Valid:          0
+Last trade
+ - Mantisa:        0
+ - Exponent:       0
+ - Valid:          0
+Attributes
+ - Status:         0
+Current Top of Book
+Bid [level 0]
+ - Mantisa:        0
+ - Exponent:       0
+ - Size:           0
+ - Customer size:  0
+ - Secondary size: 0
+ - Lvl timestamp:  0
+ - Empty:          1
+ - Valid:          0
+Ask [level 0]
+ - Mantisa:        205825
+ - Exponent:       0
+ - Size:           1
+ - Customer size:  1
+ - Secondary size: 0
+ - Lvl timestamp:  0
+ - Empty:          0
+ - Valid:          1
+Last trade
+ - Mantisa:        0
+ - Exponent:       0
+ - Valid:          0
+Attributes
+ - Status:         0
+
+Info channel
+ - Sending time:    66030
+ - Hardware time:   1621584152179844000
+ - Exchange time:   1621584152182679048
+ - Flags:           0
+ - Feed type:       INCREMENTAL_FEED
+ - Channel ID:      4
+ - Packet seqnum:   1757507
+ - Message seqnum:  1757507
+ - Decoder seqnum:  1
+ - Message type:    68
+ - Message content: 200 Bytes
+Symbol
+ - SID:            406930
+ - MSID:           0
+Previous Top of Book
+Bid [level 0]
+ - Mantisa:        0
+ - Exponent:       0
+ - Size:           0
+ - Customer size:  0
+ - Secondary size: 0
+ - Lvl timestamp:  0
+ - Empty:          1
+ - Valid:          0
+Ask [level 0]
+ - Mantisa:        205825
+ - Exponent:       0
+ - Size:           1
+ - Customer size:  1
+ - Secondary size: 0
+ - Lvl timestamp:  0
+ - Empty:          0
+ - Valid:          1
+Last trade
+ - Mantisa:        0
+ - Exponent:       0
+ - Valid:          0
+Attributes
+ - Status:         0
+Current Top of Book
+Bid [level 0]
+ - Mantisa:        0
+ - Exponent:       0
+ - Size:           0
+ - Customer size:  0
+ - Secondary size: 0
+ - Lvl timestamp:  0
+ - Empty:          1
+ - Valid:          0
+Ask [level 0]
+ - Mantisa:        0
+ - Exponent:       0
+ - Size:           0
+ - Customer size:  0
+ - Secondary size: 0
+ - Lvl timestamp:  0
+ - Empty:          1
+ - Valid:          0
+Last trade
+ - Mantisa:        0
+ - Exponent:       0
+ - Valid:          0
+Attributes
+ - Status:         0
+
+Info channel
+ - Sending time:    66030
+ - Hardware time:   1621584152179844000
+ - Exchange time:   1621584152182679048
+ - Flags:           1
+ - Feed type:       INCREMENTAL_FEED
+ - Channel ID:      4
+ - Packet seqnum:   1757507
+ - Message seqnum:  1757508
+ - Decoder seqnum:  2
+ - Message type:    65
+ - Message content: 200 Bytes
+Symbol
+ - SID:            406930
+ - MSID:           0
+Previous Top of Book
+Bid [level 0]
+ - Mantisa:        0
+ - Exponent:       0
+ - Size:           0
+ - Customer size:  0
+ - Secondary size: 0
+ - Lvl timestamp:  0
+ - Empty:          1
+ - Valid:          0
+Ask [level 0]
+ - Mantisa:        0
+ - Exponent:       0
+ - Size:           0
+ - Customer size:  0
+ - Secondary size: 0
+ - Lvl timestamp:  0
+ - Empty:          1
+ - Valid:          0
+Last trade
+ - Mantisa:        0
+ - Exponent:       0
+ - Valid:          0
+Attributes
+ - Status:         0
+Current Top of Book
+Bid [level 0]
+ - Mantisa:        0
+ - Exponent:       0
+ - Size:           0
+ - Customer size:  0
+ - Secondary size: 0
+ - Lvl timestamp:  0
+ - Empty:          1
+ - Valid:          0
+Ask [level 0]
+ - Mantisa:        194625
+ - Exponent:       0
+ - Size:           1
+ - Customer size:  1
+ - Secondary size: 0
+ - Lvl timestamp:  0
+ - Empty:          0
+ - Valid:          1
+Last trade
+ - Mantisa:        0
+ - Exponent:       0
+ - Valid:          0
+Attributes
+ - Status:         0
+
+
++===============================================================+
+| Statistics of processed data                                  |
++---------------------------------------------+-----------------+
+| Unit                                        | Value           |
++---------------------------------------------+-----------------+
+| Packet Filter    0  - received packets      |          100000 | 
+| Packet Filter    1  - received packets      |               0 | 
+| Packet Filter    3  - received packets      |               0 | 
+| Packet Filter    0  - discarded packets     |           43563 | 
+| Packet Filter    1  - discarded packets     |               0 | 
+| Packet Filter    3  - discarded packets     |               0 | 
+| Packet Filter    0  - bad CRC packets       |               0 | 
+| Packet Filter    1  - bad CRC packets       |               0 | 
+| Packet Filter    3  - bad CRC packets       |               0 | 
+| Packet Filter    0  - passed to SW          |               0 | 
+| Packet Filter    1  - passed to SW          |               0 | 
+| Packet Filter    3  - passed to SW          |               0 | 
+| Packet Filter    0  - overflow SW           |               0 | 
+| Packet Filter    1  - overflow SW           |               0 | 
+| Packet Filter    3  - overflow SW           |               0 | 
+| Packet Filter    0  - forwarded market      |           56437 | 
+| Packet Filter    0  - overflow market       |               0 | 
+| Packet Filter    0  - forwarded ord.dec     |               0 | 
+| Packet Filter    1  - forwarded ord.dec     |               0 | 
+| Packet Filter    0  - overflow ord.dec      |               0 | 
+| Packet Filter    1  - overflow ord.dec      |               0 | 
+| Packet Filter    3  - overflow ord.dec      |               0 | 
+| Arbitrage A      0  - received packets      |           56437 | 
+| Arbitrage A      0  - forwarded packets     |           52443 | 
+| Arbitrage A      0  - discarded packets     |            3994 | 
+| Arbitrage A      0  - not found packets     |               0 | 
+| Recovery buffer  0  - received packets      |           52443 | 
+| Recovery buffer  0  - forwarded packets     |           52443 | 
+| Recovery buffer  0  - discarded packets     |               0 | 
+| Recovery buffer  0  - buffered packets      |               0 | 
+| Decoder          0  - received packets      |           52443 | 
+| Decoder          0  - exported messages     |          101517 | 
+| Decoder          0  - dummy EOP messages    |               0 | 
+| Decoder          0  - corrupt packets       |               0 | 
+| Order Decoder    0  - received packets      |               0 | 
+| Order Decoder    1  - received packets      |               0 | 
+| Order Decoder    2  - received packets      |               0 | 
+| Order Decoder    3  - received packets      |               0 | 
+| Order Decoder    0  - exported messages     |               0 | 
+| Order Decoder    1  - exported messages     |               0 | 
+| Order Decoder    2  - exported messages     |               0 | 
+| Order Decoder    3  - exported messages     |               0 | 
+| Order Decoder    0  - SidMap written        |               0 | 
+| Order Decoder    1  - SidMap written        |               0 | 
+| Order Decoder    2  - SidMap written        |               0 | 
+| Order Decoder    3  - SidMap written        |               0 | 
+| Order Decoder    0  - SidMap added          |               0 | 
+| Order Decoder    1  - SidMap added          |               0 | 
+| Order Decoder    2  - SidMap added          |               0 | 
+| Order Decoder    3  - SidMap added          |               0 | 
+| Order Decoder    0  - SidMap deleted        |               0 | 
+| Order Decoder    1  - SidMap deleted        |               0 | 
+| Order Decoder    2  - SidMap deleted        |               0 | 
+| Order Decoder    3  - SidMap deleted        |               0 | 
+| Order Decoder    0  - SidMap searched       |               0 | 
+| Order Decoder    1  - SidMap searched       |               0 | 
+| Order Decoder    2  - SidMap searched       |               0 | 
+| Order Decoder    3  - SidMap searched       |               0 | 
+| Order Decoder    0  - SidMap missed         |               0 | 
+| Order Decoder    1  - SidMap missed         |               0 | 
+| Order Decoder    2  - SidMap missed         |               0 | 
+| Order Decoder    3  - SidMap missed         |               0 | 
+| Seqnum filter    0  - received messages     |          101517 | 
+| Seqnum filter    0  - forwarded messages    |          101517 | 
+| Seqnum filter    0  - discarded messages    |               0 | 
+| Mapping             - search requests       |           50362 | 
+| Mapping             - symbol found          |               4 | 
+| Mapping             - symbol missed         |           50358 | 
+| Book                - received messages     |          101517 | 
+| Book                - SW sync received      |               0 | 
+| Book                - discarded by OT       |           51152 | 
+| Book                - unknown symbols       |           50358 | 
+| Book                - exported updates      |               7 | 
+| Strategy Engine     - book updates          |               7 | 
+| Strategy Engine     - sent feedback         |               7 | 
+| Strategy Engine     - sent orders           |               4 | 
+| Order Sender     0  - requests from HLS     |               4 | 
+| Order Sender     1  - requests from HLS     |               0 | 
+| Order Sender     2  - requests from HLS     |               0 | 
+| Order Sender     3  - requests from HLS     |               0 | 
+| Order Sender     0  - requests from SW      |               0 | 
+| Order Sender     1  - requests from SW      |               0 | 
+| Order Sender     2  - requests from SW      |               0 | 
+| Order Sender     3  - requests from SW      |               0 | 
+| Order Sender     0  - session disabled      |               4 | 
+| Order Sender     1  - session disabled      |               0 | 
+| Order Sender     2  - session disabled      |               0 | 
+| Order Sender     3  - session disabled      |               0 | 
+| Order Sender     0  - input fifo full       |               0 | 
+| Order Sender     1  - input fifo full       |               0 | 
+| Order Sender     2  - input fifo full       |               0 | 
+| Order Sender     3  - input fifo full       |               0 | 
+| Order Sender     0  - TCP window full       |               0 | 
+| Order Sender     1  - TCP window full       |               0 | 
+| Order Sender     2  - TCP window full       |               0 | 
+| Order Sender     3  - TCP window full       |               0 | 
+| Order Sender     0  - bad requests          |               0 | 
+| Order Sender     1  - bad requests          |               0 | 
+| Order Sender     2  - bad requests          |               0 | 
+| Order Sender     3  - bad requests          |               0 | 
+| Order Sender     0  - generated orders      |               0 | 
+| Order Sender     1  - generated orders      |               0 | 
+| Order Sender     2  - generated orders      |               0 | 
+| Order Sender     3  - generated orders      |               0 | 
++---------------------------------------------+-----------------+
+

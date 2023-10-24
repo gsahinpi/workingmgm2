@@ -1,0 +1,5 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$class_magmio_1_1_per_symbol_rw_params.html" title="Persymbolrw parameters reader/updater. " alt="" coords="6,41,226,68"/>
+<area shape="rect" id="node2" href="$class_magmio_1_1_per_symbol_rw_params_debug.html" title="Persymbolrw parameters class for API running in debug mode. " alt="" coords="285,5,505,46"/>
+<area shape="rect" id="node3" href="$class_magmio_1_1_per_symbol_rw_params_fw.html" title="Persymbolrw parameters class for API running in firmware mode. " alt="" coords="275,71,514,97"/>
+</map>

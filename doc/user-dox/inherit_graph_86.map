@@ -1,0 +1,28 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node2" href="$class_magmio_1_1_arbiter.html" title="Channel arbiter class " alt="" coords="283,461,410,488"/>
+<area shape="rect" id="node3" href="$class_magmio_1_1_book_channel.html" title="API for reading book channel (stream) " alt="" coords="263,259,431,285"/>
+<area shape="rect" id="node4" href="$class_magmio_1_1_book_handler_api_top.html" title="Book Handler API. " alt="" coords="242,360,451,387"/>
+<area shape="rect" id="node5" href="$class_magmio_1_1_decoder_api.html" title="API class to control Decoder unit in FPGA. " alt="" coords="268,512,425,539"/>
+<area shape="rect" id="node6" href="$class_magmio_1_1_order_sender_base.html" title="Order sender API. API for order sender which allows to monitor or cancel orders that are sent from ha..." alt="" coords="249,613,444,640"/>
+<area shape="rect" id="node9" href="$class_magmio_1_1_recovery_api.html" title="Recovery API. " alt="" coords="265,411,428,437"/>
+<area shape="rect" id="node10" href="$class_magmio_1_1_status_channel.html" title="API for reading events from status channel. " alt="" coords="259,208,435,235"/>
+<area shape="rect" id="node11" href="$class_magmio_1_1_strategy.html" title="API for reading from Strategy Engine stream. This file shows how to correctly read from Strategy Engi..." alt="" coords="566,309,703,336"/>
+<area shape="rect" id="node7" href="$class_magmio_1_1_order_sender_api.html" title="Order sender API for TCP communication. " alt="" coords="543,627,727,653"/>
+<area shape="rect" id="node8" href="$class_magmio_1_1_order_sender_top.html" title="Order sender API. API for order sender which allows to monitor or cancel orders that are sent from ha..." alt="" coords="542,576,727,603"/>
+<area shape="rect" id="node12" href="$class_magmio_1_1_counters.html" title="Magmio::Counters" alt="" coords="23,689,163,716"/>
+<area shape="rect" id="node13" href="$class_magmio_1_1_active_order_memory_api.html" title="API class to control Active Order Memory unit in FPGA. " alt="" coords="230,1019,463,1045"/>
+<area shape="rect" id="node14" href="$class_magmio_1_1_book_handler_api.html" title="Book Handler API. " alt="" coords="253,715,440,741"/>
+<area shape="rect" id="node17" href="$class_magmio_1_1_mapping.html" title="Library for convering SID to address. " alt="" coords="278,816,415,843"/>
+<area shape="rect" id="node18" href="$class_magmio_1_1_packet_filter_api.html" title="Magmio Packet Filter API. " alt="" coords="257,867,436,893"/>
+<area shape="rect" id="node19" href="$class_magmio_1_1_packet_sender_top.html" title="API for Packet sender unit in the FW. " alt="" coords="251,917,443,944"/>
+<area shape="rect" id="node20" href="$class_magmio_1_1_risk_check_api.html" title="RiskCheckApi class is used to change setting of Pre&#45;Trade Risk Check Module " alt="" coords="261,968,432,995"/>
+<area shape="rect" id="node21" href="$class_magmio_1_1_strategy_prefilter.html" title="Magmio::StrategyPrefilter" alt="" coords="253,664,441,691"/>
+<area shape="rect" id="node22" href="$class_magmio_1_1_tuple_memory_api.html" title="API class to control Tuple Memory unit in FPGA. " alt="" coords="251,765,442,792"/>
+<area shape="rect" id="node15" href="$class_magmio_1_1_full_order_book_handler_api.html" title="Full Order Book Handler API. " alt="" coords="512,753,757,780"/>
+<area shape="rect" id="node16" href="$class_magmio_1_1_level_book_handler_api.html" title="Level Book Handler API. " alt="" coords="523,703,746,729"/>
+<area shape="rect" id="node23" href="$class_magmio_1_1_stream_reader.html" title="Parentheses class for reading from DMA interface. " alt="" coords="6,132,181,159"/>
+<area shape="rect" id="node24" href="$class_magmio_1_1_decoder.html" title="API for reading from Decoder stream. " alt="" coords="279,157,415,184"/>
+<area shape="rect" id="node25" href="$class_magmio_1_1_decoder_in.html" title="API for reading from Decoder INPUT stream. " alt="" coords="273,5,421,32"/>
+<area shape="rect" id="node26" href="$class_magmio_1_1_etob.html" title="API for reading from Enhanced Top of Book stream. " alt="" coords="291,56,402,83"/>
+<area shape="rect" id="node27" href="$class_magmio_1_1_pcap_reader.html" title="API class for recording all incoming traffic to a pcap file. " alt="" coords="267,107,426,133"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="Magmio::Strategy::Message" name="Magmio::Strategy::Message">
+<area shape="rect" id="node2" href="$struct_magmio_1_1_strategy_1_1_feedback_message.html" title="engine feedback message " alt="" coords="5,201,211,242"/>
+<area shape="rect" id="node3" href="$struct_magmio_1_1_strategy_1_1_export_message.html" title="Strategy engine export message " alt="" coords="235,201,421,242"/>
+<area shape="rect" id="node4" href="$struct_magmio_1_1_etob_1_1_data.html" title="Book export message. " alt="" coords="110,109,260,136"/>
+<area shape="rect" id="node5" href="$struct_magmio_1_1_etob_1_1_top_of_book.html" title="Top of Book. " alt="" coords="91,5,280,32"/>
+<area shape="rect" id="node6" href="$struct_magmio_1_1_strategy_1_1_strategy_out.html" title="Strategy Engine &#45; one output " alt="" coords="285,109,507,136"/>
+</map>

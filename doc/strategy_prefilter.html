@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Magmio a.s." />
+      <link rel="shortcut icon" href="img/favicon.ico" />
+    <title>Strategy Prefilter - Magmio User's Manual</title>
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/theme_extra.css" />
+        <link href="css/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Strategy Prefilter";
+        var mkdocs_page_input_path = "strategy_prefilter.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+    <![endif]--> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="./index.html">
+          <img src="img/magmio-slogan-logo.png" class="logo" alt="Logo"/>
+        </a>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Magmio User Guide</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="index.html">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="exanic_tools.html">Exanic tools</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="api.html">API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="mapping_configuration.html">Mapping and configuration files</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="strategies.html">Writing strategies</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="hls_strategy_simulation.html">Testing strategies in Vivado HLS</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="recovery.html">Recovery</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="book_channel.html">Book Channel</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="strategy_prefilter.html">Strategy Prefilter</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#strategy-prefilter-mode">Strategy prefilter mode</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#message-type-filter">Message type filter</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#feed-type-filter">Feed type filter</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#sw-sync-filter">SW Sync filter</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#book-filter">Book filter</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#initial-strategy-prefilter-state">Initial strategy prefilter state</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#configuration-setup-from-file">Configuration setup from file</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#example-of-configuration-file-for-strategy-prefilter">Example of configuration file for strategy prefilter</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#examples-of-configuration-through-api">Examples of configuration through API</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="riskcheck.html">PreTrade Risk Check</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="order_sender.html">Order Sender</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="status_channel.html">Status information</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="firmware_synthesis.html">Firmware synthesis</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="model_verification.html">Software model, simulation and verification</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="about.html">About</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="./index.html">Magmio User's Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><hr/>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="strategy-prefilter">Strategy Prefilter</h1>
+<p>Strategy prefilter module provides methods to filter updates generated by the book module before they reach the strategy engine module. Strategy prefilter consists of four separate filters: <strong>MsgType (TID) filter</strong>, <strong>FeedType filter</strong>, <strong>SW Sync filter</strong>, and <strong>Book filter</strong>. Not all filters must be present in firmware, the presence of a filter depends on the customer configuration at build-time. Each filter processes input updates and considering their content the filter decides to pass or drop the updates. Decisions from all filters are then combined together into the final decision based on the chosen mode (defined in the customer configuration).</p>
+<h2 id="strategy-prefilter-mode">Strategy prefilter mode</h2>
+<p>A method used to combine decisions from all filters into the final decision about the last received book update depends on the <strong>mode</strong>. There are two modes currently supported by Magmio: <strong>all pass</strong> and <strong>at least one pass</strong> (default mode). In the first case, the received book update is passed only when <strong>all</strong> filters decided to pass the update. In the second case, the received book update is passed when <strong>at least one</strong> filter decided to pass the update. If all filters are currently deactivated by API, all incoming book updates are automatically passed. The filters are individually described in the following subsections.</p>
+<h2 id="message-type-filter">Message type filter</h2>
+<p>Message type filter processes update&rsquo;s info field: <strong>message type</strong> (internally also known as <em>template ID</em>). In the initial state, the filter is disabled and all message types are passed by default. The filter can be activated and message types can be dropped and/or passed dynamically by calling specific API methods at run-time.</p>
+<h2 id="feed-type-filter">Feed type filter</h2>
+<p>Feed type filter processes update&rsquo;s info field: <strong>feed type</strong>. In the initial state, the filter is disabled and all feed types are passed by default. The filter can be activated and feed types can be dropped and/or passed dynamically by calling specific API methods at run-time.</p>
+<p>Currently, the filter supports three update types: <code>MARKET</code>, <code>REPLAY</code>, and <code>ORDER</code>. Feed types <code>NORMAL_FEED</code> and <code>INCREMENTAL_FEED</code> are processed by filter as one type called <code>MARKET</code>. Similarly, feed types <code>REQUEST_FEED</code> and <code>SNAPSHOT_FEED</code> are processed as one type called <code>REPLAY</code>.</p>
+<h2 id="sw-sync-filter">SW Sync filter</h2>
+<p>SW Sync filter processes update&rsquo;s info flags, specifically <code>ichanNotValid</code> flag. In the initial state, the filter is disabled by default. When enabled, the filter droppes all updates with active <code>ichanNotValid</code> flag.</p>
+<h2 id="book-filter">Book filter</h2>
+<p>Book filter processes update&rsquo;s book data: <strong>current and previous top of book</strong>. Book filter looks for any difference in the current and previous book state. If a difference is identified, the update is passed. Otherwise, the update is dropped. The comparison process is controlled by the following parameters:</p>
+<ul>
+<li><strong>Price</strong> and/or <strong>Size</strong> (a.k.a. quantity) - the selection of fields to be compared.</li>
+<li><strong>All levels</strong> or <strong>Only top level</strong> - used levels in the comparison process.</li>
+</ul>
+<h2 id="initial-strategy-prefilter-state">Initial strategy prefilter state</h2>
+<p>All internal filters of strategy prefilter unit (mentioned in the previous sections) are <strong>disabled</strong> by default, i.e. no filtering is performed and all book updates are automatically forwarded into the strategy unit.</p>
+<p>All message types as well as all feed types are <strong>passed</strong> by default. In the case of book filter, <strong>both</strong> fields (price and size) are used by default. <strong>All exported levels</strong> are searched for change by default.</p>
+<h2 id="configuration-setup-from-file">Configuration setup from file</h2>
+<p>Magmio API provides a method <code>loadFromFile</code> for object <code>api.strategyPrefilter</code> to load configuration directly from file. This approach simplifies a user to initialize strategy prefilter module or change its setup by applying a set of configuration commands to strategy prefilter in batch mode.</p>
+<p>Each line of configuration file should have one of the following formats:</p>
+<ul>
+<li>Comment line starting with symbol <code>#</code></li>
+<li>Empty line</li>
+<li>Command in the form: <code>&lt;command&gt;;&lt;value1&gt;;&lt;value2&gt;;...</code>, where <code>&lt;command&gt;</code> is a string with specific text (see table) and the following list are arguments for the command.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>msgtype_filter_enable</code></td>
+<td>Enable MsgType filter (arguments are ignored).</td>
+</tr>
+<tr>
+<td><code>msgtype_filter_disable</code></td>
+<td>Disable MsgType filter (arguments are ignored).</td>
+</tr>
+<tr>
+<td><code>msgtype_filter_passlist</code></td>
+<td>Apply all arguments as a list of msg types to be passed by MsgType filter. If the list is <strong>empty</strong>, <strong>all msg types</strong> are set to be passed.</td>
+</tr>
+<tr>
+<td><code>msgtype_filter_droplist</code></td>
+<td>Apply all arguments as a list of msg types to be dropped by MsgType filter. If the list is <strong>empty</strong>, <strong>all msg types</strong> are set to be dropped.</td>
+</tr>
+<tr>
+<td><code>feedtype_filter_enable</code></td>
+<td>Enable FeedType filter (arguments are ignored).</td>
+</tr>
+<tr>
+<td><code>feedtype_filter_disable</code></td>
+<td>Disable FeedType filter (arguments are ignored).</td>
+</tr>
+<tr>
+<td><code>feedtype_filter_passlist</code></td>
+<td>Apply all arguments as a list of feed types to be passed by FeedType filter. If the list is <strong>empty</strong>, <strong>all feed types</strong> are set to be passed. Arguments are numbers corresponding to the filter feed types defined by <code>TFilterFeedType</code> in <strong>strategy_prefilter.h</strong> (i.e. <code>MARKET_TYPE = 0</code>, <code>ORDER_TYPE = 1</code>, and <code>REPLAY_TYPE = 2</code>).</td>
+</tr>
+<tr>
+<td><code>feedtype_filter_droplist</code></td>
+<td>Apply all arguments as a list of feed types to be dropped by FeedType filter. If the list is <strong>empty</strong>, <strong>all feed types</strong> are set to be dropped. Argument format is same as in the case of <code>feedtype_filter_passlist</code> command.</td>
+</tr>
+<tr>
+<td><code>swsync_filter_enable</code></td>
+<td>Enable SW Sync filter (arguments are ignored).</td>
+</tr>
+<tr>
+<td><code>swsync_filter_disable</code></td>
+<td>Disable SW Sync filter (arguments are ignored).</td>
+</tr>
+<tr>
+<td><code>book_filter_enable</code></td>
+<td>Enable Book filter (arguments are ignored).</td>
+</tr>
+<tr>
+<td><code>book_filter_disable</code></td>
+<td>Disable Book filter (arguments are ignored).</td>
+</tr>
+<tr>
+<td><code>book_filter_price</code></td>
+<td>Enable or disable price in Book filter. Non-zero value of argument represents <code>enable</code>, otherwise <code>disable</code>.</td>
+</tr>
+<tr>
+<td><code>book_filter_size</code></td>
+<td>Enable or disable size in Book filter. Non-zero value of argument represents <code>enable</code>, otherwise <code>disable</code>.</td>
+</tr>
+<tr>
+<td><code>book_filter_alllevels</code></td>
+<td>Enable or disable all levels in Book filter. Non-zero value of argument sets <strong>all levels</strong> mode, otherwise <strong>top level only</strong> mode is set.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>If a line in the configuration file contains a command without the expected arguments list, the command is applied to all items.</p>
+</div>
+<p>All <strong>unknown</strong> commands (not mentioned in the list) are <strong>ignored</strong> and an appropriate warning message is generated. An example of such warning message for non-existing command <code>my_command</code> follows:</p>
+<pre><code>WARNING: Strategy Prefilter: Unknown config command &quot;my_command&quot;!
+</code></pre>
+<h3 id="example-of-configuration-file-for-strategy-prefilter">Example of configuration file for strategy prefilter</h3>
+<pre><code># Enable msg type filter
+msgtype_filter_enable
+# Specify a list of msg types to drop
+msgtype_filter_droplist;10;20;68;65;69;70
+# Enable feed type filter
+feedtype_filter_enable
+# Specify a list of feed types to pass
+feedtype_filter_passlist;0
+# Enable sw sync filter
+swsync_filter_enable
+# Enable book filter
+book_filter_enable
+# Enable only price
+book_filter_price;1
+book_filter_size;0
+# Enable only top level
+book_filter_alllevels;0
+</code></pre>
+<h2 id="examples-of-configuration-through-api">Examples of configuration through API</h2>
+<p>Examples of strategy prefilter configuration through our API are included in source file <strong>strategy_prefilter.cpp</strong> inside <strong>api-example</strong>. The examples present methods to configure all internal filters of strategy prefilter unit, like:</p>
+<ul>
+<li>Pass / Drop single message type as well as a list of several message types at once.</li>
+<li>Get current filtering state of a message type.</li>
+<li>Pass / Drop a feed type.</li>
+<li>Get current filtering state of a feed type.</li>
+<li>Use price and/or size for book filtering.</li>
+<li>Use only top level or use all levels for book filtering.</li>
+<li>Activate individual filters.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="book_channel.html" class="btn btn-neutral float-left" title="Book Channel"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="riskcheck.html" class="btn btn-neutral float-right" title="PreTrade Risk Check">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Copyright &copy; 2022 <a href="https://www.magmio.com/contact">Magmio a.s.</a></p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="book_channel.html" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="riskcheck.html" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '.';</script>
+    <script src="js/theme_extra.js" defer></script>
+    <script src="js/theme.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

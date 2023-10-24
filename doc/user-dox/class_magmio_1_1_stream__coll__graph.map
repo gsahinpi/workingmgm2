@@ -1,0 +1,16 @@
+<map id="Magmio::Stream" name="Magmio::Stream">
+<area shape="rect" id="node2" href="$class_magmio_1_1_strategy.html" title="API for reading from Strategy Engine stream. This file shows how to correctly read from Strategy Engi..." alt="" coords="1162,65,1299,92"/>
+<area shape="rect" id="node3" href="$class_magmio_1_1_etob.html" title="API for reading from Enhanced Top of Book stream. " alt="" coords="813,16,923,43"/>
+<area shape="rect" id="node4" href="$class_magmio_1_1_stream_reader.html" title="Parentheses class for reading from DMA interface. " alt="" coords="571,229,746,256"/>
+<area shape="rect" id="node13" href="$class_magmio_1_1_book_channel.html" title="API for reading book channel (stream) " alt="" coords="1147,151,1315,177"/>
+<area shape="rect" id="node14" href="$class_magmio_1_1_pcap_reader.html" title="API class for recording all incoming traffic to a pcap file. " alt="" coords="963,223,1122,249"/>
+<area shape="rect" id="node15" href="$class_magmio_1_1_decoder_in.html" title="API for reading from Decoder INPUT stream. " alt="" coords="969,272,1117,299"/>
+<area shape="rect" id="node16" href="$class_magmio_1_1_decoder.html" title="API for reading from Decoder stream. " alt="" coords="975,329,1111,356"/>
+<area shape="rect" id="node5" href="$class_magmio_1_1_common.html" title="Class for simple pass of the most commonly used references. " alt="" coords="320,229,461,256"/>
+<area shape="rect" id="node6" href="$class_magmio_1_1_fw_info.html" title="Reads detailed info from FPGA. " alt="" coords="37,280,163,307"/>
+<area shape="rect" id="node7" href="$class_magmio_1_1_exception_queue.html" title="Magmio::ExceptionQueue" alt="" coords="6,179,194,205"/>
+<area shape="rect" id="node8" href="$class_magmio_1_1_counters_top.html" title="Counters class is used to cover statistics of processed data from all individual modules (decoder..." alt="" coords="19,229,181,256"/>
+<area shape="rect" id="node9" href="$class_magmio_1_1_settings.html" title="Class for loading settings from config class. " alt="" coords="33,116,167,143"/>
+<area shape="rect" id="node10" href="$class_magmio_1_1_log.html" title="Magmio::Log" alt="" coords="47,347,153,373"/>
+<area shape="rect" id="node11" href="$class_magmio_1_1_counters.html" title="Magmio::Counters" alt="" coords="798,125,938,152"/>
+</map>

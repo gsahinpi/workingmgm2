@@ -1,0 +1,9 @@
+<map id="Magmio::StatusChannel::TStatusEvents" name="Magmio::StatusChannel::TStatusEvents">
+<area shape="rect" id="node2" href="$struct_magmio_1_1_status_channel_1_1_t_recovery_status.html" title="Magmio::StatusChannel\l::TRecoveryStatus" alt="" coords="5,5,181,46"/>
+<area shape="rect" id="node3" href="$struct_magmio_1_1_status_channel_1_1_t_automatic_reset.html" title="Magmio::StatusChannel\l::TAutomaticReset" alt="" coords="5,70,181,111"/>
+<area shape="rect" id="node4" href="$struct_magmio_1_1_status_channel_1_1_t_unknown_symbol.html" title="Magmio::StatusChannel\l::TUnknownSymbol" alt="" coords="5,135,181,177"/>
+<area shape="rect" id="node5" href="$struct_magmio_1_1_status_channel_1_1_t_risk_check_status.html" title="Magmio::StatusChannel\l::TRiskCheckStatus" alt="" coords="5,201,181,242"/>
+<area shape="rect" id="node6" href="$struct_magmio_1_1_status_channel_1_1_t_broken_packet.html" title="Magmio::StatusChannel\l::TBrokenPacket" alt="" coords="5,266,181,307"/>
+<area shape="rect" id="node7" href="$struct_magmio_1_1_status_channel_1_1_t_sequence_hole.html" title="Magmio::StatusChannel\l::TSequenceHole" alt="" coords="5,331,181,373"/>
+<area shape="rect" id="node8" href="$struct_magmio_1_1_status_channel_1_1_t_o_invalid_value.html" title="Each event is described by its own structure. " alt="" coords="5,397,181,438"/>
+</map>

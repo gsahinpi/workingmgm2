@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Magmio a.s." />
+      <link rel="shortcut icon" href="img/favicon.ico" />
+    <title>Recovery - Magmio User's Manual</title>
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/theme_extra.css" />
+        <link href="css/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Recovery";
+        var mkdocs_page_input_path = "recovery.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+    <![endif]--> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="./index.html">
+          <img src="img/magmio-slogan-logo.png" class="logo" alt="Logo"/>
+        </a>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Magmio User Guide</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="index.html">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="exanic_tools.html">Exanic tools</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="api.html">API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="mapping_configuration.html">Mapping and configuration files</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="strategies.html">Writing strategies</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="hls_strategy_simulation.html">Testing strategies in Vivado HLS</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="recovery.html">Recovery</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#magmiomagmio">Magmio::Magmio</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#magmiostatuschanneltrecoverystatus">Magmio::StatusChannel::TRecoveryStatus</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#status-vector-structure-meaning-of-the-bits-in-vector">Status vector structure (meaning of the bits in vector)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#error-vector-structure-meaning-of-the-bits-in-vector">Error vector structure (meaning of the bits in vector)</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#magmiostatuschannel-apistatuschannel">Magmio::StatusChannel (api.statusChannel)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#example-api-examplemaincpp">Example (api-example/main.cpp)</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="book_channel.html">Book Channel</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="strategy_prefilter.html">Strategy Prefilter</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="riskcheck.html">PreTrade Risk Check</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="order_sender.html">Order Sender</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="status_channel.html">Status information</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="firmware_synthesis.html">Firmware synthesis</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="model_verification.html">Software model, simulation and verification</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="about.html">About</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="./index.html">Magmio User's Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><hr/>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="recovery-module-in-magmio-api">Recovery module in Magmio API</h1>
+<h2 id="magmiomagmio">Magmio::Magmio</h2>
+<pre><code>Magmio::Magmio api(...);
+...
+api.init(...);
+...
+
+// Disable recovery for a market specified by index (starting from 0)
+api.recoveryInhibit(...);
+
+...
+
+// Print recovery status for a market specified by index (starting from 0) to stdout
+api.recoveryStatus(...);
+</code></pre>
+<h2 id="magmiostatuschanneltrecoverystatus">Magmio::StatusChannel::TRecoveryStatus</h2>
+<pre><code>typedef struct {
+   // Index of the market
+   uint8_t market;
+   // Status bit vector
+   uint8_t status;
+   // Error bit vector
+   uint8_t error;
+} TRecoveryStatus;
+</code></pre>
+<h3 id="status-vector-structure-meaning-of-the-bits-in-vector">Status vector structure (meaning of the bits in vector)</h3>
+<table>
+<thead>
+<tr>
+<th>BIT_POS</th>
+<th>VALUE</th>
+<th>MEANING</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td></td>
+<td>status channel: report valid</td>
+</tr>
+<tr>
+<td>1</td>
+<td></td>
+<td>status channel: recovery state changed</td>
+</tr>
+<tr>
+<td>2</td>
+<td></td>
+<td>status channel: replay request timed out</td>
+</tr>
+<tr>
+<td>3</td>
+<td></td>
+<td>status channel: integrity state changed</td>
+</tr>
+<tr>
+<td>5..4</td>
+<td></td>
+<td>current recovery state</td>
+</tr>
+<tr>
+<td></td>
+<td>0</td>
+<td>idle and waiting for packet loss report</td>
+</tr>
+<tr>
+<td></td>
+<td>1</td>
+<td>obtaining recovery data</td>
+</tr>
+<tr>
+<td></td>
+<td>2</td>
+<td>replaying incremental data buffer</td>
+</tr>
+<tr>
+<td></td>
+<td>3</td>
+<td>replay finished; waiting for other feeds</td>
+</tr>
+<tr>
+<td>6</td>
+<td></td>
+<td>current integrity state</td>
+</tr>
+<tr>
+<td></td>
+<td>0</td>
+<td>the recovery process did not finish yet, some feeds may not be up to date</td>
+</tr>
+<tr>
+<td></td>
+<td>1</td>
+<td>feed integrity is verified: all enabled feeds received at least one packet and no feed is in state 1 or 2.</td>
+</tr>
+<tr>
+<td>7</td>
+<td></td>
+<td>reserved</td>
+</tr>
+</tbody>
+</table>
+<h3 id="error-vector-structure-meaning-of-the-bits-in-vector">Error vector structure (meaning of the bits in vector)</h3>
+<table>
+<thead>
+<tr>
+<th>BIT_POS</th>
+<th>MEANING</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>recovery failure (the reason is specified by following bits), if no other bits are set, the failure was caused by packet loss</td>
+</tr>
+<tr>
+<td>2</td>
+<td>data FIFO buffer overflow</td>
+</tr>
+<tr>
+<td>3</td>
+<td>info FIFO buffer overflow</td>
+</tr>
+<tr>
+<td>4</td>
+<td>seqnum sync failure (missing data between applied snapshot and stored incrementals)</td>
+</tr>
+<tr>
+<td>5</td>
+<td>request failure (attempted transmission of a packet with zero MAC, IP or port)</td>
+</tr>
+<tr>
+<td>7..6</td>
+<td>reserved</td>
+</tr>
+</tbody>
+</table>
+<h2 id="magmiostatuschannel-apistatuschannel">Magmio::StatusChannel (api.statusChannel)</h2>
+<pre><code>#define RECOVERY_ERROR_DATA_FIFO_OVERFLOW_MASK  (0x02)
+#define RECOVERY_STATUS_REPLAY_TIMEOUT_MASK     (0x02)
+#define RECOVERY_STATUS_INTEGRITY_CHANGED_MASK  (0X04)
+...
+
+// Open status channel
+api.statusChannel.subscribe(...);
+...
+
+// Process incoming status channel events
+Magmio::StatusChannel::TStatusEvents event;
+while(...){
+   api.statusChannel.getEvent(event);
+   ...
+   // Process event according to its type
+   switch(event.type){
+      ...
+
+      case EVT_RECOVERY_DONE: {
+         // Recovery process ended
+         // Manipulate with event.recoveryStatus members
+         // using bit operations for extraction of various pieces of information
+         if (event.recoveryStatus.error &amp; RECOVERY_ERROR_DATA_FIFO_OVERFLOW_MASK){
+            // Here the processing of the event when data fifo buffer overflows could be added
+            std::cerr &lt;&lt; &quot;Recovery (error): data FIFO buffer overflow&quot; &lt;&lt; std::endl;
+         }
+         ...
+         break;
+      }
+      case EVT_RECOVERY_STATUS: {
+         // Recovery status changed
+         // Manipulate with event.recoveryStatus members
+         // using bit operations for extraction of various pieces of information
+         if (event.recoveryStatus.status &amp; RECOVERY_STATUS_REPLAY_TIMEOUT_MASK){
+            // Here the processing of the event when replay request times out could be added
+            std::cout &lt;&lt; &quot;Recovery (status): replay request timed out&quot; &lt;&lt; std::endl;
+         }
+         if (event.recoveryStatus.status &amp; RECOVERY_STATUS_INTEGRITY_CHANGED_MASK){
+            // Here the processing of the event when integrity state changes could be added
+            std::cout &lt;&lt; &quot;Recovery (status): integrity state changed&quot; &lt;&lt; std::endl;
+         }
+         ...
+         break;
+      }
+      default: {
+         ...
+         break;
+      }
+   }
+}
+...
+
+// Close status channel
+api.statusChannel.unsubscribe(...);
+</code></pre>
+<h2 id="example-api-examplemaincpp">Example (api-example/main.cpp)</h2>
+<pre><code>void eventHandler() {
+    Magmio::TError err;
+    Magmio::StatusChannel::TStatusEvents event;
+
+   //subscribe events
+   if ((err = api_ptr-&gt;statusChannel.subscribe(Magmio::StatusChannel::EVT_ALL &amp; (~Magmio::StatusChannel::EVT_BOOK_ALL))) != Magmio::SUCCESS) {
+      std::cerr &lt;&lt; &quot;ERROR: &quot; &lt;&lt; Magmio::Log::getErrorMessage(err) &lt;&lt; std::endl;
+      return;
+   }
+
+   //read messages from status channel in infinite loop
+   while(!stop){
+       //read message
+       if (api_ptr-&gt;statusChannel.getEvent(event) == Magmio::SUCCESS)  {
+          std::cout &lt;&lt; &quot;EVENT: &quot; &lt;&lt; event &lt;&lt; std::endl;
+       }
+   }
+
+   //unsubscribe from channel at the end
+   if ((err = api_ptr-&gt;statusChannel.unsubscribe(Magmio::StatusChannel::EVT_ALL)) != Magmio::SUCCESS) {
+      std::cerr &lt;&lt; &quot;ERROR: &quot; &lt;&lt; Magmio::Log::getErrorMessage(err) &lt;&lt; std::endl;
+      return;
+   }
+}
+</code></pre>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="hls_strategy_simulation.html" class="btn btn-neutral float-left" title="Testing strategies in Vivado HLS"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="book_channel.html" class="btn btn-neutral float-right" title="Book Channel">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Copyright &copy; 2022 <a href="https://www.magmio.com/contact">Magmio a.s.</a></p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="hls_strategy_simulation.html" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="book_channel.html" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '.';</script>
+    <script src="js/theme_extra.js" defer></script>
+    <script src="js/theme.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+<map id="Magmio::Counters::TCounters" name="Magmio::Counters::TCounters">
+<area shape="rect" id="node2" href="$struct_magmio_1_1_counters_1_1_t_counters_book_channel.html" title="Magmio::Counters::TCounters\lBookChannel" alt="" coords="23,14,236,55"/>
+<area shape="rect" id="node3" href="$struct_magmio_1_1_counters_1_1_t_counters_seq_filter.html" title="Magmio::Counters::TCounters\lSeqFilter" alt="" coords="23,79,236,121"/>
+<area shape="rect" id="node4" href="$struct_magmio_1_1_counters_1_1_t_counters_packet_sender.html" title="Magmio::Counters::TCounters\lPacketSender" alt="" coords="23,145,236,186"/>
+<area shape="rect" id="node5" href="$struct_magmio_1_1_counters_1_1_t_counters_trigger_strategy.html" title="Magmio::Counters::TCounters\lTriggerStrategy" alt="" coords="23,210,236,251"/>
+<area shape="rect" id="node6" href="$struct_magmio_1_1_counters_1_1_t_counters_decoder.html" title="Magmio::Counters::TCounters\lDecoder" alt="" coords="23,275,236,317"/>
+<area shape="rect" id="node7" href="$struct_magmio_1_1_counters_1_1_t_counters_recovery.html" title="Magmio::Counters::TCounters\lRecovery" alt="" coords="23,341,236,382"/>
+<area shape="rect" id="node8" href="$struct_magmio_1_1_counters_1_1_t_counters_packet_extractor.html" title="Magmio::Counters::TCounters\lPacketExtractor" alt="" coords="23,406,236,447"/>
+<area shape="rect" id="node9" href="$struct_magmio_1_1_counters_1_1_t_counters_tuple_memory.html" title="Magmio::Counters::TCounters\lTupleMemory" alt="" coords="23,471,236,513"/>
+<area shape="rect" id="node10" href="$struct_magmio_1_1_counters_1_1_t_counters_active_order_memory.html" title="Magmio::Counters::TCounters\lActiveOrderMemory" alt="" coords="23,537,236,578"/>
+<area shape="rect" id="node11" href="$struct_magmio_1_1_counters_1_1_t_counters_order_decoder.html" title="Magmio::Counters::TCounters\lOrderDecoder" alt="" coords="23,602,236,643"/>
+<area shape="rect" id="node12" href="$struct_magmio_1_1_counters_1_1_t_counters_p_p.html" title="Magmio::Counters::TCountersPP" alt="" coords="15,668,244,695"/>
+<area shape="rect" id="node13" href="$struct_magmio_1_1_counters_1_1_t_counters_prefilter.html" title="Magmio::Counters::TCounters\lPrefilter" alt="" coords="23,719,236,761"/>
+<area shape="rect" id="node14" href="$struct_magmio_1_1_counters_1_1_t_counters_order_sender.html" title="Magmio::Counters::TCounters\lOrderSender" alt="" coords="23,785,236,826"/>
+<area shape="rect" id="node15" href="$struct_magmio_1_1_counters_1_1_t_counters_arbiter.html" title="Magmio::Counters::TCounters\lArbiter" alt="" coords="23,850,236,891"/>
+<area shape="rect" id="node16" href="$struct_magmio_1_1_counters_1_1_t_counters_strategy.html" title="Magmio::Counters::TCounters\lStrategy" alt="" coords="23,915,236,957"/>
+<area shape="rect" id="node17" href="$struct_magmio_1_1_counters_1_1_t_counters_book.html" title="Magmio::Counters::TCountersBook" alt="" coords="6,981,253,1008"/>
+<area shape="rect" id="node18" href="$struct_magmio_1_1_counters_1_1_t_counters_order_table.html" title="Magmio::Counters::TCounters\lOrderTable" alt="" coords="23,1033,236,1074"/>
+<area shape="rect" id="node19" href="$struct_magmio_1_1_counters_1_1_t_counters_risk_check.html" title="Magmio::Counters::TCounters\lRiskCheck" alt="" coords="23,1098,236,1139"/>
+<area shape="rect" id="node20" href="$struct_magmio_1_1_counters_1_1_t_counters_filter.html" title="Magmio::Counters::TCounters\lFilter" alt="" coords="23,1163,236,1205"/>
+<area shape="rect" id="node21" href="$struct_magmio_1_1_counters_1_1_t_counters_mapping.html" title="Magmio::Counters::TCounters\lMapping" alt="" coords="23,1229,236,1270"/>
+</map>

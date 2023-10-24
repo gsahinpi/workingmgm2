@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Magmio a.s." />
+      <link rel="shortcut icon" href="img/favicon.ico" />
+    <title>Order Sender - Magmio User's Manual</title>
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/theme_extra.css" />
+        <link href="css/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Order Sender";
+        var mkdocs_page_input_path = "order_sender.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+    <![endif]--> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="./index.html">
+          <img src="img/magmio-slogan-logo.png" class="logo" alt="Logo"/>
+        </a>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Magmio User Guide</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="index.html">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="exanic_tools.html">Exanic tools</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="api.html">API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="mapping_configuration.html">Mapping and configuration files</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="strategies.html">Writing strategies</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="hls_strategy_simulation.html">Testing strategies in Vivado HLS</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="recovery.html">Recovery</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="book_channel.html">Book Channel</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="strategy_prefilter.html">Strategy Prefilter</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="riskcheck.html">PreTrade Risk Check</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="order_sender.html">Order Sender</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#order-sender-configuration">Order Sender configuration</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#market-session">Market session</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#instrument-identification">Instrument identification</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#order-parameters">Order parameters</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#order-sender-management">Order Sender management</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#managing-a-session">Managing a session</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#enable-order-sender">Enable Order Sender</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#watchdog">Watchdog</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#software-orders">Software Orders</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#reading-events">Reading events</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#order-extra-fields-in-events">Order extra fields in events</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="status_channel.html">Status information</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="firmware_synthesis.html">Firmware synthesis</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="model_verification.html">Software model, simulation and verification</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="about.html">About</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="./index.html">Magmio User's Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><hr/>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="order-sender">Order Sender</h1>
+<p>Order Sender is instantiated as <a href="./user-dox/class_magmio_1_1_order_sender_top.html">a part of Magmio API</a> and cooperates with low-latency, order sending component in the card. It maintains session to market order entry gateway and allows a user to control sending of orders from the card. Multiple sessions are allowed, the number of supported sessions can be modified if needed.</p>
+<h2 id="order-sender-configuration">Order Sender configuration</h2>
+<h3 id="market-session">Market session</h3>
+<p>Each session is uniquely identified by session ID. The value can be configured in <a href="mapping_configuration.html">API configuration file</a> using <code>id</code> attribute of <code>session</code> tag. In the API the session ID can be passed to certain methods to refer only to specific session. Also, all events contain session ID of the session, from which the event was originated.</p>
+<p>To be able to successfully connect to desired market order gateway, user has to choose proper order entry protocol. This is done using tag <code>&lt;protocol type=""&gt;</code>. Following table shows list of all supported order protocols, concrete list depends on Magmio package version.</p>
+<table>
+<thead>
+<tr>
+<th>XML protocol attribute</th>
+<th>Name</th>
+<th>Link to specification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>arca_direct</td>
+<td>ArcaDirect v4.1</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>arca_quote</td>
+<td>ArcaQuote</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>bats_boe</td>
+<td>CBoe v2.9.4</td>
+<td><a href="http://cdn.batstrading.com/resources/membership/US_Options_BOE_Specification.pdf">CBoe Options</a></td>
+</tr>
+<tr>
+<td>bats_equities</td>
+<td>CBoe US Equities v2.35</td>
+<td><a href="http://cdn.cboe.com/resources/membership/Cboe_US_Equities_BOE_Specification.pdf">CBoe Equities</a></td>
+</tr>
+<tr>
+<td>bats_quote</td>
+<td>CBoe v2.9.4</td>
+<td><a href="http://cdn.batstrading.com/resources/membership/US_Options_BOE_Specification.pdf">CBoe Options</a></td>
+</tr>
+<tr>
+<td>cme_ilink</td>
+<td>iLink</td>
+<td><a href="https://www.cmegroup.com/confluence/display/EPICSANDBOX/Application+Message+Formats">iLink</a></td>
+</tr>
+<tr>
+<td>eurex_eti</td>
+<td>Enhanced Trading Interface v7.1</td>
+<td><a href="https://www.eurexchange.com/resource/blob/1559020/05cbb05973dd402f0c6b7b3aa19668d9/data/T7_Enhanced_Trading_Interface_-_Manual_v.1.3.pdf">ETI</a></td>
+</tr>
+<tr>
+<td>miax_mei</td>
+<td>MIAX ExpressInterface v2.2b</td>
+<td><a href="https://www.miaxoptions.com/sites/default/files/page-files/MIAX_Express_Interface_MEI_v2.2b.pdf">MIAX</a></td>
+</tr>
+<tr>
+<td>moex_fix</td>
+<td>Moscow Exchange Fix v1.8.0</td>
+<td><a href="http://ftp.moex.ru/pub/FIX/Spectra/prod/OTC/OTC_fixgate_en.pdf">MOEX</a></td>
+</tr>
+<tr>
+<td>nasdaq_otto</td>
+<td>Ouch to Trade Options v2.1.4</td>
+<td><a href="https://www.nasdaqtrader.com/content/technicalsupport/specifications/TradingProducts/otto2.1.4.pdf">OTTO</a></td>
+</tr>
+<tr>
+<td>nasdaq_ouch</td>
+<td>OUCH v4.2</td>
+<td><a href="http://www.nasdaqtrader.com/content/technicalsupport/specifications/tradingproducts/ouch4.2.pdf">OUCH</a></td>
+</tr>
+<tr>
+<td>nasdaq_ouch_ufo</td>
+<td>Nasdaq OUTCH UFO</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>nasdaq_quo</td>
+<td>Quote Using Orders (QUO)</td>
+<td><a href="http://www.nasdaqtrader.com/content/technicalsupport/specifications/TradingProducts/quo.pdf">QUO</a></td>
+</tr>
+<tr>
+<td>nasdaq_sqf</td>
+<td>Specialized Quote Interface v6.4N</td>
+<td><a href="https://www.nasdaqtrader.com/content/technicalsupport/specifications/TradingProducts/sqfnom2.0.pdf">SQF</a></td>
+</tr>
+<tr>
+<td>nyse_pillar</td>
+<td>NYSE PillarGateway v1.1</td>
+<td><a href="https://www.nyse.com/publicdocs/NYSE_Pillar_Gateway_Binary_Protocol_Specification.pdf">NYSE Pillar</a></td>
+</tr>
+<tr>
+<td>nyse_utpd</td>
+<td>NYSE UTPDirect v1.4</td>
+<td><a href="https://www.nyse.com/publicdocs/nyse/markets/nyse/NYSEUTPDirect_Specification.pdf">NYSE UTPDirect</a></td>
+</tr>
+</tbody>
+</table>
+<p>To establish a market session, several fields are required, e.g. user login and password. These parameters are taken (together with network configuration) from the <a href="api.html">API configuration file</a> of the specified order protocol.</p>
+<h3 id="instrument-identification">Instrument identification</h3>
+<p>Instrument which will be traded is usually described using string called <em>symbol</em> (i.e. &ldquo;AAPL&rdquo;) and some additional fields (i.e. strike price, strike date for options). The fields are stored in <a href="mapping_configuration.html">mapping file</a>, right after symbol ID field and group ID field, and automatically passed to Order Sender in the card.</p>
+<pre><code>39914;1;AAPL;20121222;260000;C;100;4
+39915;1;BRBY;20121222;270000;C;100;4
+39916;1;AAPL;20121222;280000;C;100;4
+39917;1;CSCO;20140118;30000;P;100;4
+</code></pre>
+<h3 id="order-parameters">Order parameters</h3>
+<p>Each order message generated in the card consists of price and size of the order and another parameters setting behaviour of the order. These parameters are configurable via user written <a href="strategies.html">trading logic</a> (order sender is connected to trading logic output).</p>
+<p>List of available parameters:</p>
+<ul>
+<li>ID of generated order *</li>
+<li>Price of order</li>
+<li>Size of order</li>
+<li>Minimum quantity to trade</li>
+<li>Message type *</li>
+<li>Order side *</li>
+<li>Order type*</li>
+<li>Position *</li>
+<li>Time in force *</li>
+<li>Display *</li>
+<li>ISO *</li>
+</ul>
+<p>Certain markets do not support some of listed parameters or its values. In that case, the parameter is ignored.</p>
+<p>Parameters marked with * are checked for correct value at the order sender input. If an invalid configuration is detected, no order is generated. Instead, <code>EVT_ORDER_INVALID_VALUE</code> message is send to the <a href="status_channel.html">status channel</a> and &ldquo;<em>Bad Orders</em>&rdquo; statistic counter is incremented.</p>
+<h2 id="order-sender-management">Order Sender management</h2>
+<p>Each instance of Order Sender in Magmio API provides several methods for monitoring and controlling order generator in the card and for session management. Following text describes basic functionality of Order Sender. For more details, refer to the Order Sender example in <code>example</code> directory.</p>
+<h3 id="managing-a-session">Managing a session</h3>
+<p>After Magmio API is initialized, Order Sender is by default disconnected from market. When connecting, Order Sender connects to the market server using settings from the configuration file. To connect to the market, use one of the following methods</p>
+<ul>
+<li><a href="./user-dox/class_magmio_1_1_order_sender_top_abdd1ac51add00af6ba5a016205fb6cee.html"><code>api.order.start()</code></a></li>
+<li><a href="./user-dox/class_magmio_1_1_order_sender_top_ab87927751dce9d4c3daf00db50094974.html"><code>api.order.start("session_id")</code></a></li>
+</ul>
+<p>If the session ID is not specified, Order Sender connects to all sessions with <code>automap="true"</code> specified in the configuration file. If the session ID is specified, Order Sender searches the configuration file for a session with specified <code>id</code> and <code>automap="true"</code> and will enable just this session.</p>
+<p>Once connected, Order Sender automatically handles some market protocol events without user interaction (such as responding to heartbeat requests). Use <a href="./user-dox/class_magmio_1_1_order_sender_top_a1b783d81b9faffe3908d2ed767c6e70a.html"><code>api.order.stop()</code></a> to disconnect from market and stop Order Sender(s).</p>
+<h3 id="enable-order-sender">Enable Order Sender</h3>
+<p>To enable Order Sender to generate orders to market, use method <a href="./user-dox/class_magmio_1_1_order_sender_top_a37dd167725bf4e1fc1b659cbae00c532.html"><code>api.order.enable()</code></a>. Besides the session ID, the method also takes optional argument saying how many orders (default 1) the order sender can send before it disables itself. If set to 0 (unlimited number of orders), the Order Sender stays enabled until it is manually disabled by user.</p>
+<p>Order Sender can be disabled any time by calling <a href="./user-dox/class_magmio_1_1_order_sender_top_a6b76ffb95d20e0c781b41944ac8e17f0.html"><code>api.order.disable()</code></a>.</p>
+<h3 id="watchdog">Watchdog</h3>
+<p>We recommend using watchdog timer to prevent uncontrolled sending of orders to market when the user application freezes or dies unexpectedly.</p>
+<p>The watchdog is enabled by calling <code>api.order.wdt_start()</code> with argument configuring the watchdog timeout in milliseconds. The user application then has to call <code>api.order.wdt_reset()</code> periodically to reset the timer.</p>
+<p>If the reset doesn&rsquo;t come in configured time, i.e. because the application has frozen, the timer expires and all connections in the card are closed independently on the software state.</p>
+<p>Watchdog can be disabled by <code>api.order.wdt_stop()</code>.</p>
+<h3 id="software-orders">Software Orders</h3>
+<p>It is possible to generate orders directly via software using API methods <code>sendOrder</code> / <code>sendOrderFpga</code>, see Doxygen for more information.</p>
+<ul>
+<li><a href="./user-dox/class_magmio_1_1_order_sender_base_a70f03d09954cfec6e5f1e767ec053b90.html"><code>api.order.sendOrderFpga()</code></a> - Sends order directly to the Order Sender in FPGA (same as for orders generated directly by user strategy)</li>
+<li><a href="./user-dox/class_magmio_1_1_order_sender_top_ac1919bb83e1c3456f243de1d34e1dec2.html"><code>api.order.sendOrder()</code></a> - Software order (send orders purely through software)</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The orders generated by calling <code>api.order.sendOrder()</code> in host application ignore <a href="riskcheck.html">Risk Check</a> module and are excluded from the statistic counters for sent orders from the FPGA card.</p>
+</div>
+<h3 id="reading-events">Reading events</h3>
+<p>When an order is sent from card to the market server, an event is generated. Events are also generated when market server responds to requests from Order Sender (order acknowledgement, rejection, cancellation, execution).</p>
+<p>The following method is provided for reading the order events:</p>
+<ul>
+<li><a href="./user-dox/class_magmio_1_1_order_sender_top_a76f7e653e72c89d9306ce290adb22c58.html"><code>order.getEvent()</code></a> - Blocks the application execution until a new event is available in the queue.</li>
+</ul>
+<p>Each event contains:</p>
+<ul>
+<li>Event code</li>
+<li>Session ID (as defined by user in the config file) of session from which this event originated</li>
+<li>Type of protocol used in this session (Nasdaq OTTO, CME iLink,&hellip;)</li>
+<li>Precise timestamp from FPGA upon packet arrival</li>
+<li>Latency of shot order / latency between last two events</li>
+<li>Information from which physical port on the card the order was shot</li>
+<li>Text field populated in case of error/rejection</li>
+<li>Structure with order information</li>
+</ul>
+<p>Definition of the structure and event codes is available in <a href="./user-dox/order__types_8h_source.html">order_types.h</a>. Following event codes are available. Please, note that some order protocols may not use all of the listed events.</p>
+<table>
+<thead>
+<tr>
+<th>Event code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>EVT_ORDER_SEND</code></td>
+<td>Order from FPGA has been sent to market (size and price contain requested values)</td>
+</tr>
+<tr>
+<td><code>EVT_CANCEL_SEND</code></td>
+<td>Cancel request from FPGA has been sent to market</td>
+</tr>
+<tr>
+<td><code>EVT_REPLACE_SEND</code></td>
+<td>Replace request from FPGA has been sent to market (size and price contain new values)</td>
+</tr>
+<tr>
+<td><code>EVT_ORDER_ACK</code></td>
+<td>Market acknowledged the order request (size and price contain accepted values)</td>
+</tr>
+<tr>
+<td><code>EVT_ORDER_REPLACED</code></td>
+<td>Market acknowledged the order replace request / order was modified</td>
+</tr>
+<tr>
+<td><code>EVT_PRIORITY_CHANGE</code></td>
+<td>Priority of the order has been changed in the system</td>
+</tr>
+<tr>
+<td><code>EVT_CANCEL_ACK</code></td>
+<td>Request for cancelling acknowledged/pending</td>
+</tr>
+<tr>
+<td><code>EVT_ORDER_FILLED</code></td>
+<td>Order has been (partially) filled (size contains quantity executed by this event, not accumulated value)</td>
+</tr>
+<tr>
+<td><code>EVT_ORDER_KILLED</code></td>
+<td>Order has been canceled/killed (size contains quantity decremented from the order by this event, not accumulated value)</td>
+</tr>
+<tr>
+<td><code>EVT_ORDER_KILLED_AIQ</code></td>
+<td>Order was cancelled due to broken AIQ (self-match prevention)</td>
+</tr>
+<tr>
+<td><code>EVT_DONE_FOR_DAY</code></td>
+<td>No further executions forthcoming for the trading day (size contains total traded quantity)</td>
+</tr>
+<tr>
+<td><code>EVT_MESSAGE_REJECTED</code></td>
+<td>Message to market was rejected, see <code>info_text</code> field for reason. Order structure may not be populated</td>
+</tr>
+<tr>
+<td><code>EVT_LATENCY_MEASURED</code></td>
+<td>Connection latency was measured, timestamp contains measured latency</td>
+</tr>
+<tr>
+<td><code>EVT_SYSTEM_EVENT</code></td>
+<td>System event message from market (i.e. start/end of the market day)</td>
+</tr>
+<tr>
+<td><code>EVT_BROKEN_TRADE</code></td>
+<td>Trade was broken.</td>
+</tr>
+<tr>
+<td><code>EVT_REPLAY_COMPLETE</code></td>
+<td>When data recovery is complete and session is ready to enable order sender in HW</td>
+</tr>
+<tr>
+<td><code>EVT_ERROR</code></td>
+<td>Unrecoverable error occurred, order sender has been stopped. See <code>info_text</code> field for error description</td>
+</tr>
+<tr>
+<td><code>EVT_STOP</code></td>
+<td>When session is gracefully stopped, this is the last event for a session</td>
+</tr>
+</tbody>
+</table>
+<p>The information about order is represented by protocol-independent structure and contains following items. Exact type definition is available in <a href="./user-dox/order__types_8h_source.html">order_types.h</a>.</p>
+<pre><code>uint64_t orderID;              // API internal order ID. Use it for canceling order in cancel method
+uint64_t newOrderId;           // Populated for replace order messages.
+uint64_t marketId;             // Order ID as assigned by market - binary number
+std::string marketIDStr;       // Order ID as string when binary representation is not possible (i.e. CME FIX)
+uint32_t sequenceNumber;       // Sequence number of this message from underlying protocol (if available)
+uint64_t execID;               // Execution ID / Match Number (if available)
+uint64_t marketTimestamp;      // Message timestamp assigned by market (if available)
+uint64_t sid;                  // ID of instrument which caused sending of order to market
+uint8_t userTag;               // User assigned tag to order in strategy
+
+int64_t price;                 // Price in scale of price_scale field.
+int8_t  priceScale;            // Price scale 4 means that price 10000 = 1$
+uint32_t size;                 // Order QTY. Contains requested quantity in ACK message, increment quantity in FILL message, decrement qty in CANCEL message
+uint32_t minimumQty;           // Minimum quantity needed to execute this order. Not applicable on some markets.
+
+TOrderSide side;               // Buy/sell side
+TOrderPosition position;       // Open/close position. Not applicable on some markets
+TOrderTIF timeInForce;         // Time in force
+TOrderType orderType;          // Type of order
+TDisplay displayType;          // Not applicable on some markets
+TIso iso;                      // Not applicable on some markets
+
+std::string symbol;            // Security symbol. Used when the symbol can't be represented as a number (field symbolNum)
+uint64_t symbolNum;            // Security symbol as number / token (if possible)
+uint32_t strikePrice;          // Strike price. Not applicable on some markets
+std::string strikeDate;        // Strike date. Not applicable on some markets
+TOrderPutCall putCall;         // Option put/call. Not applicable on some markets
+
+char systemEventCode;          // Set when EVT_SYSTEM_EVENT message. Not applicable on some markets
+
+uint8_t extras[EXTRAS_WIDTH];  // Extra protocol specific items. Refer to msgs/&lt;proto_name&gt;/order_extras.h for more info
+</code></pre>
+<p>In case the API gets market response to order which no longer exists, the structure itself may not be populated (just <code>orderId</code>). Please, note that <code>price</code> and <code>size</code> fields in the order structure are changing during lifespan of order:</p>
+<ol>
+<li><code>EVT_ORDER_SEND</code> - requested price and size</li>
+<li><code>EVT_ORDER_ACK</code> - price and size accepted by market</li>
+<li><code>EVT_ORDER_FILLED</code> - size (increment, not accumulated value) and price of this fill</li>
+<li><code>EVT_ORDER_KILLED</code> - size contains killed quantity by this kill/cancel event, not accumulated value</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The structure is unified between different market protocols. It may happen that certain markets do not populate some of the listed items. In that case, the unavailable items will be set to default/zero value.</p>
+</div>
+<h3 id="order-extra-fields-in-events">Order extra fields in events</h3>
+<p>Some order protocols in Magmio support additional <em>extra</em> fields to be sent from FPGA to the software application included in each order event. Declaration of the structure representing extra fields for a specific protocol is available in header file: <strong>/usr/include/magmio/msgs/&lt;protocol>/order_extras.h</strong>.</p>
+<p>The following code snippet provides an example of catching order sender events and parsing available fields including the extra fields. The given code should be used in the software application and/or software model, for a full example see <em>order_example.cpp</em> source file provided as a part of the software model. The short explanation of the following code is given in comments.</p>
+<pre><code>// Import header file with extra fields declaration for the specific order protocol
+#include &lt;magmio/msgs/bist_ouch/order_extras.h&gt;
+
+...
+
+// Almost infinite loop for processing received order events. The loop should be executed in a separate thread to not block the main application process
+while (!stop) {
+   Magmio::TEventItem event;
+   // Pointer to the extras structure for the specific order protocol
+   Magmio::TBistExtras* extras;
+
+   // 1000 = wait for an event for 1000 ms
+   //   -1 = wait for an event infinitely
+   if (!api.order.getEvent(event, 1000)) {
+      // false is returned when there is no event to get
+      continue;
+   }
+
+   std::cout &lt;&lt; &quot;Got event from session: &quot; &lt;&lt; event.sessionID &lt;&lt; std::endl;
+
+   // Process received events according to their type
+   switch (event.type) {
+      case Magmio::TEventType::EVT_ORDER_SEND:
+         std::cout &lt;&lt; &quot;New order with orderToken = &quot; &lt;&lt; event.order.orderID  &lt;&lt; &quot; sent.&quot; &lt;&lt; std::endl;
+      break;
+
+      case Magmio::TEventType::EVT_ORDER_ACK:
+          std::cout &lt;&lt; &quot;Order with orderToken = &quot; &lt;&lt; event.order.orderID &lt;&lt; &quot; ACKED (orderID = &quot; &lt;&lt; event.order.marketID &lt;&lt;  &quot;)&quot; &lt;&lt; std::endl;
+          // Cast the extras event order member to the specific extras structure according to the order protocol
+          extras = (Magmio::TBistExtras*)event.order.extras;
+          // Access individual extras fields
+          std::cout &lt;&lt; &quot;Order state: &quot; &lt;&lt; extras-&gt;orderState; &lt;&lt; std::endl;
+      break;
+
+      case Magmio::TEventType::EVT_ORDER_FILLED:
+          std::cout &lt;&lt; &quot;Order with orderToken = &quot; &lt;&lt; event.order.orderID &lt;&lt; &quot; FILLED (trade QTY = &quot; &lt;&lt; event.order.size &lt;&lt;  &quot;)&quot; &lt;&lt; std::endl;
+          extras = (Magmio::TBistExtras*)event.order.extras;
+          // Here, the matchID is available via extras-&gt;matchID as an array of 12B
+      break;
+
+      case Magmio::TEventType::EVT_ORDER_REPLACED:
+          std::cout &lt;&lt; &quot;Order with orderToken = &quot; &lt;&lt; event.order.orderID &lt;&lt; &quot; REPLACED (replacementOrderToken = &quot; &lt;&lt; event.order.newOrderID &lt;&lt;  &quot;)&quot; &lt;&lt; std::endl;
+          // Further messages to replaced order (i.e. fills, kills) will be reported with event.order.orderID set to value of replacement orderToken
+      break;
+
+      ...
+      // Add case block for all event types you want to process
+   }
+   ...
+}
+</code></pre>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="riskcheck.html" class="btn btn-neutral float-left" title="PreTrade Risk Check"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="status_channel.html" class="btn btn-neutral float-right" title="Status information">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Copyright &copy; 2022 <a href="https://www.magmio.com/contact">Magmio a.s.</a></p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="riskcheck.html" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="status_channel.html" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '.';</script>
+    <script src="js/theme_extra.js" defer></script>
+    <script src="js/theme.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

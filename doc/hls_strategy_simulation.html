@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Magmio a.s." />
+      <link rel="shortcut icon" href="img/favicon.ico" />
+    <title>Testing strategies in Vivado HLS - Magmio User's Manual</title>
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/theme_extra.css" />
+        <link href="css/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Testing strategies in Vivado HLS";
+        var mkdocs_page_input_path = "hls_strategy_simulation.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+    <![endif]--> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="./index.html">
+          <img src="img/magmio-slogan-logo.png" class="logo" alt="Logo"/>
+        </a>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Magmio User Guide</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="index.html">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="exanic_tools.html">Exanic tools</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="api.html">API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="mapping_configuration.html">Mapping and configuration files</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="strategies.html">Writing strategies</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="hls_strategy_simulation.html">Testing strategies in Vivado HLS</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#why">Why?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#what">What?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#requirements">Requirements</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#hls-testbench-source-files">HLS testbench source files</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#user-specified-testing-dataset">User-specified testing dataset</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#how">How?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1-define-a-desired-behavior-of-your-strategy">1. Define a desired behavior of your strategy.</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#general-data-format">General data format</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#data-set-format">Data set format</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#data-files-creation">Data files creation</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2-run-a-test">2. Run a test</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="recovery.html">Recovery</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="book_channel.html">Book Channel</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="strategy_prefilter.html">Strategy Prefilter</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="riskcheck.html">PreTrade Risk Check</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="order_sender.html">Order Sender</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="status_channel.html">Status information</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="firmware_synthesis.html">Firmware synthesis</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="model_verification.html">Software model, simulation and verification</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="about.html">About</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="./index.html">Magmio User's Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><hr/>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="hls-strategy-simulation-and-cosimulation">HLS strategy simulation and cosimulation</h1>
+<p>The user strategy can be simulated and cosimulated directly by Vivado HLS tool in order to check its behavior even before the run of firmware build process. In the following sections are answered three primary questions about the (co-)simulation of user strategy through HLS testbench: <a href="hls_strategy_simulation.html#why"><strong>Why?</strong></a>, <a href="hls_strategy_simulation.html#what"><strong>What?</strong></a> and <a href="hls_strategy_simulation.html#how"><strong>How?</strong></a></p>
+<h2 id="why">Why?</h2>
+<p>Vivado HLS is responsible for translation of C++ code into RTL (VHDL), which is suitable for FPGA. This process is difficult and requires code to be written in a specific kind of programming approach (more hardware-like). As a consequence, some C++ code snippets work correctly in software, but their RTL counterparts result in non-functional hardware. Furthermore, the process of searching for such code snippets and correctly identifying roots of their miss-behavior is very time demanding.</p>
+<p>Strategy (co-)simulation in Vivado HLS serves as a good, recommended, and fast method to check functionality of user-specific strategy code through simulation (check C++ code) and co-simulation (check RTL code) offered by Vivado HLS. The only responsibility of a user is to define a desired behavior of his strategy through data sets (CSV files). The testbench reveals all differences between real and desired outputs from the current strategy code at the software (C++) level and also at the hardware level (RTL).</p>
+<h2 id="what">What?</h2>
+<p>HLS testbench is a set of C++ and CSV files. The <code>main</code> function represents a testing environment. The tested code (<code>top</code>) &ndash; function to be synthesized and implemented into FPGA afterwards &ndash; must be called inside <code>main</code>. All code snippets in <code>main</code>, that are not a part of <code>top</code>, should be used to:</p>
+<ul>
+<li>setup tests,</li>
+<li>generate input test samples (<em>stimuli</em>) or read them from input CSV files,</li>
+<li>put stimuli into <code>top</code>,</li>
+<li>process outputs from <code>top</code>,</li>
+<li>compare test outputs with desired data (<em>golden outputs</em>),</li>
+<li>evaluate the final test result (<em>PASS/FAIL</em>).</li>
+</ul>
+<p>HLS strategy testbench has all this steps already implemented for <code>strategy_engine</code> function, which contains user-specific strategy code.</p>
+<h3 id="requirements">Requirements</h3>
+<p>Before going into more details in the next sections, we assume:</p>
+<ul>
+<li>the rpm package is installed on the machine and a user created a local directory with magmio files by running <code>magmio-create-local &lt;profile&gt; &lt;local-dir&gt;</code></li>
+<li><a href="installation.html#local-copy-of-magmio-application"><em>remote_host_conf.sh</em></a> is set properly (variables <code>REMOTE_HOST</code>, <code>SYNTH_PKG_DIR</code>, <code>XILINX</code>)</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>User should edit only <strong>tb_settings.h</strong> and <strong>tb_data/</strong> considering his requirements on the strategy code behavior.</p>
+</div>
+<h3 id="hls-testbench-source-files">HLS testbench source files</h3>
+<p>HLS strategy testbench source files are placed in folder <strong>devkit/hls_tb</strong> on the build machine inside the folder defined by <code>SYNTH_PKG_DIR</code>.</p>
+<p>Magmio HLS testbench consists of:</p>
+<ul>
+<li><strong>tb_settings.h</strong> - the user-defined settings of testing process: names of individual data set files, maximum processed samples during test, vector of starting order IDS for sessions, and additional features (disabled by default, you must uncomment a macro to enable a feature).</li>
+<li><strong>strategies_tb.cpp</strong>, <strong>strategies_tb.h</strong> - the central testing code with <code>main</code> function, that is responsible for run of the whole testing process.</li>
+<li><strong>tb_utils.h</strong> - functions to load data samples from files and store outputs to files in predefined format.</li>
+<li><strong>hft_types_text.h</strong> - functions to print data in pretty format to output stream (<code>stdout</code> in test).</li>
+</ul>
+<h3 id="user-specified-testing-dataset">User-specified testing dataset</h3>
+<p>A testing dataset (a set of CSV files), which will be used during HLS testbench run, is placed on the production machine (the machine with installed package) inside directory created by <code>magmio-create-local</code>, namely <code>&lt;local-dir&gt;/strategies/&lt;strategy&gt;/src/tb_data</code>.</p>
+<h2 id="how">How?</h2>
+<p>This section describes a step-by-step guide to correctly use the HLS strategy testbench.</p>
+<h3 id="1-define-a-desired-behavior-of-your-strategy">1. Define a desired behavior of your strategy.</h3>
+<p>The HLS strategy testbench requires a user to specify a data set containing input-output pairs (files inluded in <strong>tb_data</strong> sub-folder). Because of the complexity of strategy interface and clarity of data, input samples are split into several CSV files. The next subsection references to the files using their default names.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>User can use any filenames, but he is responsible for update of these filenames in <strong>tb_settings.h</strong>. The names of CSV files must correspond to the names defined in <strong>tb_settings.h</strong>.</p>
+</div>
+<p>Each line in a file represents one sample &ndash; one call of the function <code>strategy_engine</code> in <code>main</code>. N-th sample in each of data files is a part of one particular test sample. All lines starting with <code>#</code> are considered as comments and as well as empty lines are ignored in further processing (skipped).</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>All data files must be stored in <strong>tb_data</strong> folder to be automatically loaded during test run.</p>
+</div>
+<h4 id="general-data-format">General data format</h4>
+<p>Each data file uses CSV format, where <code>;</code> is used as delimiter. The list and order of fields correspond with definition of their data types in <strong>hft_types.h</strong>.</p>
+<ul>
+<li><code>integer</code> and <code>enum</code> types are written in decimal format</li>
+<li>a <code>boolean</code> value is written for <code>false</code> as zero and for <code>true</code> as any non-zero value</li>
+<li>a raw <code>byte</code> array is written as one hexadecimal value with following rules:</li>
+<li>value starts with &ldquo;0x&rdquo;</li>
+<li>all leading zero bytes are trimmed</li>
+<li>if all bytes are zero, the sample value is written simply as 0 (without &ldquo;0x&rdquo;)</li>
+<li><code>decodedMsg</code> argument is an exception to the previous point. In this case, the byte array is written in byte-by-byte manner (each byte as a separate value in the form &ldquo;0xNN&rdquo;), where two adjacent bytes are separated by space.</li>
+</ul>
+<h4 id="data-set-format">Data set format</h4>
+<p>For each of data files, used in HLS strategy testbench, a corresponding argument in <code>strategy_engine</code> function interface, sample format and an example are shown in the next paragraphs.</p>
+<p><strong>curr_tobs.dat</strong>, <strong>prev_tobs.dat</strong>:</p>
+<ul>
+<li><em>Argument:</em><ul>
+<li><code>TToB currTob[BOOK_LEVELS]</code></li>
+<li><code>TToB prevTob[BOOK_LEVELS]</code></li>
+</ul>
+</li>
+<li><em>Sample format</em>: <code>TToB[0];TToB[1];...;TToB[BOOK_LEVELS-1];</code>,<ul>
+<li><strong>TToB</strong>: <code>ask;bid;ask_size;bid_size;ask_cussize;bid_cussize;ask_prosize;bid_prosize;ask_lvl_ts;bid_lvl_ts;ask_empty;bid_empty;ask_valid;bid_valid;</code></li>
+</ul>
+</li>
+<li><em>Example:</em> <code>10000;90000;5;10;1;2;3;4;5;6;0;0;1;1;</code></li>
+<li><em>Notes:</em><ul>
+<li>If some fields are missing on a line, valid flags are set to <code>false</code>.</li>
+</ul>
+</li>
+</ul>
+<p><strong>info.dat</strong>:</p>
+<ul>
+<li><em>Argument:</em> <code>TInfo info</code></li>
+<li><em>Sample format:</em> <code>timestamp;hwTimestamp;exchangeTimestamp;eop_flag;seqError_flag;swUpdate_flag;ichanNotValid_flag;obRstToggle_flag;feedType;templateId;channelId;packetSeqnum;msgSeqnum;decoderSeqnum</code></li>
+<li><em>Example:</em> <code>1100;1000;950;0;0;1;0;0;0;65;2;12300;12305;1;</code></li>
+</ul>
+<p><strong>decoded_msgs.dat</strong>:</p>
+<ul>
+<li><em>Argument:</em> <code>uint8_t decodedMsg[MESSAGE_SIZE]</code></li>
+<li><em>Sample format:</em> <code>"0x"decodedMsg[0] "0x"decodedMsg[1] ...</code></li>
+<li><em>Example:</em> <code>0x2e 0x04 0x01 0x00 0x00 0x00 0x00 0x00</code></li>
+</ul>
+<p><strong>global_params.dat</strong>, <strong>pergroup_params.dat</strong>, <strong>persymbolro_params.dat</strong>, <strong>persymbolrw_params.dat</strong>:</p>
+<ul>
+<li><em>Argument:</em><ul>
+<li><code>int32_t global_params[GLOBAL_PARAMS_COUNT]</code></li>
+<li><code>int32_t pergroup_params[PERGROUP_PARAMS_COUNT]</code></li>
+<li><code>int32_t persymbolro_params[PERSYMBOLRO_PARAMS_COUNT]</code></li>
+<li><code>int32_t persymbolrw_params[PERSYMBOLRW_PARAMS_COUNT]</code></li>
+</ul>
+</li>
+<li><em>Sample format:</em> <code>param[0];param[1];param[2];...;param[N-1];</code></li>
+<li><em>Example:</em> <code>1;2;3;4;5;6;7;8;9;10;11;12;13;14;15;16;17;18;19;</code></li>
+<li><em>Notes:</em><ul>
+<li>If a line contains less values than a total count of params, the missing params are automatically set to zero.</li>
+<li>If a data file with params contains less lines than total number of samples, the last parameters set is used for all remaining samples.</li>
+</ul>
+</li>
+</ul>
+<p><strong>golden_order_outputs.dat</strong>:</p>
+<ul>
+<li><em>Argument:</em> <code>hls::stream&lt;TOrderOut&gt; &amp;order_output</code></li>
+<li><em>Sample format:</em> <code>message_type;order_type;price;size;ask_price;bid_price;ask_size;bid_size;min_qty;side;position;time_in_force;order_id;display;iso;user_tag;session_index;generic_out;instrument;feedback;feedback_vld</code></li>
+<li><em>Example:</em> <code>0;2;10000;5;0;10000;0;5;1;1;1;3;0xCCBBAA998877665544332211;1;2;0;0;0;0x4443424134333231;0;0</code></li>
+</ul>
+<h4 id="data-files-creation">Data files creation</h4>
+<p>There are two options to prepare an input data set (<strong>curr_tobs.dat</strong>, <strong>prev_tobs.dat</strong>, <strong>info.dat</strong>, <strong>decoded_msgs.dat</strong>, <strong>global_params.dat</strong>, <strong>pergroup_params.dat</strong>, <strong>persymbolro_params.dat</strong> and <strong>persymbolrw_params.dat</strong>) with valid test samples:</p>
+<ol>
+<li>User creates his own data set manually by creating and editing files, mentioned at the start of this section.</li>
+<li>Alternatively, user runs software model with option <code>-f</code>. Model creates all input data files with <a href="hls_strategy_simulation.html#data-set-format">default names</a> and fills their content with data from this run.</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Because <strong>golden_order_outputs.dat</strong> represents an output data set, it should be gained from another independent source. Therefore, user must create this file manually (not as an output from his HLS strategy code). As an alternative, user can use the golden orders file generated by the software model with active option <code>-f</code>.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not forget to copy data files to <strong>tb_data</strong> sub-folder and update their filenames in <strong>tb_settings.h</strong>.</p>
+</div>
+<p>Steps to use the software model for generating testing data files:</p>
+<ol>
+<li>Install rpm package: <code>$ sudo yum install magmio-X.Y-Z.x86_64.rpm</code></li>
+<li>Create local magmio directory: <code>$ magmio-create-local &lt;profile&gt; &lt;directory&gt;</code></li>
+<li>Build model : <code>$ cd &lt;local-magmio-dir&gt;/strategies/&lt;strategy-name&gt;/src &amp;&amp; make model</code></li>
+<li>Run model with <code>-f</code> option: <code>cd &lt;local-magmio-dir&gt;/strategies/&lt;strategy-name&gt;/model &amp;&amp; ./model -p &lt;pcap&gt; -c &lt;api-xml&gt; -m &lt;mapping&gt; -f</code></li>
+</ol>
+<p>After the model ends, new generated CSV files are available in the directory with model binary (ex: <strong>~/data/my-local/strategies/happy-trigger/model/</strong>):</p>
+<ul>
+<li><strong>persymbolrw_params.dat</strong>, <strong>persymbolro_params.dat</strong>, <strong>pergroup_params.dat</strong>, <strong>global_params.dat</strong> - dataset for each parameter type,</li>
+<li><strong>curr_tobs.dat</strong>, <strong>prev_tobs.dat</strong> - datasets for ToB input arguments of hls strategy,</li>
+<li><strong>info.dat</strong> - dataset for info argument of hls strategy,</li>
+<li><strong>decoded_msgs.dat</strong> - dataset for decoded msgs input argument of hls strategy,</li>
+<li><strong>order_outputs.dat</strong> - dataset for output orders sent from hls strategy.</li>
+</ul>
+<h3 id="2-run-a-test">2. Run a test</h3>
+<p>The next step is to run a test, that evaluates your <code>strategy_engine</code> by comparing outputs on input test samples with desired &ldquo;golden&rdquo; outputs.</p>
+<p>The test runs at two different levels. In the first step, the software simulation is started and checks behavior of the C++ code. If the simulation passes, i. e. golden outputs and real outputs are same, then as the second step, the co-simulation starts. Otherwise, test run stops. Co-simulation checks behavior of generated RTL code against the same samples as during simulation. The final result of test is printed at the end.</p>
+<p>Command to start test:</p>
+<pre><code>$ cd &lt;your_strategy_dir&gt;/src ; make check_validity
+</code></pre>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="strategies.html" class="btn btn-neutral float-left" title="Writing strategies"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="recovery.html" class="btn btn-neutral float-right" title="Recovery">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Copyright &copy; 2022 <a href="https://www.magmio.com/contact">Magmio a.s.</a></p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="strategies.html" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="recovery.html" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '.';</script>
+    <script src="js/theme_extra.js" defer></script>
+    <script src="js/theme.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

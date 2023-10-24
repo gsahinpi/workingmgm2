@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Magmio a.s." />
+      <link rel="shortcut icon" href="img/favicon.ico" />
+    <title>Writing strategies - Magmio User's Manual</title>
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/theme_extra.css" />
+        <link href="css/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Writing strategies";
+        var mkdocs_page_input_path = "strategies.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+    <![endif]--> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="./index.html">
+          <img src="img/magmio-slogan-logo.png" class="logo" alt="Logo"/>
+        </a>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Magmio User Guide</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="index.html">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="exanic_tools.html">Exanic tools</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="api.html">API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="mapping_configuration.html">Mapping and configuration files</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="strategies.html">Writing strategies</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#source-code-location">Source code location</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#trading-logic">Trading logic</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#output-orders">Output orders</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#price-implied-decimal-point">Price - implied decimal point</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#changing-global-persymbolrw-and-pergroup-parameters">Changing global, persymbolrw and pergroup parameters</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#instrument-identification">Instrument identification</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#decoded-message-array">Decoded message array</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#strategy-feedback">Strategy feedback</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#strategy-feedback-in-host-software-application">Strategy feedback in host software application</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#coding-guidelines-for-writing-hardware-strategies">Coding guidelines for writing hardware strategies</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#latency">Latency</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#latency-limits">Latency limits</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="hls_strategy_simulation.html">Testing strategies in Vivado HLS</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="recovery.html">Recovery</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="book_channel.html">Book Channel</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="strategy_prefilter.html">Strategy Prefilter</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="riskcheck.html">PreTrade Risk Check</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="order_sender.html">Order Sender</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="status_channel.html">Status information</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="firmware_synthesis.html">Firmware synthesis</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="model_verification.html">Software model, simulation and verification</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="about.html">About</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="./index.html">Magmio User's Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><hr/>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="writing-the-strategies">Writing the strategies</h1>
+<h2 id="source-code-location">Source code location</h2>
+<p>Source codes of trading strategies are located on the development machine in structure <code>~/my-local/strategies</code>. Every strategy resides in its own directory, which is further divided into subdirectories. The following listing shows the directory structure for a single strategy:</p>
+<ul>
+<li><strong>build/</strong> - Directory with results of strategy <a href="firmware_synthesis.html">firmware synthesis</a><ul>
+<li><strong>&lt;strategy_name>_&lt;build_number>.bit (.fw)</strong> - Bitstream for FPGA circuit configuration</li>
+<li><strong>build_status.log</strong> - Synthesis status log file</li>
+</ul>
+</li>
+<li><strong>src/</strong> - Directory with source codes for strategy firmware<ul>
+<li><strong>strategies.cpp</strong> - Main strategy function (<code>strategy_engine()</code> defining trading logic)</li>
+<li><strong>strategies.h</strong> - Strategy header file containing user specific defines</li>
+<li><a href="./user-dox/hft__types_8h_source.html"><strong>hft_types.h</strong></a> - Constants and structures definitions</li>
+<li><strong>hft_types.cpp</strong> - Implementation of methods for OrderOutput and FeedbackOutput classes</li>
+<li><strong>&lt;market>/messages.h</strong> -  Message templates for appropriate market</li>
+</ul>
+</li>
+<li><strong>model/</strong> - Directory for <a href="model_verification.html">verification and software modelling of the strategy</a> (created after <code>make model</code> was executed)<ul>
+<li><strong>model</strong> - Software model of the strategy (generated binary file)</li>
+<li><strong>verification_model</strong> - Offline verification model (generated binary file)</li>
+<li><strong>main.cpp</strong> - Source file for software strategy model</li>
+<li><strong>main_verify.cpp</strong> - Source file for offline verification</li>
+</ul>
+</li>
+<li><strong>Makefile</strong> - Make file with definition of few variables:<ul>
+<li><code>OUTPUT_NAME</code> - Name used as strategy name in output firmware filename</li>
+<li><a href="strategies.html#latency-limits"><code>STRATEGY_LATENCY</code></a> - Threshold for a user strategy latency</li>
+<li><code>STRATEGY_XILINX</code> - Optional variable to explicitely specify a path to <strong>settings64.sh</strong> of the Xilinx Vivado HLS version that will be used for user strategy translation (required if user strategy must be translated by a different version of Xilinx Vivado Toolset than the rest of Magmio product).</li>
+</ul>
+</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Firmware (and/or model) has to be synthesized (recompiled) after every modification of strategies.</p>
+</div>
+<h2 id="trading-logic">Trading logic</h2>
+<p>Trading logic is written in file <strong>strategies.cpp</strong>. Any user defined function needs to be called directly by function <code>strategy_engine</code> or by another user function called in <code>strategy_engine</code> with all desired arguments passed to it. Function <code>strategy_engine</code> is invoked every time the book handler receives an update message from the market that contains known symbol ID (defined in <a href="mapping_configuration.html#mapping-file">mapping file</a>). Strategy can be also triggered from the software.</p>
+<p>The declaration of strategy_engine function interface:</p>
+<pre><code>void strategy_engine(
+    // Input interface
+    const TToB prevTob[BOOK_LEVELS],                     // Previous Tob of Book
+    const TToB currTob[BOOK_LEVELS],                     // Current Tob of Book
+    const uint8_t prevStatus,                            // Status of prevTob
+    const uint8_t currStatus,                            // Status of curTob
+    const uint64_t symbol_id,                            // SID of trigger instrument
+    const uint8_t instrument_in[MAX_IDENT_WIDTH],        // Instrument Identification
+    const TInfo info,                                    // Additional information about a trigger message
+    const int32_t global_params[GLOBAL_PARAMS_COUNT],    // Global Parameters
+    const int32_t persymbolro_params[PERSYMBOLRO_PARAMS_COUNT], // Persymbolro Parameters
+    const int32_t persymbolrw_params[PERSYMBOLRW_PARAMS_COUNT], // Initial persymbolrw parameters changeable within strategy
+    const int32_t pergroup_params[PERGROUP_PARAMS_COUNT],    // Pergroup Parameters
+    hls::stream order_id_in[ORDER_SESSIONS],             // Order ID, set from API, can be changed in the strategy
+    hls::stream order_status,                            // Order status used to receive feedback from the order sender about any attempt of order sending
+    const uint32_t session_disabled,                     // Bitmask of disabled sessions
+    const uint32_t session_fifo_full,                    // Bitmask of full sessions' FIFOs (new requests are dropped)
+    const uint32_t session_congestion_tresh,             // Bitmask of reached sessions' congestion thresholds
+
+    // Output interface
+    hls::stream &amp;feedback_output,                        // Feedback output (no direct access, use send() method of the FeedbackOutput object)
+    int32_t persymbolrw_params_out[PERSYMBOLRW_PARAMS_COUNT],  // Persymbolrw parameters changed within strategy
+    int32_t pergroup_params_out[PERGROUP_PARAMS_COUNT],     // Pergroup parameters changed within strategy
+    int32_t global_params_out[GLOBAL_PARAMS_COUNT],      // Global parameters changed within strategy
+    hls::stream &amp;order_output                            // Order output (no direct access, use send() method of the OrderOutput object)
+)
+</code></pre>
+<p>The declaration of <code>TInfo</code> structure:</p>
+<pre><code>typedef struct TInfo {
+    uint64_t timestamp;             // Strategy start timestamp - nanoseconds since the epoch start (1.1.1970)
+    uint64_t hwTimestamp;           // Packet timestamp (when received on IBUF) - nanoseconds since the epoch start (1.1.1970)
+    uint64_t exchangeTimestamp;     // Exchange assigned timestamp - nanoseconds since the starting point specified by the exchange
+    TFlags flags;                   // Set of flags (booleans) indicating various events
+    uint8_t feedType;               // Code identifying update's source feed type
+    uint16_t templateId;            // Template ID of the current trigger message
+    uint8_t channelId;              // Bitmask identifying update's source feed id
+    uint64_t packetSeqnum;          // Sequence number of the packet which caused strategy trigger
+    uint64_t msgSeqnum;             // Sequence number of the current trigger message exported from the packet
+    uint8_t decoderSeqnum;          // Sequence number of the current trigger message in packet which caused strategy update
+    const uint8_t decodedMsg[MESSAGE_SIZE];     // Decoded Message content
+} TInfo;
+</code></pre>
+<p>Strategy engine is always presented with only the N first levels of the book, in software with subscribed status channel to etob updates correspond to ones received by the strategy interface.</p>
+<p>Hardware maintains up to 24 book levels, software keeps the full depth and provides the missing price levels to the hardware in case of price move. In such case, when strategy is updated with software synchronisation of the book, a flag called <code>ichanNotValid</code> is set (see <a href="./user-dox/hft__types_8h_source.html">hft_types.h</a>).</p>
+<p>It is possible to avoid triggering strategy engine with software synchronisation using <a href="strategy_prefilter.html"><em>strategyPrefilter</em> unit</a>, simply by adding a <a href="strategy_prefilter.html#configuration-setup-from-file">config file</a> with a command and a list of message types (TIDs) to be dropped before they reach strategy, software synchronisation message type is 0 and the entire decodedMsg is empty. However, in default configuration this unit is disabled. Alternatively, it is possible to simply add an <code>if(info.flags.ichanNotValid)</code> condition to strategy engine function to do nothing if update was triggered by book sync.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Strategy can be triggered not only by market data (UDP) but also by order data (TCP), in such case <code>info.feedType</code> is set to <code>ODEC_FEED</code> (see <code>TFeedType</code> in <a href="./user-dox/hft__types_8h_source.html">hft_types.h</a>).</p>
+</div>
+<h3 id="output-orders">Output orders</h3>
+<p>To generate an order use any of available <code>send()</code> methods over the <code>OrderOutput</code> instance with the name <code>order</code>, defined in <a href="./user-dox/hft__types_8h_source.html">hft_types.h</a> Do not acces <code>hls::stream</code> directly! Same applies to <code>feedback_output</code>.</p>
+<p>The output interface uses hls stream of <code>TOrderOut</code> structure for orders and hls stream of <code>TFeedback</code> structure defined in <a href="./user-dox/hft__types_8h_source.html">hft_types.h</a>. Structure items are described below. The API can maintain up to <code>ORDER_SESSIONS</code> order entry connections to the market, capable of generating unlimited amount of orders within each session per one strategy execution.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Shooting one order from strategy takes one CLK cycle, therefore it is possible to shoot many orders from single strategy run, but it will increase overall latency of each subsequent order as well as the whole strategy run.</p>
+</div>
+<p>Please, note that trading logic uses a number (array index) as a session identifier. To see which index corresponds to user defined session ID in the API, use <a href="./user-dox/class_magmio_1_1_order_sender_base_a26081dd22c63d7b2e60e0a9d24358cb5.html"><code>getStrategyIndex()</code></a> method.</p>
+<pre><code>typedef struct TOrderOut {
+    TMessageType message_type;      // Which type of message send to market (new order, cancel, replace)
+    TOrderType order_type;          // Type of order: market, limit, ...
+    uint64_t price;                 // Price for non-quote protocols
+    uint32_t size;                  // Quantity for non-quote protocols
+    uint64_t ask_price;             // Ask price for quote protocols
+    uint64_t bid_price;             // Bid price, used only for quote protocols (SQF, ArcaQuote)
+    uint32_t ask_size;              // Ask quantity for quote protocols
+    uint32_t bid_size;              // Bid quantity, used only for quote protocols (SQF, ArcaQuote)
+    uint32_t min_qty;               // Minimum quantity to trade
+    TSide side;                     // Side of order
+    TPosition position;             // Position: open, close
+    TTimeInForce time_in_force;     // Time in force: day, ioc, fok, ...
+    uint8_t order_id[ORDER_ID_WIDTH]; // Desired ID of the order
+    TDisplay display;               // Display
+    TIso iso;                       // ISO
+    uint8_t user_tag;               // User assigned tag in strategy, can be used to track a sent order through its life
+    uint8_t session_index;          // Session identifier
+    uint8_t generic_out[GENERIC_OUT_WIDTH];     // Used to pass additional info the the order (if required)
+    uint8_t instrument[MAX_IDENT_WIDTH]; // Instrument identification
+    char feedback[ORDER_FEEDBACK_INT];
+    bool feedback_vld;
+} TOrderOut;
+</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Certain markets do not support some of listed items / values. In that case, the item is ignored.</p>
+</div>
+<p>When <code>send(order_out, n)</code> is called on the <code>OrderOutput</code> object and the <code>session_fifo_full</code> bit flag of the corresponding <code>n</code> session was zero, an order message for this session will be generated. However, there are some circumstances in which the order message is not generated, despite the busy flag is cleared. In such case, &ldquo;Order sender - received orders&rdquo; counter won&rsquo;t be equal to &ldquo;Order Sender - generated orders&rdquo;:</p>
+<ul>
+<li>Disable is called from API and in the same moment the strategies are about to send request to the output. The request might be dropped.</li>
+<li>Flow control mechanism of a protocol on transport layer (TCP) decided to throttle outgoing segments, order requests might be dropped. This could only happen when high number of orders is being sent to target and the target is not able to process them quickly enough. This event is reported to <a href="status_channel.html">status channel</a> (if subscribed).</li>
+</ul>
+<p>The <code>TOrderOut</code> structure also contains <code>price</code> and <code>size</code> items for non-quote protocols to achieve more readable code. These two fields are transferred internally to <code>ask_price</code> and <code>ask_size</code> when non-quote protocol is selected.</p>
+<p>By default, Magmio generates <em>&ldquo;New Order&rdquo;</em> message to market. For some implementations it is possible to generate also messages of other types upon strategy update, like order cancel or replace request. The message type can be selected using <code>message_type</code> field.</p>
+<p>To simplify work with trading strategies, it is recommended to use data types and structures defined in <a href="./user-dox/hft__types_8h_source.html">hft_types.h</a> header file inside of <code>strategy_engine</code> and all user methods. For example, when working with price, use <code>TPrice</code> data type instead of <code>uint64_t</code>.</p>
+<p>List of custom data types:</p>
+<ul>
+<li><code>TToB</code> - Top of Book</li>
+<li><code>TPrice</code> - Price</li>
+<li><code>TSize</code> - Size</li>
+<li><code>TSide</code> - Side</li>
+<li><code>TMessageType</code> - Message type (new order, cancel, replace, &hellip;)</li>
+<li><code>TOrderType</code> - Order Type (Limit, Market, &hellip;)</li>
+<li><code>TPosition</code> - Position</li>
+<li><code>TTimeInForce</code> - Time in Force</li>
+<li><code>TDisplay</code> - Display</li>
+<li><code>TIso</code> - ISO</li>
+</ul>
+<h3 id="price-implied-decimal-point">Price - implied decimal point</h3>
+<p>All prices in trading logic interface, including ask/bid prices in Top of Book and output price for Order Sender, have implied decimal point. Number of digits for decimal portion is determined by price scale. For example, if the price scale is set to 4, the value 125000 in price field should be interpreted as 12.5000. Following table shows price scale values for all supported markets:</p>
+<table>
+<thead>
+<tr>
+<th>Protocol</th>
+<th>Price scale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Arca Options</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Bats / CBOE pitch</td>
+<td>4</td>
+</tr>
+<tr>
+<td>CME MDP3</td>
+<td>9</td>
+</tr>
+<tr>
+<td>Eurex eobi</td>
+<td>8</td>
+</tr>
+<tr>
+<td>Eurex emdi</td>
+<td>8</td>
+</tr>
+<tr>
+<td>Miax tom</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Moex asts</td>
+<td>6</td>
+</tr>
+<tr>
+<td>Nasdaq bonoitto</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Nasdaq itto</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Nasdaq ise</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Nasdaq itch5</td>
+<td>4</td>
+</tr>
+<tr>
+<td>XDP integrated</td>
+<td>0</td>
+</tr>
+<tr>
+<td>NSE NSEMD</td>
+<td>up to 7</td>
+</tr>
+</tbody>
+</table>
+<h3 id="changing-global-persymbolrw-and-pergroup-parameters">Changing global, persymbolrw and pergroup parameters</h3>
+<p>Global, persymbolrw and pergroup parameter values can be changed from strategy by using appropriate <code>*_out</code> parameters in strategy engine function interface. Values from <code>*_out</code> parameters are written to global, persymbolrw and pergroup parameters between two strategy invocations. When the strategy engine is triggered, original values from <code>persymbolrw_params</code> and <code>global_params</code> are automatically written to <code>persymbolrw_params_out</code>, <code>global_params_out</code> and <code>pergroup_params_out</code> respectively to preserve their values. However, user is allowed to change those <code>*_out</code> parameters, therefore cause storing his user values to global, persymbolrw and pergroup parameters for next strategy invocation, instead of the original values. This behaviour is suppressed by parameter write from API, which has precedence over strategy parameters change.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Our experience in developing C++ code for Vivado HLS shows that local variables help to achieve better results in general (compared with the direct access of the function arguments). Therefore, there are local arrays called <code>*_tmp</code> available in the strategy code for <em>persymbolrw</em>, <em>pergroup</em> and <em>global</em> parameters. At the strategy start, these arrays are filled with the values from relevant input arguments. At the strategy end, these arrays are copied back to the relevant output arguments. We recommend to use <code>*_tmp</code> arrays in your strategy code to read current values as well as write new values for various parameter types.</p>
+</div>
+<h3 id="instrument-identification">Instrument identification</h3>
+<p>Description of traded instrument is passed to the strategy as a raw array of bytes. To modify/read the instrument it is neccessary to cast the array pointer to appropriate structure:</p>
+<pre><code>CME_Ident *cme_ident = (CME_Ident *)output[0][0].instrument;
+</code></pre>
+<p>Please, look at the delivered example strategy to see specification of the instrument structure. Feel free to <a href="about.html#contact-information">contact us</a> if you need more details.</p>
+<h3 id="decoded-message-array">Decoded message array</h3>
+<p>To access all fields from original market message that caused book update, a byte array <code>decodedMsg</code> is provided in <code>info</code> argument. This array is connected to function <code>strategy_engine</code>. User can restore original message by simple type conversion of this array. To detect type of message that caused the update, the <code>templateId</code> field in the <code>info</code> argument contains numeric code representing type of the original message (TID). Message data structures of all supported markets and messages are stored in files <strong>&lt;market>/messages.h</strong>.</p>
+<p>Example of type conversion:</p>
+<pre><code>TARCA_XDP_Imbalance *imbalMsg = (TARCA_XDP_Imbalance *)info.decodedMsg;
+</code></pre>
+<h3 id="strategy-feedback">Strategy feedback</h3>
+<p>For getting feedback from the strategy (executed in fpga) back to the user application, a user can use strategy stream, namely feedback interface, which is available through an object of <code>TFeedback</code>. There is no limitation of how user can use this structure&rsquo;s data array. To commit the array to the API it is neccessary to call <code>send(feedback)</code> method on the <code>FeedbackOutput</code> class. To send feedback data it is not required for strategy to generate an order. The API passes the feedback array to user application using <code>strategy</code> functions over the initialized magmio api object.</p>
+<p>Optionally, a user can specify <strong>index of internal buffer</strong> to be used for the feedback message: <code>send(feedback, index)</code>. Internal buffers are separate from each other and can be read in host application independently. If no index is specified in <code>send</code> method call, buffer with <strong>index 0</strong> is used by default.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Internal buffers are currently supported only by <strong>Magmio</strong> product (not by taker) and only for <strong>Cisco</strong> cards (through the platform-specific functionality called <em>flow steering</em>). In all other cases, only a buffer with index 0 can be used (default buffer index). Total number of supported internal buffers is limited and bound to the RPM package. If an entered index is out of range, default buffer index will be used instead. Please, ask <a href="about.html#contact-information">Magmio</a> about the current limits for the specific package.</p>
+</div>
+<p>Total length of the feedback array available in strategy is defined by <code>FEEDBACK_WIDTH</code> in <strong>strategies.h</strong>. The value of <code>FEEDBACK_WIDTH</code> is automatically set based on the profile after running <code>make check_latency</code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><code>FEEDBACK_WIDTH</code> is fixed for a specific customer profile in a specific rpm package. If the customer needs a different value of this constant, the new rpm package must be prepared with a new updated value. In that case, the direct notification in the form of a request for such modification must be sent to <a href="about.html#contact-information">Magmio</a>.</p>
+</div>
+<h4 id="strategy-feedback-in-host-software-application">Strategy feedback in host software application</h4>
+<p>Current value of <code>FEEDBACK_WIDTH</code> is reported as a <code>debug</code> log line during initialization of Magmio API in host software application.</p>
+<p>Strategy feedback sent from the user strategy in FPGA card into the software application is forwarded as <code>Magmio::Strategy::Message</code> through the strategy stream object (<code>api.stream.strategy</code>). <code>Magmio::Strategy::Message</code> consists of two parts <code>ExportMessage</code> and <code>FeedbackMessage</code>, validity of their content is defined by <code>TMsgType</code> (<code>MSG_STRATEGY_FEEDBACK</code> or <code>MSG_STRATEGY_EXPORT</code>). Based on the value of <code>type</code> in strategy message, the corresponding member should be accessed: <code>exportMsg</code> (if type is equal <code>MSG_STRATEGY_EXPORT</code>) or <code>feedbackMsg</code> (if type is equal <code>MSG_STRATEGY_FEEDBACK</code>). The specific structure of each of the message types is available in the header file <strong>strategy.h</strong> of the Magmio API.</p>
+<p>Export of strategy messages into software application is disabled by default. The user is responsible for <strong>subscription</strong> of these messages in software application through <code>subscribe()</code> method of strategy stream object in Magmio API. The method supports an optional argument &ndash; type of the message to subscribe to (if no argument is used, both strategy message types are exported by default). Similarly, the user can disable export of a specific message type by calling <code>unsubscribe()</code> method with the message type as an argument (if no argument is used, all message types are disabled by default). The <code>subscribe()</code> and <code>unsubscribe()</code> methods can be called anytime in the host software application to temporarily disable or enable export of the specific message types.</p>
+<p>All methods of subscription process mentioned in the previous paragraph provide an optional parameter specifying internal <strong>buffer index</strong> (if supported by the platform). If no index is specified, buffer with <strong>index 0</strong> is used by default. Subscription for various buffers is independent, i.e. each buffer requires a separate subscription and unsubscription performed by user through <code>subscribe(subscribedMsgs, index)</code> and <code>unsubscribe(unsubscribedMsgs, index)</code>. In the same way, the reading of messages from different strategy stream buffers is independent through <code>getNextMessage(msg, index)</code> and <code>getNextMessageNonBlock(msg, index)</code> methods. The limit of buffers is available through <code>getBuffersLimit()</code> method.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Internal buffers are currently supported only by <strong>Magmio</strong> product and only for <strong>Cisco</strong> cards. In all other cases, only a buffer with index 0 can be used (default buffer index). If an entered index is out of range, a method returns an error code.</p>
+</div>
+<p>Example of strategy feedback in software application (default buffer with index 0 is used):</p>
+<pre><code>Magmio::TError err;
+
+// Export only strategy feedback
+if ((err = api-&gt;stream.strategy.subscribe(Magmio::Strategy::MSG_STRATEGY_FEEDBACK)) != Magmio::SUCCESS) {
+   std::cerr &lt;&lt; &quot;ERROR: &quot; &lt;&lt; Magmio::Log::getErrorMessage(err) &lt;&lt; std::endl;
+   return;
+}
+
+// Access feedback data sent from a user strategy running in the FPGA
+Magmio::Strategy::Message msg;
+
+if (api-&gt;stream.strategy.getNextMessage(msg) == Magmio::SUCCESS) {
+   if (msg.type == Magmio::Strategy::MSG_STRATEGY_FEEDBACK) {
+      first_feedback_byte = msg.feedbackMsg.data[0];
+      second_feedback_byte = msg.feedbackMsg.data[1];
+   }
+}
+
+// Close strategy stream for strategy feedback messages when finished
+if ((err = api-&gt;stream.strategy.unsubscribe(Magmio::Strategy::MSG_STRATEGY_FEEDBACK)) != Magmio::SUCCESS) {
+   std::cerr &lt;&lt; &quot;ERROR: &quot; &lt;&lt; Magmio::Log::getErrorMessage(err) &lt;&lt; std::endl;
+   return;
+}
+</code></pre>
+<p>Strategy feedback works also in model in the same way as for a software application including internal buffers. But size of the strategy feedback data array in software model is constant and cannot be changed by <code>FEEDBACK_WIDTH</code> in <strong>strategies.h</strong>. The value of <code>FEEDBACK_WIDTH</code> really used during the model compilation is defined in <strong>hft_types.h</strong> (currently set to 128). This value cannot be changed after the static library <strong>model.a</strong> is built. <a href="about.html#contact-information">Contact us</a>, if you need a bigger feedback array to be available in the model.</p>
+<h3 id="coding-guidelines-for-writing-hardware-strategies">Coding guidelines for writing hardware strategies</h3>
+<ul>
+<li><code>GOTO</code> should not be used</li>
+<li>Use loops with caution as they may lead to high latency</li>
+<li>Division is supported but it requires a lot of FPGA resources and it takes long time to compute. Use only when necessary</li>
+<li>Addition, subtraction and bit operations such as AND, OR, XOR, NOT, shift or rotate are effective</li>
+</ul>
+<p>We have prepared our own guide to summarize common rules of writing optimal code for Vivado HLS tool. The guide is provided as a separate file called <strong>Magmio HLS Coding Guidelines</strong>.</p>
+<p>As another good source of information regarding HLS constraints see Xilinx Vivado design suite <a href="https://www.xilinx.com/support/documentation/sw_manuals/xilinx2014_1/ug902-vivado-high-level-synthesis.pdf">user guide</a>.</p>
+<h3 id="latency">Latency</h3>
+<p>Latency of a user strategy is reported automatically when running <code>make check_latency</code>. The printed output value represents the  total time required to execute one strategy run in the worst case given by the count of clock periods. Conversion from the periods count to seconds is given by the following formula, where <code>F</code> is clock frequency in <em>Hz</em>, <code>C</code> is latency in periods and <code>t</code> is latency in seconds:</p>
+<pre><code>t = (1 / F) * C
+</code></pre>
+<p>Currently used clock frequency is reported by the line <strong>&ldquo;Setting hls clk frequency to XYZMhz&rdquo;</strong> during the process of C++ to VHDL translation. The latency of a user strategy is reported by the line <strong>&ldquo;Your code meets latency constraint. Max latency: XYZ, your code latency: XYZ&rdquo;</strong> at the end of <code>make check_latency</code> process.</p>
+<p>Example:</p>
+<pre><code>...
+Setting hls clk frequency to 175.0MHz
+...
+Your code meets latency constraint. Max latency: 30, your code latency: 3
+</code></pre>
+<p>The strategy latency in the example equals to 0.000000018s = 18ns (t = 1/175000000 * 3).</p>
+<h4 id="latency-limits">Latency limits</h4>
+<p>Latency of a user strategy is automatically checked before every synthesis to verify that resulting design is not too slow. Current latency limit is set to 30 clock cycles. It is just a recommendation from the latency and throughput perspective. You can increase the limit by yourselves, but it probably means you are doing something that is not very efficient. The upper latency limit is set by the variable <code>STRATEGY_LATENCY</code> inside Makefile.</p>
+<p>It is possible to check latency and resource consumption of your strategies manually before firmware synthesis by following command in <strong>&lt;strategy>/src</strong> directory:</p>
+<pre><code>$ make check_latency
+</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The latency limit can be modified if needed. Higher values can slow down whole Magmio pipeline.</p>
+</div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="mapping_configuration.html" class="btn btn-neutral float-left" title="Mapping and configuration files"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="hls_strategy_simulation.html" class="btn btn-neutral float-right" title="Testing strategies in Vivado HLS">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Copyright &copy; 2022 <a href="https://www.magmio.com/contact">Magmio a.s.</a></p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="mapping_configuration.html" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="hls_strategy_simulation.html" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '.';</script>
+    <script src="js/theme_extra.js" defer></script>
+    <script src="js/theme.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,9 @@
+<map id="Magmio::Params" name="Magmio::Params">
+<area shape="rect" id="node2" href="$class_magmio_1_1_global_params.html" title="Global parameters API. " alt="" coords="438,9,610,36"/>
+<area shape="rect" id="node3" href="$class_magmio_1_1_log.html" title="Magmio::Log" alt="" coords="23,116,129,143"/>
+<area shape="rect" id="node4" href="$class_magmio_1_1_per_symbol_rw_params.html" title="Persymbolrw parameters reader/updater. " alt="" coords="635,204,855,231"/>
+<area shape="rect" id="node7" href="$class_magmio_1_1_per_group_params.html" title="R/W Pergroup parameters reader/updater. " alt="" coords="222,89,413,116"/>
+<area shape="rect" id="node8" href="$class_magmio_1_1_per_symbol_ro_params.html" title="Persymbolro params updater. Updating persymbolro parameters in FPGA using MI32/DMA interface..." alt="" coords="637,133,853,160"/>
+<area shape="rect" id="node5" href="$class_magmio_1_1_mapping.html" title="Library for convering SID to address. " alt="" coords="249,275,386,301"/>
+<area shape="rect" id="node6" href="$class_magmio_1_1_counters.html" title="Magmio::Counters" alt="" coords="6,275,146,301"/>
+</map>

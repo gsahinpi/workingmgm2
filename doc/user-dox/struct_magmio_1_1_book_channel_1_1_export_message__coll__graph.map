@@ -1,0 +1,7 @@
+<map id="Magmio::BookChannel::ExportMessage" name="Magmio::BookChannel::ExportMessage">
+<area shape="rect" id="node2" href="$struct_magmio_1_1_book_channel_1_1_export_enhanced_tob.html" title="Exported Enhanced Tob of Book. " alt="" coords="5,353,173,394"/>
+<area shape="rect" id="node3" href="$struct_magmio_1_1_book_channel_1_1_export_tob.html" title="Exported Tob of Book. " alt="" coords="5,233,173,274"/>
+<area shape="rect" id="node4" href="$struct_magmio_1_1_book_channel_1_1_export_tob_level.html" title="Exported Tob level. " alt="" coords="5,126,173,167"/>
+<area shape="rect" id="node5" href="$struct_magmio_1_1_book_channel_1_1_export_bid_ask.html" title="Exported Tob level item. " alt="" coords="5,6,173,47"/>
+<area shape="rect" id="node6" href="$struct_magmio_1_1_book_channel_1_1_export_info.html" title="Exported info data. " alt="" coords="197,353,365,394"/>
+</map>

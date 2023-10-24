@@ -1,0 +1,155 @@
+<decoderTemplate market="bist_ouch" endianness="big" mtu="4000" tcp_order_feed="true" >
+<!--
+   Specification: Genium INET® OUCH Protocol Specification BIST
+   URL: https://www.borsaistanbul.com/files/OUCH_ProtSpec_BIST_va2414.pdf
+
+   NASDAQ SoupBinTCP 3, Version 3.00 (2014-03-20)
+   URL: https://www.borsaistanbul.com/files/soupbintcp-protocol-specification2B66B4A034F0.pdf
+
+   Version checked: 2021-01-13 by MaD
+-->
+   <converters>
+      <converter target="side" byteLength="1">
+         <entry value="83" converted="1" /> <!-- "S" -->
+         <entry value="66" converted="0" /> <!-- "B" -->
+      </converter>
+      <converter name="sidmap_delete_condition" target="sidmap_delete_signal" byteLength="4" default="1">
+         <entry value="0" converted="0" /><!-- Implicit 0 -->
+         <entry value="-800014"  converted="0" />
+      </converter>
+      <converter name="sidmap_decrement_condition" target="sidmap_size_decrement_signal" byteLength="1" default="1">
+         <entry value="1"  converted="0" /> <!-- Replace = 0 (false) -->
+      </converter>
+   </converters>
+
+
+   <!--  Usage: Set non-zero byteLength to those fields you want in sidmap
+         Never change the source attribute value - corresponds to t_strategy_order record.
+         Feel free to change the name attribute value, but keep it unique.
+         Keep, comment-out or delete the unwanted items -->
+
+   <sidmap size_field="ask_size" price_field="ask_price">
+      <key name="clordid" replaced="clordid_to_delete" byteLength="14" ascii="true">
+         <out name="ClOrdID" byteLength="8" decmsg_byte="0" /> <!-- optional: when unwanted, delete this line or set byteLength to 0 -->
+      </key>
+      <delete name="sidmap_delete_signal" />
+      <modify_size name="size_modify_data" decrement="sidmap_size_decrement_signal" />
+      <modify_price name="price_replace_signal" />
+      <sid  source="ident" byteLength="4" /><!-- Max: 8 Bytes -->
+      <item source="ask_size" name="StoredLeavesQty" byteLength="4" decmsg_byte="16" /> <!-- Max: 4 Bytes -->
+      <item source="side" name="StoredSide" byteLength="1" decmsg_byte="20" /> <!-- Max: 1 Bytes -->
+      <item source="timestamp" name="StoredTime" byteLength="8" decmsg_byte="8" /> <!-- Max: 8 Bytes -->
+      <item source="user_tag" name="StoredUserTag" byteLength="1" decmsg_byte="21" /> <!-- Max: 1 Bytes -->
+      <item source="msg_type" name="StoredMsgType" byteLength="1" decmsg_byte="22" /> <!-- Max: 1 Bytes -->
+   </sidmap>
+
+   <packetHeader  byteLength="0">
+   </packetHeader>
+
+   <match_pattern value="0x53">
+      <pattern value="0x2B" process="false" /><!-- '+' -->
+      <pattern value="0x41" process="false" /><!-- 'A' -->
+      <pattern value="0x48" process="false" /><!-- 'H' -->
+      <pattern value="0x4A" process="false" /><!-- 'J' -->
+      <pattern value="0x53" process="true"  /><!-- 'S' -->
+      <pattern value="0x5A" process="false" /><!-- 'Z' -->
+   </match_pattern>
+
+   <templates>
+      <messageHeader byteLength="4">
+         <field   name="Packet Length" pos="0"  byteLength="2" export="msg_len" increment="2"/>
+         <field   name="Packet Type"   pos="2"  byteLength="1" export="match_pattern" />
+         <tid     name="Message Type"  pos="3"  byteLength="1" export="msg_type" />
+      </messageHeader>
+
+      <template   name="Order Accepted" msg_type="A" id="65" >
+         <field   name="Timestamp"              pos="4"  byteLength="8"    export="time" />
+         <string  name="Order Token"            pos="12" byteLength="14"   export="clordid" />
+         <field   name="Order Book ID"          pos="26" byteLength="4"    export="decmsg" decmsg_byte="23" />
+         <string  name="Side"                   pos="30" byteLength="1"    export="decmsg" decmsg_byte="27" />
+         <field   name="Order ID"               pos="31" byteLength="8"    export="decmsg" decmsg_byte="28" />
+         <field   name="Quantity"               pos="39" byteLength="8"    export="decmsg" decmsg_byte="36" />
+         <field   name="Price"                  pos="47" byteLength="4"    export="decmsg" decmsg_byte="44" />
+         <field   name="Time In Force"          pos="51" byteLength="1"    />
+         <field   name="Open Close"             pos="52" byteLength="1"    />
+         <string  name="Client/Account"         pos="53" byteLength="16"   />
+         <field   name="Order State"            pos="69" byteLength="1"    export="decmsg" decmsg_byte="56" />
+         <string  name="Customer Info"          pos="70" byteLength="15"   export="decmsg" decmsg_byte="57" />
+         <string  name="Exchange Info"          pos="85" byteLength="32"   />
+         <field   name="Pre Trade Quantity"     pos="117" byteLength="8"   export="decmsg" decmsg_byte="48" />
+         <field   name="Display Quantity"       pos="125" byteLength="8"   />
+         <field   name="Client Category"        pos="133" byteLength="1"   />
+         <field   name="OffHours"               pos="134" byteLength="1"   />
+         <string  name="Reserved"               pos="135" byteLength="3"   />
+      </template>
+
+      <template   name="Order Rejected" msg_type="J" id="74" >
+         <!-- <const   name="SidmapDelete"                    byteLength="1"  value="1" export="sidmap_delete_condition" /> -->
+         <field   name="Timestamp"              pos="4"  byteLength="8"    export="time" />
+         <string  name="Order Token"            pos="12"  byteLength="14"   export="clordid" />
+         <field   name="Reject Code"            pos="26" byteLength="4"    export="sidmap_delete_condition" />
+         <field   name="Reject Code"            pos="26" byteLength="4"    export="decmsg" decmsg_byte="23" />
+      </template>
+
+      <template   name="Order Replaced" msg_type="U" id="85" >
+         <const   name="SidmapSizeReplaceMode"           byteLength="1"  value="1" export="sidmap_decrement_condition" />
+         <field   name="Timestamp"              pos="4"  byteLength="8"    export="time" />
+         <string  name="Replacement Order Token" pos="12" byteLength="14"  export="clordid" />
+         <string  name="Previous Order Token"   pos="26" byteLength="14"   export="decmsg" decmsg_byte="56" export="clordid_to_delete" force_send="true" />
+         <field   name="Order Book ID "         pos="40" byteLength="4"    export="decmsg" decmsg_byte="23" />
+         <string  name="Side"                   pos="44" byteLength="1"    export="decmsg" decmsg_byte="27" />
+         <field   name="Order ID"               pos="45" byteLength="8"    export="decmsg" decmsg_byte="28" />
+         <field   name="Quantity"               pos="53" byteLength="8"    export="decmsg" decmsg_byte="36" />
+         <field   name="Price"                  pos="61" byteLength="4"    export="decmsg" decmsg_byte="44" />
+         <field   name="Time in Force"          pos="65" byteLength="1"    />
+         <field   name="Open Close"             pos="66" byteLength="1"    />
+         <string  name="Client/Account"         pos="67" byteLength="16"   />
+         <field   name="Order State"            pos="83" byteLength="1"    export="decmsg" decmsg_byte="70"/>
+         <string  name="Customer Info"          pos="84" byteLength="15"   export="decmsg" decmsg_byte="71"/>
+         <string  name="Exchange Info"          pos="99" byteLength="32"   />
+         <field   name="Pre Trade Quantity"     pos="131" byteLength="8"   export="size_modify_data" decmsg_byte="48" />
+         <field   name="Display Quantity"       pos="139" byteLength="8"   />
+         <field   name="Client Category"        pos="147" byteLength="1"   />
+      </template>
+
+      <template name="Order Canceled" msg_type="C" id="67" >
+         <const   name="SidmapDelete"            byteLength="1"  value="1" export="sidmap_delete_condition" />
+         <field   name="Timestamp"              pos="4"  byteLength="8"    export="time" />
+         <string  name="Order Token"            pos="12" byteLength="14"   export="clordid" />
+         <field   name="Order Book ID"          pos="26" byteLength="4"    export="decmsg" decmsg_byte="23" />
+         <string  name="Side"                   pos="30" byteLength="1"    export="decmsg" decmsg_byte="27" />
+         <field   name="Order ID"               pos="31" byteLength="8"    export="decmsg" decmsg_byte="28" />
+         <field   name="Reason"                 pos="39" byteLength="1"    export="decmsg" decmsg_byte="36" />
+      </template>
+
+      <template name="Order Executed" msg_type="E" id="69" >
+         <field   name="Timestamp"              pos="4"  byteLength="8"    export="time" />
+         <string  name="Order Token"            pos="12" byteLength="14"   export="clordid" />
+         <field   name="Order Book ID"          pos="26" byteLength="4"    export="decmsg" decmsg_byte="23" />
+         <field   name="Traded Quantity"        pos="30" byteLength="8"    export="size_modify_data" decmsg_byte="28" />
+         <field   name="Trade Price"            pos="38" byteLength="4"    export="decmsg" decmsg_byte="36" />
+         <field   name="Match ID High"          pos="42" byteLength="8"    export="decmsg" decmsg_byte="44" />
+         <field   name="Match ID Low"           pos="50" byteLength="4"    export="decmsg" decmsg_byte="40" />
+         <field   name="Client Category"        pos="54" byteLength="1"    export="decmsg" decmsg_byte="27" />
+         <string  name="Reserved"               pos="55" byteLength="16"   />
+      </template>
+
+      <template name="Mass Quote Acknowledgement" msg_type="K" id="75" >
+         <field   name="Timestamp"              pos="4"  byteLength="8" />
+         <string  name="Order Token"            pos="12" byteLength="14"/>
+         <field   name="Order Book ID"          pos="26" byteLength="4" />
+         <field   name="Quantity"               pos="30" byteLength="8" />
+         <field   name="Traded Quantity"        pos="38" byteLength="8" />
+         <field   name="Price"                  pos="46" byteLength="4" />
+         <string  name="Side"                   pos="50" byteLength="1" />
+         <field   name="Quote Status"           pos="51" byteLength="8" />
+      </template>
+
+      <template name="Mass Quote Rejection" msg_type="R" id="82" >
+         <field   name="Timestamp"              pos="4"  byteLength="8" />
+         <string  name="Order Token"            pos="12" byteLength="14"/>
+         <field   name="Order Book ID"          pos="26" byteLength="4" />
+         <field   name="Reject Code"            pos="30" byteLength="4" />
+      </template>
+   </templates>
+</decoderTemplate>

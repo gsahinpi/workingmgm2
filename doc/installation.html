@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Magmio a.s." />
+      <link rel="shortcut icon" href="img/favicon.ico" />
+    <title>Installation - Magmio User's Manual</title>
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/theme_extra.css" />
+        <link href="css/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Installation";
+        var mkdocs_page_input_path = "installation.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+    <![endif]--> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="./index.html">
+          <img src="img/magmio-slogan-logo.png" class="logo" alt="Logo"/>
+        </a>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Magmio User Guide</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="index.html">Overview</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="installation.html">Installation</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#list-of-supported-fpga-boards">List of supported FPGA boards</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#list-of-deliverables">List of deliverables</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#magmio-software-evaluation-package">Magmio software evaluation package</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#prerequisites-production">Prerequisites (production)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#installing-magmio-production-package">Installing Magmio production package</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#installing-magmio-license">Installing Magmio license</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#preparing-the-synthesis-machine">Preparing the synthesis machine</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#preparation-of-magmio-application">Preparation of Magmio application</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#local-copy-of-magmio-application">Local copy of Magmio application</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#how-to-start-using-magmio">How to start using Magmio</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#working-with-software-model">Working with software model</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#customizing-config-files-switching-to-hardware">Customizing config files, switching to hardware</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#paper-trading-and-trading-on-test-markets">Paper trading and trading on test markets</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#live-trading">Live trading</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="exanic_tools.html">Exanic tools</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="api.html">API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="mapping_configuration.html">Mapping and configuration files</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="strategies.html">Writing strategies</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="hls_strategy_simulation.html">Testing strategies in Vivado HLS</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="recovery.html">Recovery</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="book_channel.html">Book Channel</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="strategy_prefilter.html">Strategy Prefilter</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="riskcheck.html">PreTrade Risk Check</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="order_sender.html">Order Sender</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="status_channel.html">Status information</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="firmware_synthesis.html">Firmware synthesis</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="model_verification.html">Software model, simulation and verification</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="about.html">About</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="./index.html">Magmio User's Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><hr/>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="installation-and-preparation-of-magmio-package">Installation and preparation of Magmio package</h1>
+<h2 id="list-of-supported-fpga-boards">List of supported FPGA boards</h2>
+<p>Magmio platform supports the following FPGA boards (the shortname in parenthesis represents an internal card identifier, used in the documentation):</p>
+<ul>
+<li>Netcope NFB-200G2QL (<code>200g</code>)</li>
+<li>Cisco Nexus K3P (<code>x25</code>)</li>
+<li>Cisco Nexus V5P (<code>v5p</code>)</li>
+<li>Cisco Nexus V9P (<code>v9p</code>)</li>
+<li>Cisco Nexus V9P SG-3 (<code>v9p3</code>)</li>
+</ul>
+<h2 id="list-of-deliverables">List of deliverables</h2>
+<ul>
+<li><code>magmio-sw-eval-X.Y-Z.x86_64.rpm</code> - Magmio software evaluation package provided as RPM</li>
+<li><code>magmio-&lt;card&gt;-X.Y-Z.x86_64.rpm</code> - Magmio production package provided as RPM</li>
+<li><code>magmio.lic</code> - Binary license file for Magmio API</li>
+<li><code>license.xml</code> - Readable information about the license file, e.g. expiration date, customer and product</li>
+</ul>
+<h2 id="magmio-software-evaluation-package">Magmio software evaluation package</h2>
+<p>Software evaluation package contains only software model without the options to build firmware and use Magmio in production.</p>
+<p>Steps to use software evaluation package:</p>
+<ol>
+<li>Install provided RPM package:
+    <code># yum install magmio-sw-eval-X.Y-Z.x86_64.rpm</code></li>
+<li>You must re-log in order to automatically set a correct value for system variable <code>MAGMIO_PATH</code>.</li>
+<li>Run magmio-create-local binary to prepare a user folder (with model), all required files will be copied to your local directory:
+    <code>$ magmio-create-local &lt;market&gt; &lt;my-local&gt;</code></li>
+<li>Go into your local directory with model:
+    <code>$ cd &lt;my-local&gt;</code></li>
+<li>Build software model: <code>$ make</code></li>
+<li>Run <a href="model_verification.html#simulate-pcap-trace">software model</a>:
+    <code>$ ./model -p input.pcap -m configs/&lt;market&gt;/mapping.txt -c configs/&lt;market&gt;/api.xml -v 4</code></li>
+</ol>
+<p>The folder with software model contains:</p>
+<ul>
+<li><strong>doc/</strong> - web-based documentation (we recommend you to browse through pages in order to better understand Magmio product)</li>
+<li><strong>configs/</strong> - <a href="mapping_configuration.html">configuration files</a> required to build and run software model. The folder contains examples of default configuration files. A user can change their content to his needs.</li>
+</ul>
+<h2 id="prerequisites-production">Prerequisites (production)</h2>
+<ul>
+<li>Server with FPGA card for developing strategies (<em>production</em> / <em>development</em> machine)</li>
+<li>Supported operating systems are <em>CentOS 6.x</em> and <em>CentOS 7.x</em></li>
+<li>Network interface #0 connected to network with market data multicast. Can be changed upon request.</li>
+<li>Server with Xilinx Synthesis tools for Magmio firmware synthesis (<em>synthesis</em> machine)</li>
+<li>Xilinx Vivado 2018.1 (NFB cards) or 2019.1 (Cisco cards) Design Edition - translation of user strategies from C/C++ into VHDL and synthesis of the firmware</li>
+<li>Full list of supported operating systems for Xilinx Synthesis tools is available <a href="https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_1/ug973-vivado-release-notes-install-license.pdf#_OPENTOPIC_TOC_PROCESSING_d96e1965">here</a>.</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Tools to manage FPGA card require specific rights to be available to normal users. The best way is to create <code>dev</code> group and add all competent users into this group. The step-by-step method follows (for CentOS7):</p>
+<ol>
+<li>Enable epel repository: <code># yum install epel-release</code></li>
+<li>Create <code>dev</code> group on the machine: <code># groupadd dev</code></li>
+<li>Add a user that will operate with the card to the group: <code># usermod -a -G dev user_name</code></li>
+</ol>
+<p>These steps must be done only once <strong>before</strong> the installation of RPM packages on the production machine.</p>
+</div>
+<h2 id="installing-magmio-production-package">Installing Magmio production package</h2>
+<p>Magmio package is provided as an RPM package. Install the package as <strong>root</strong> using the following command:</p>
+<pre><code>yum install magmio-&lt;card&gt;-X.Y-Z.x86_64.rpm
+
+Ex: yum install magmio-v9p3-1.0-0.x86_64.rpm
+</code></pre>
+<p>Important installed files and directories are:</p>
+<ul>
+<li><code>/usr/include/magmio/</code> - Magmio API header files</li>
+<li><code>/usr/bin/magmio-create-local</code> - Create local copy of Magmio package in specified directory</li>
+</ul>
+<p>After the successful installation of the packages, the system environment reload is required for a new created system variable <em>MAGMIO_PATH</em> to be set. You can simply relog (log out and log back in), reboot the system or run <code>$ source /etc/profile.d/magmio.sh</code>. This operation has to be performed only once.</p>
+<h2 id="installing-magmio-license">Installing Magmio license</h2>
+<p>Magmio license file <code>magmio.lic</code> is required to use Magmio API in software application with firmware. Before the start of the host application, the system variable <code>MAGMIO_LICENSE_PATH</code> must be set to the folder containing <code>magmio.lic</code> file. If this variable is not set, Magmio API looks for <code>magmio.lic</code> in folder specified by system variable <code>MAGMIO_PATH</code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The name of license file cannot be changed, it must be <code>magmio.lic</code> in order to be found by Magmio API during initialization process.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Software model does <strong>not</strong> require magmio license for its run.</p>
+</div>
+<h2 id="preparing-the-synthesis-machine">Preparing the synthesis machine</h2>
+<p>To be able to synthesize trading strategies written in C++ language into a firmware for FPGA card, it is necessary to set up another machine with Xilinx synthesis tools.</p>
+<div class="admonition note">
+<p class="admonition-title">Xilinx Vivado Design Versions</p>
+<p>The Magmio platform is compatible with <em>Xilinx Vivado Design Suite 2018.1</em> (NFB cards) and <em>2019.1</em> (Cisco cards) <em>Design Edition</em>. Also, make sure a &lsquo;tcl&rsquo; package (Tool Command Language) is installed on the machine as it provides required &lsquo;tclsh&rsquo; (should be automatically installed as a part of Xilinx Vivado Design Suite).</p>
+</div>
+<p>Licenses for Xilinx Vivado and Xilinx Vivado HLS are required. Availability of licenses can be checked using graphical Xilinx tool <em>vlm</em> (Vivado Licence Manager).</p>
+<p>Synthesis is done remotely on this machine using SSH remote commands.</p>
+<div class="admonition note">
+<p class="admonition-title">Keypair as an effective authentication method for SSH authorization on a synthesis machine</p>
+<p>During the firmware build process, including translation of user strategy code into VHDL and synthesis, production machine (where the <code>make</code> command was executed) connects multiple times through SSH to the synthesis machine. In order to avoid multiple requests for the user password, we recommend to use SSH keypairs as a secure authentication method to log into the synthesis machine. This method requires to <a href="https://www.ssh.com/academy/ssh/keygen">create SSH keypair</a> and activate this method in SSH server configuration on the synthesis machine. This is valid also in the case of local synthesis, i.e. build process runs directly on the production machine.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Access to the Cisco (Exablaze) FDK license</p>
+<p>In the case of Cisco cards, the firmware build process requires access to the special Cisco license file. The license file provides a license for all Cisco (originally Exablaze) IP cores called FDK. The IP cores from the FDK are also used by our Magmio products. Therefore, we provide access to the license for all our customers through our internal license server. Because our license server is located in private network, we require from our customers to share the public IP address of their synthesis server in order to be added into our firewall&rsquo;s permit list. Please, <a href="about.html#contact-information">contact us</a>, if you do not have access to the Cisco license file yet.</p>
+</div>
+<p>Example of the <a href="https://support.xilinx.com/s/article/38293">license setup for Xilinx Vivado Design Suite</a> on the synthesis machine (<code>/home/magmio/Xilinx.lic</code> is a license file provided by Xilinx, <code>9093@85.93.123.186</code> is remote connection for access to the Cisco FDK license file provided by Magmio):</p>
+<pre><code>$ export XILINXD_LICENSE_FILE=&quot;/home/magmio/Xilinx.lic:9093@85.93.123.186&quot;
+</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We recommend to add the export of <code>XILINXD_LICENSE_FILE</code> to the <em>.bashrc</em> file at the synthesis machine for the user used for remote SSH connection in <a href="installation.html#local-copy-of-magmio-application"><em>remote_host_conf.sh</em></a>.</p>
+</div>
+<h2 id="preparation-of-magmio-application">Preparation of Magmio application</h2>
+<h3 id="local-copy-of-magmio-application">Local copy of Magmio application</h3>
+<p>To start working with Magmio application, make your own local copy of Magmio application in home directory. This documentation assumes the local copy to be created in <code>~/my-local</code> directory but it is possible to use a different directory as well. You will also have to select one of the supported markets provided in Magmio package. Invoking following command without any parameters shows its usage with a list of all available market configurations:</p>
+<pre><code>$ magmio-create-local
+   Create local copy of Magmio package in specified directory.
+   Usage: magmio-create-local MARKET DIR
+      MARKET    one of: itch5
+      DIR       Target directory
+</code></pre>
+<p>Let&rsquo;s choose <em>Nasdaq ITCH5</em> market. Following command then creates a local copy of Magmio configured for ITCH5 market in <code>~/my-local</code> directory.</p>
+<pre><code>$ magmio-create-local itch5 ~/my-local
+</code></pre>
+<p>This copy contains among other things the following directories:</p>
+<ul>
+<li><code>configs/</code> - Configuration files for the market the local copy was configured with</li>
+<li><code>doc/</code> - This documentation</li>
+<li><code>examples/</code> - Directories with host application examples explaining how to use Magmio</li>
+<li><code>strategies/</code> - Source codes of user trading strategies</li>
+</ul>
+<p>Edit configuration file for remote firmware synthesis <code>~/my-local/remote_host_conf.sh</code> and set following variables:</p>
+<ul>
+<li><code>REMOTE_HOST</code> - Network address of remote synthesis machine, e.g. magmio@10.201.20.11</li>
+<li><code>SYNTH_PKG_DIR</code> - Directory at remote synthesis machine where remote synthesis will be performed; the actual synthesis path is <code>$(REMOTE):$(SYNTH_PKG_DIR)/</code></li>
+<li><code>XILINX</code> - Path to a script that will setup environment for Xilinx tools (<em>settings64.sh</em>)</li>
+</ul>
+<p>Considering a random factor of the synthesis success, running multiple build processes in parallel provides a higher probability of the successful firmware to be ready at the end. If there are several synthesis machines available for the build process, then a user can specify the list of additional machines in <code>MACHINES</code> array, the build process will run on each of the machines in parallel (including the machine defined directly through the variables <code>REMOTE_HOST</code>, <code>SYNTH_SYNTH_PKG_DIR</code> and <code>XILINX</code>).</p>
+<p>The <code>MACHINES</code> variable is optional with the following rules:</p>
+<ul>
+<li>The additional machines in the <code>MACHINES</code> array are indexed from <strong>1</strong>.</li>
+<li>Each machine is represented by the string containing <em>remote host information</em> (same meaning as <code>REMOTE_HOST</code>), <em>synthesis package directory</em> (same meaning as <code>SYNTH_PKG_DIR</code>) and <em>path to the Xilinx setup script</em> on the remote machine (same meaning as <code>XILINX</code>).</li>
+<li>Example: <code>MACHINES[1]="user@10.10.10.2;magmio_fw;/opt/Xilinx/Vivado/2019.1/settings64.sh"</code></li>
+</ul>
+<h2 id="how-to-start-using-magmio">How to start using Magmio</h2>
+<p>After you have successfully installed Magmio and prepared the remote synthesis environment and local copy of Magmio application, you are ready to start using the Magmio solution. In order to speed up the familiarization process, we recommend you to follow steps in the next subsections.</p>
+<h3 id="working-with-software-model">Working with software model</h3>
+<p>The best way to start is probably to experiment with <a href="model_verification.html">software model</a>. The model mirrors functionality of the hardware (more precisely firmware) but the work with it is less time consuming, as it does not require a synthesis step. User can <a href="model_verification.html#simulate-pcap-trace">replay PCAP trace</a> from real market and observe model outputs for the strategy the model was compiled with. At the beginning, it is possible to use some of the example strategies, get yourself familiar with the mechanics and afterwards proceed to <a href="strategies.html">writing your own strategies</a>.</p>
+<h3 id="customizing-config-files-switching-to-hardware">Customizing config files, switching to hardware</h3>
+<p>After you have grasped the basic mechanics of strategies, software model, its inputs and outputs, you should make yourself acquainted with <a href="mapping_configuration.html">config files</a> <code>api.xml</code> and <code>mapping.txt</code>. Those files provide configuration for Magmio application and market specific configurations. Now is also a proper time to move your work flow to <a href="firmware_synthesis.html">hardware</a> and start using Magmio API to control it. There is an <a href="api.html">api example project</a> to show you how to work with the Magmio API and control the Magmio execution in hardware. The functionality of firmware can be verified against software model compiled for the very same strategy <a href="model_verification.html#offline-verification">using verification model</a>.</p>
+<h3 id="paper-trading-and-trading-on-test-markets">Paper trading and trading on test markets</h3>
+<p>Now you should be familiar with config files, Magmio API and you should be able to write and synthesize your own strategy. In order to verify your strategy is doing what you intended it would do for some live market data, you can initialize the API with <code>HFT_NO_ORDERS</code> API extras. That option will prevent sending any orders to the network, and just informs that an order would be sent if it was allowed. This way you can verify that the generated orders would be safe. If you are satisfied with the behaviour of your strategy, remove <code>HFT_NO_ORDERS</code> (and <code>HFT_DEBUG_SENDER</code> if it was specified) from API initialization to permit orders to be sent to test markets. Bear in mind that the Magmio will now perform real trading so select the testing market appropriately.</p>
+<h3 id="live-trading">Live trading</h3>
+<p>The final step is quite self explanatory. If you are satisfied with the strategy and behaviour of Magmio on test markets, you can begin trading on a real market.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="index.html" class="btn btn-neutral float-left" title="Overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="exanic_tools.html" class="btn btn-neutral float-right" title="Exanic tools">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Copyright &copy; 2022 <a href="https://www.magmio.com/contact">Magmio a.s.</a></p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="index.html" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="exanic_tools.html" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '.';</script>
+    <script src="js/theme_extra.js" defer></script>
+    <script src="js/theme.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

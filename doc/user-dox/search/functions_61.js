@@ -1,0 +1,13 @@
+var searchData=
+[
+  ['abort',['abort',['../class_magmio_1_1_order_sender_ace246ad298eab051d138a149039911c4.html#ace246ad298eab051d138a149039911c4',1,'Magmio::OrderSender::abort()'],['../class_magmio_1_1_order_sender_base_ae62e9577889414be6016b5977d8a6490.html#ae62e9577889414be6016b5977d8a6490',1,'Magmio::OrderSenderBase::abort()'],['../class_magmio_1_1_magmio_api_ab7d1ec6e85d175a786c63c01d40aca45.html#ab7d1ec6e85d175a786c63c01d40aca45',1,'Magmio::MagmioApi::abort()']]],
+  ['activeordermemoryapi',['ActiveOrderMemoryApi',['../class_magmio_1_1_active_order_memory_api_ab42d2b3bc6d52c72747093f50decf5aa.html#ab42d2b3bc6d52c72747093f50decf5aa',1,'Magmio::ActiveOrderMemoryApi']]],
+  ['add',['add',['../class_magmio_1_1_counters_top_ab22fd863f10a3a3bad29bbf9936009fa.html#ab22fd863f10a3a3bad29bbf9936009fa',1,'Magmio::CountersTop::add()'],['../class_magmio_1_1_s_w_connections_ab8ba6231264ce4cbea7533008fbe7e9a.html#ab8ba6231264ce4cbea7533008fbe7e9a',1,'Magmio::SWConnections::add()']]],
+  ['addmacrule',['addMACRule',['../class_magmio_1_1_packet_filter_api_af25eca048549f6a320e5a3cb148fc740.html#af25eca048549f6a320e5a3cb148fc740',1,'Magmio::PacketFilterApi']]],
+  ['addnext',['addNext',['../class_magmio_1_1_exception_queue_af0bbd26affcb4045f256cdc730f59460.html#af0bbd26affcb4045f256cdc730f59460',1,'Magmio::ExceptionQueue']]],
+  ['addrule',['addRule',['../class_magmio_1_1_decoder_api_a46c451fdb2a07e0355ef09450d6072ee.html#a46c451fdb2a07e0355ef09450d6072ee',1,'Magmio::DecoderApi::addRule()'],['../class_magmio_1_1_feed_addr_a8950b493bc825810a2a1bd10c03cad25.html#a8950b493bc825810a2a1bd10c03cad25',1,'Magmio::FeedAddr::addRule()']]],
+  ['adjustexchangetimestamp',['adjustExchangeTimestamp',['../class_magmio_1_1_decoder_api_a8a1abd4f409f0be3b5ca28ae0dba1e19.html#a8a1abd4f409f0be3b5ca28ae0dba1e19',1,'Magmio::DecoderApi::adjustExchangeTimestamp()'],['../class_magmio_1_1_magmio_api_ab4bf5c6c66e4164511c9b0826d77b20d.html#ab4bf5c6c66e4164511c9b0826d77b20d',1,'Magmio::MagmioApi::adjustExchangeTimestamp()']]],
+  ['arbiter',['Arbiter',['../class_magmio_1_1_arbiter_a03fe0e7175ac9e5e009f1c23111998b6.html#a03fe0e7175ac9e5e009f1c23111998b6',1,'Magmio::Arbiter']]],
+  ['assigngroupidtosid',['assignGroupIDToSID',['../class_magmio_1_1_order_params_a3382c34fa38015860f8beb1725695778.html#a3382c34fa38015860f8beb1725695778',1,'Magmio::OrderParams']]],
+  ['attachswcard',['attachSwCard',['../class_magmio_1_1_decoder_api_a231ae03cf3e1ae1a8f7a9a87d13c7abe.html#a231ae03cf3e1ae1a8f7a9a87d13c7abe',1,'Magmio::DecoderApi::attachSwCard()'],['../class_magmio_1_1_tuple_memory_api_a558d58b351eaee1a70502deeec88e691.html#a558d58b351eaee1a70502deeec88e691',1,'Magmio::TupleMemoryApi::attachSwCard()']]]
+];

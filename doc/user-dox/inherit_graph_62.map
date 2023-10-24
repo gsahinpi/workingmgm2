@@ -1,0 +1,5 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$class_magmio_1_1_per_symbol_ro_params.html" title="Persymbolro params updater. Updating persymbolro parameters in FPGA using MI32/DMA interface..." alt="" coords="5,41,221,68"/>
+<area shape="rect" id="node2" href="$class_magmio_1_1_per_symbol_ro_params_debug.html" title="Persymbolro parameters class for API running in debug mode. " alt="" coords="279,5,495,46"/>
+<area shape="rect" id="node3" href="$class_magmio_1_1_per_symbol_ro_params_fw.html" title="Persymbolro parameters updater. " alt="" coords="269,71,504,97"/>
+</map>

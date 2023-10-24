@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Magmio a.s." />
+      <link rel="shortcut icon" href="img/favicon.ico" />
+    <title>Software model, simulation and verification - Magmio User's Manual</title>
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/theme_extra.css" />
+        <link href="css/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Software model, simulation and verification";
+        var mkdocs_page_input_path = "model_verification.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+    <![endif]--> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="./index.html">
+          <img src="img/magmio-slogan-logo.png" class="logo" alt="Logo"/>
+        </a>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Magmio User Guide</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="index.html">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="exanic_tools.html">Exanic tools</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="api.html">API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="mapping_configuration.html">Mapping and configuration files</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="strategies.html">Writing strategies</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="hls_strategy_simulation.html">Testing strategies in Vivado HLS</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="recovery.html">Recovery</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="book_channel.html">Book Channel</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="strategy_prefilter.html">Strategy Prefilter</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="riskcheck.html">PreTrade Risk Check</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="order_sender.html">Order Sender</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="status_channel.html">Status information</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="firmware_synthesis.html">Firmware synthesis</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="model_verification.html">Software model, simulation and verification</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#traffic-recording-and-replaying">Traffic recording and replaying</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#recording-of-incoming-traffic">Recording of incoming traffic</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#replaying-traffic">Replaying traffic</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#packet-overflow">Packet overflow</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#offline-verification">Offline verification</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#simulate-pcap-trace">Simulate PCAP trace</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="about.html">About</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="./index.html">Magmio User's Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><hr/>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="software-model-simulation-and-verification">Software model, simulation and verification</h1>
+<h2 id="overview">Overview</h2>
+<p>Software model is a software application which works in the same way as Magmio firmware does. Its advantage is the ability to run without time consuming <a href="firmware_synthesis.html">synthesis</a> (as it is necessary for Magmio firmware after every modification of <a href="strategies.html">strategies</a>). Its disadvantages are lower throughput and high requirements on computer performance.</p>
+<p>Model can be used in two scenarios:</p>
+<ul>
+<li><a href="#offline-verification">Offline verification</a> based on comparison of firmware pipeline and software model outputs</li>
+<li><a href="#simulate-pcap-trace">Simulation of PCAP trace</a> for observing outputs for written strategy</li>
+</ul>
+<p>It is possible to generate software model for any strategy by invoking following command in sources directory <code>src/</code> of particular strategy:</p>
+<pre><code>$ make model
+</code></pre>
+<p>This command creates a new directory <code>~/my-local/strategies/&lt;strategy&gt;/model/</code> by copying <code>strategies.cpp/.h</code> from <code>~/my-local/strategies/&lt;strategy&gt;/src/</code> directory and compiling with model libraries to create executables for offline verification as well as for PCAP trace simulation.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Model has to be re-created after every modification of user strategy code.</p>
+</div>
+<h2 id="traffic-recording-and-replaying">Traffic recording and replaying</h2>
+<p>Before working with software model, it is necessary to have access to recorded traffic from the market that will be used for simulation or verification. When doing verification, FPGA card must be configured properly for traffic replaying as well.</p>
+<h3 id="recording-of-incoming-traffic">Recording of incoming traffic</h3>
+<p>To start recording of incoming traffic (both multicast and unicast data are supported), Magmio API method <code>stream.pcap.record("myfile.pcap")</code> needs to be invoked. Traffic recording is stopped automatically when Magmio API stops or can be stopped manually by invoking method <code>stream.pcap.stop()</code>.</p>
+<h3 id="replaying-traffic">Replaying traffic</h3>
+<p>When replaying traffic into the card (e.g. during offline verification), recorded PCAP trace needs to be transmitted into the card&rsquo;s physical interface #0. There are two ways how to replay the trace.</p>
+<ul>
+<li>Use physical interface other than #0 for transmitting PCAP data via loop-back to interface #0. The exact interface capable of replaying PCAP data is reported by API, when a user application is executed (i.e.: <a href="api.html">api-example</a>). The following diagram shows the connection of physical interface #3 (replay port for PCAP out) to physical interface #0 (multicast port for market data in).</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This feature is disabled by default, it is possible to enable it by changing configuration in HW. <a href="about.html#contact-information">Contact us</a> for more information.</p>
+</div>
+<p><img alt="Loopback Connection" class="center" src="img/replay_loopback.png" /></p>
+<p>The naming convention of the NFB-200G2QL card interfaces is shown in the following picture. Both physical QSPF+ interfaces are composed of 4 TX/RX pairs, totalling for 8 pairs per card. First four pairs (#0 - 3) come from QSPF+0 interface and the rest (#4 - 7) belongs to QSPF+1 interface.</p>
+<p><img alt="NFB-200G2QL card" class="center" src="img/NFB-200G2-QSFP-cages.jpg" /></p>
+<p>Similarly, the naming convention of the Cisco card interfaces is shown in the following pictures (Cisco Nexus V9P followed by Cisco Nexus V5P). Cisco cards support at most 8 RX/TX pairs per cage, totalling for 16 pairs per card. First eigth pairs (#0 - 7) come from QSPF-DD0 interface and the rest (#8 - 15) belongs to QSPF-DD1 interface.</p>
+<p><img alt="Cisco Nexus V9P card" class="center" src="img/exanic-v9p.png" /></p>
+<p><img alt="Cisco Nexus V5P card" class="center" src="img/exanic-v5p.jpg" /></p>
+<ul>
+<li>Use separate network interface card for sending data to FPGA card interface #0
+<img alt="Separate Connection" class="center" src="img/replay_separate.png" /></li>
+</ul>
+<p>There are several tools for transmitting PCAP trace, e.g. <code>sze2write</code> (only NFB-200G2QL cards) or <code>tcpreplay</code> (both cards):</p>
+<pre><code>$ sze2write -i 2 -f trace.pcap
+$ tcpreplay -i sze0.2 trace.pcap
+$ tcpreplay -i enp179s0d2 trade.pcap
+</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Example commands above assume loop-back configuration. Interface <strong>sze0.2</strong> identifies a card in position 0 and DMA channel 2. Specific sze interface is reported by api debug messages. Interface <strong>enp179s0d2</strong> identifies DMA channel 2 of a card.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Use <code>-M &lt;speed&gt;</code> parameter for tcpreplay tool to force speed of traffic replaying. Decrease the speed in case of packet overflow appears.</p>
+</div>
+<h3 id="packet-overflow">Packet overflow</h3>
+<p>If the transmitting speed is too high, some packets may be lost on the interface #0 because of input buffer overflow. Use command <code>ibufctl -i 0</code> (on NFB-200G2QL cards) or <a href="exanic_tools.html#exanic-config"><code>exanic-config</code></a> (on Cisco cards) to observe packet statistics.</p>
+<p>Example output (NFB-200G2QL card):</p>
+<pre><code>----------------------------- IBUF Status ------------------------------
+Interface number                 : 0
+Link status                      : ON
+IBUF                             : ENABLED
+PACODAG overflow occurred        : False
+DFIFO overflow occurred          : False
+IBUF speed                       : 10 Gb/s
+----------------------------- IBUF Packets/Frames Stats --------
+Packets                          : 282905
+Received                         : 282905
+Discarded                        : 0
+Buf overflow                     : 0
+Error packets                    : 0
+----------------------------- IBUF Settings ---------------------------
+Frame error from MII         [1] : enabled
+CRC check                    [2] : enabled
+Minimum frame length         [4] : enabled
+* length                         : 64 B
+MTU frame length             [8] : enabled
+* length                         : 1526 B (max 16352 B)
+MAC address check           [16] : enabled
+* mode                           : [0x0] promiscuous
+Maximal MAC addresses            : 16
+</code></pre>
+<p>NFB-200G2QL card output lines labelled <em>Discarded</em>, <em>Buf overflow</em>, and <em>Error packets</em> should be zero, otherwise some packets were lost.</p>
+<p>Example output (Cisco card):</p>
+<pre><code>...
+Port 0:
+    Interface: enp179s0
+    Port speed: 10000 Mbps
+    Port status: disabled, SFP present, no link
+    Promiscuous mode: on
+    Bypass-only mode: on
+    MAC address: bc:d2:95:95:50:00
+    RX packets: 15639  ignored: 0  error: 0  dropped: 0
+    TX packets: 412
+...
+</code></pre>
+<p>Cisco card output lines labelled <em>ignored</em>, <em>dropped</em>, and <em>error</em> should be zero, otherwise some packets were lost.</p>
+<h2 id="offline-verification">Offline verification</h2>
+<p>Verification of Magmio application is based on comparing outputs of firmware and software model when processing recorded traffic.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Offline verification serves primarily <strong>only for internal development, testing and verification by Magmio employees</strong>. Despite its main purpose, offline verification is still available to the end customers as an optional method. We do not expect customers to actively use offline verification.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Offline verification through <strong>verification_model</strong> supports currently only NFB-200G2QL cards (not available for Cisco cards yet).</p>
+</div>
+<p><img alt="Verification process diagram" class="center" src="img/verification.png" /></p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>It is unrecommended to do verification with live market data because of the low throughput of the software model.</p>
+</div>
+<p>For verification, run software model with following parameters:</p>
+<pre><code>$ cd ~/my-local/strategies/&lt;strategy&gt;/model/
+$ ./verification_model -f ../build/&lt;market&gt;_&lt;build_timestamp&gt;.bit
+                       -m ../../../configs/&lt;market&gt;/mapping.txt
+                       -c ../../../configs/&lt;market&gt;/api.xml
+                       -s
+</code></pre>
+<p>When <code>-s</code> parameter is used, Magmio application verifies output from Strategy engine. Output from Enhanced Top of Book and Decoder can be verified as well:</p>
+<ul>
+<li><code>-d</code> - Decoder</li>
+<li><code>-e</code> - Enhanced Top of Book</li>
+<li><code>-s</code> - Strategy Engine</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Only one unit output can be verified during the model run.</p>
+</div>
+<p>Example of software model verification output:</p>
+<pre><code>+=========================================================================================================================+
+| Info channel                                                                                                            |
++ ----------------------------- + ------------------------------------- + ------------------------------------- + ------- +
+| Field                         | SW output                             | HW output                             |         |
++ ----------------------------- + ------------------------------------- + ------------------------------------- + ------- +
+| Exchange time                 | 1559641512124926404                   | 1559641512124926404                   | OK      |
+| Flags                         | 1                                     | 1                                     | OK      |
+| Channel ID                    | 0                                     | 0                                     | OK      |
+| Packet seqnum                 | 789814                                | 789814                                | OK      |
+| Message seqnum                | 836624                                | 836624                                | OK      |
+| Decoder seqnum                | 1                                     | 1                                     | OK      |
+| Enfeed seqnum                 | 1                                     | 1                                     | OK      |
+| Message type                  | 44                                    | 44                                    | OK      |
+| Message content               | 200 Bytes                             | 200 Bytes                             | OK      |
+| Decoded Msg              0x00 | 2c409c00   00000000                   | 2c409c00   00000000                   | OK      |
+|                          0x08 | 0000000f   19174d00                   | 0000000f   19174d00                   | OK      |
+|                           ... | ...                                   | ...                                   | ...     |
+|                          0xc0 | 00000000   00000000                   | 00000000   00000000                   | OK      |
+===========================================================================================================================
+| Enhanced Top of Book output                                                                                             |
++ ----------------------------- + ------------------------------------- + ------------------------------------- + ------- +
+| Field                         | SW output                             | HW output                             |         |
++ ----------------------------- + ------------------------------------- + ------------------------------------- + ------- +
+| SID                           | 2479938                               | 2479938                               | OK      |
+| MSID                          | 0                                     | 0                                     | OK      |
++ ----------------------------- + ------------------------------------- + ------------------------------------- + ------- +
+| Previous Top of Book - common                                                                                           |
++ ----------------------------- + ------------------------------------- + ------------------------------------- + ------- +
+| Status                        | 0                                     | 0                                     | OK      |
+| Timestamp                     | 0                                     | 0                                     | OK      |
+| Last trade Mantisa            | 0                                     | 0                                     | OK      |
+| Last trade Exponent           | 0                                     | 0                                     | OK      |
+| Last trade Valid              | 0                                     | 0                                     | OK      |
++ ----------------------------- + ------------------------------------- + ------------------------------------- + ------- +
+| Previous Top of Book [level 0]                                                                                          |
++ ----------------------------- + ------------------------------------- + ------------------------------------- + ------- +
+| Bid Mantisa                   | 0                                     | 0                                     | OK      |
+| Bid Exponent                  | 0                                     | 0                                     | OK      |
+| Bid Size                      | 0                                     | 0                                     | OK      |
+| Bid Customer Size             | 0                                     | 0                                     | OK      |
+| Bid Secondary Size            | 0                                     | 0                                     | OK      |
+| Bid Lvl. Timestamp            | 0                                     | 0                                     | OK      |
+| Bid Valid                     | 0                                     | 0                                     | OK      |
+| Bid Error                     | 0                                     | 0                                     | OK      |
+| Ask Mantisa                   | 0                                     | 0                                     | OK      |
+| Ask Exponent                  | 0                                     | 0                                     | OK      |
+| Ask Size                      | 0                                     | 0                                     | OK      |
+| Ask Customer Size             | 0                                     | 0                                     | OK      |
+| Ask Secondary Size            | 0                                     | 0                                     | OK      |
+| Ask Lvl. Timestamp            | 0                                     | 0                                     | OK      |
+| Ask Valid                     | 0                                     | 0                                     | OK      |
+| Ask Error                     | 0                                     | 0                                     | OK      |
++ ----------------------------- + ------------------------------------- + ------------------------------------- + ------- +
+| Current Top of Book - common                                                                                            |
++ ----------------------------- + ------------------------------------- + ------------------------------------- + ------- +
+| Status                        | 0                                     | 0                                     | OK      |
+| Timestamp                     | 0                                     | 0                                     | OK      |
+| Last trade Mantisa            | 0                                     | 0                                     | OK      |
+| Last trade Exponent           | 0                                     | 0                                     | OK      |
+| Last trade Valid              | 0                                     | 0                                     | OK      |
++ ----------------------------- + ------------------------------------- + ------------------------------------- + ------- +
+| Current Top of Book [level 0]                                                                                           |
++ ----------------------------- + ------------------------------------- + ------------------------------------- + ------- +
+| Bid Mantisa                   | 331100000000                          | 331100000000                          | OK      |
+| Bid Exponent                  | 0                                     | 0                                     | OK      |
+| Bid Size                      | 40000                                 | 40000                                 | OK      |
+| Bid Customer Size             | 1                                     | 1                                     | OK      |
+| Bid Secondary Size            | 0                                     | 0                                     | OK      |
+| Bid Lvl. Timestamp            | 0                                     | 0                                     | OK      |
+| Bid Valid                     | 1                                     | 1                                     | OK      |
+| Bid Error                     | 0                                     | 0                                     | OK      |
+| Ask Mantisa                   | 0                                     | 0                                     | OK      |
+| Ask Exponent                  | 0                                     | 0                                     | OK      |
+| Ask Size                      | 0                                     | 0                                     | OK      |
+| Ask Customer Size             | 0                                     | 0                                     | OK      |
+| Ask Secondary Size            | 0                                     | 0                                     | OK      |
+| Ask Lvl. Timestamp            | 0                                     | 0                                     | OK      |
+| Ask Valid                     | 0                                     | 0                                     | OK      |
+| Ask Error                     | 0                                     | 0                                     | OK      |
+===========================================================================================================================
+| Strategy, params, pre-trade                                                                                             |
++ ----------------------------- + ------------------------------------- + ------------------------------------- + ------- +
+| Field                         | SW output                             | HW output                             |         |
++ ----------------------------- + ------------------------------------- + ------------------------------------- + ------- +
+| Strategy / pre-trade output 0                                                                                           |
++ ----------------------------- + ------------------------------------- + ------------------------------------- + ------- +
+| Ask price                     | 331100000000                          | 331100000000                          | OK      |
+| Bid price                     | 0                                     | 0                                     | OK      |
+| Ask size                      | 40000                                 | 40000                                 | OK      |
+| Bid size                      | 0                                     | 0                                     | OK      |
+| Minimum QTY                   | 100                                   | 100                                   | OK      |
+| Side                          | 2                                     | 2                                     | OK      |
+| Order type                    | 2                                     | 2                                     | OK      |
+| Position                      | 1                                     | 1                                     | OK      |
+| Time In Force                 | 3                                     | 3                                     | OK      |
+| Display                       | 1                                     | 1                                     | OK      |
+| ISO                           | 2                                     | 2                                     | OK      |
+| User tag                      | 0                                     | 0                                     | OK      |
+| Session                       | 0                                     | 0                                     | OK      |
+| Order ID                      | 65206000                              | 65206000                              | OK      |
+| Generate order                | 1                                     | 1                                     | OK      |
+| Pre-Trade status              | disabled                              | disabled                              | OK      |
+| Too Low Price                 | false                                 | false                                 | OK      |
+| Too High Price                | false                                 | false                                 | OK      |
+| Too Low Size                  | false                                 | false                                 | OK      |
+| Too High Size                 | false                                 | false                                 | OK      |
++ ----------------------------- + ------------------------------------- + ------------------------------------- + ------- +
+</code></pre>
+<p>When a verification is finished, verification model prints and compares statistics of data (packets and messages) processed through each module of trading pipeline.</p>
+<p>Example output when comparing Strategy Engine:</p>
+<pre><code>=========================================================================================
+| Statistics of processed data                                                          |
++ --------------------------------------------- + ------------- + ------------- + ----- +
+| Field                                         | SW output     | HW output     |       |
++ --------------------------------------------- + ------------- + ------------- + ----- +
+| Packet filter 0   - received packets          | 254           | 254           | OK    |
+| Packet filter 0   - discarded packets         | 248           | 248           | OK    |
+| Packet filter 0   - bad CRC packets           | 0             | 0             | OK    |
+| Packet filter 0   - passed to SW              | 0             | 0             | OK    |
+| Packet filter 0   - overflow SW               | 0             | 0             | OK    |
+| Packet filter 0   - passed market             | 6             | 6             | OK    |
+| Packet filter 0   - overflow market           | 0             | 0             | OK    |
+| Packet filter 0   - passed ord.dec            | 0             | 0             | OK    |
+| Packet filter 0   - overflow ord.dec          | 0             | 0             | OK    |
+| Arbitrage 0       - received packets          | 6             | 6             | OK    |
+| Arbitrage 0       - discarded packets         | 0             | 0             | OK    |
+| Arbitrage 0       - processed packets         | 6             | 6             | OK    |
+| Arbitrage 0       - not found packets         | 0             | 0             | OK    |
+| Recovery buffer 0 - received packets          | 6             | 6             | OK    |
+| Recovery buffer 0 - forwarded packets         | 3             | 3             | OK    |
+| Recovery buffer 0 - dropped packets           | 3             | 3             | OK    |
+| Recovery buffer 0 - replayed packets          | 0             | 0             | OK    |
+| Recovery buffer 0 - total packets out         | 3             | 3             | OK    |
+| Decoder 0         - received packets          | 3             | 3             | OK    |
+| Decoder 0         - exported messages         | 5             | 5             | OK    |
+| Seqnum filter 0   - received messages         | 5             | 5             | OK    |
+| Seqnum filter 0   - forwarded messages        | 5             | 5             | OK    |
+| Seqnum filter 0   - dropped messages          | 0             | 0             | OK    |
+| Book              - received messages         | 5             | 5             | OK    |
+| Book              - discarded by PHF          | 2             | 2             | OK    |
+| Book              - discarded by OT           | 2             | 2             | OK    |
+| Book              - exported updates          | 1             | 1             | OK    |
+| Strategy Filter   - recieved updates          | 1             | 1             | OK    |
+| Strategy Filter   - dropped updates           | 0             | 0             | OK    |
+| Strategy Filter   - passed updates            | 1             | 1             | OK    |
+| Strategy Engine   - book updates              | 1             | 1             | OK    |
+| Strategy Engine 0 - sent orders               | 1             | 1             | OK    |
+| Pre-Trade Check 0 - received orders           | 1             | 1             | OK    |
+| Pre-Trade Check 0 - passed orders             | 1             | 1             | OK    |
++ --------------------------------------------- + ------------- + ------------- + ----- +
+</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When comparing Decoder or Enhanced Top of Book outputs, some counters can be zero. In this case, it is not a fault.</p>
+</div>
+<h2 id="simulate-pcap-trace">Simulate PCAP trace</h2>
+<p>During simulation of PCAP trace in software, output from software model is not compared with output from card (as it is during verification), it is only printed on standard output (stdout). This way user strategies can be easily tested without time consuming firmware synthesis. To run software simulation with PCAP trace, use following commands:</p>
+<pre><code>$ cd ~/my-local/strategies/&lt;strategy&gt;/model/
+$ ./model -p ../nasdaq_&lt;market&gt;.pcap
+          -m ../../../configs/&lt;market&gt;/mapping.txt
+          -c ../../../configs/&lt;market&gt;/api.xml
+          -s
+</code></pre>
+<p>When <code>-s</code> parameter is used, Strategy Engine output will be printed. Similarly to verification model, Decoder and Enhanced Top of Book outputs can be printed as well by change of the parameter:</p>
+<ul>
+<li><code>-d</code> - Decoder</li>
+<li><code>-e</code> - Enhanced Top of Book</li>
+<li><code>-s</code> - Strategy Engine</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only one unit output can be printed during the model run.</p>
+</div>
+<p>Example of software model simulation output representing information about sent order from a user strategy:</p>
+<pre><code>Info channel
+ - Sending time:    0
+ - Hardware time:   1621584000006879000
+ - Exchange time:   1621584000009800576
+ - Flags:           2
+ - Feed type:       INCREMENTAL_FEED
+ - Channel ID:      0
+ - Packet seqnum:   991644
+ - Message seqnum:  991645
+ - Decoder seqnum:  1
+ - Message type:    65
+ - Message content: 200 Bytes
+Symbol
+ - SID:            71836
+ - MSID:           0
+Previous Top of Book
+Bid [level 0]
+ - Mantisa:        0
+ - Exponent:       0
+ - Size:           0
+ - Customer size:  0
+ - Secondary size: 0
+ - Lvl timestamp:  0
+ - Error:          0
+ - Valid:          0
+Ask [level 0]
+ - Mantisa:        0
+ - Exponent:       0
+ - Size:           0
+ - Customer size:  0
+ - Secondary size: 0
+ - Lvl timestamp:  0
+ - Error:          0
+ - Valid:          0
+Last trade
+ - Mantisa:        0
+ - Exponent:       0
+ - Valid:          0
+Attributes
+ - Status:         0
+Current Top of Book
+Bid [level 0]
+ - Mantisa:        5750
+ - Exponent:       0
+ - Size:           132
+ - Customer size:  1
+ - Secondary size: 0
+ - Lvl timestamp:  0
+ - Error:          0
+ - Valid:          1
+Ask [level 0]
+ - Mantisa:        0
+ - Exponent:       0
+ - Size:           0
+ - Customer size:  0
+ - Secondary size: 0
+ - Lvl timestamp:  0
+ - Error:          0
+ - Valid:          0
+Last trade
+ - Mantisa:        0
+ - Exponent:       0
+ - Valid:          0
+Attributes
+ - Status:         0
+Statistics
+ - MID:            0
+ - IMID:           0
+ - CMID:           0
+ - EMA(CMID):      0
+Strategy output
+ - Ask price:      5750
+ - Bid price:      0
+ - Ask size:       132
+ - Bid size:       0
+ - Mininum QTY:    1
+ - Side:           SIDE_SELL
+ - Msg Type:       MSG_NEW_ORDER
+ - Order Type:     TYPE_LIMIT
+ - Position:       POSITION_OPEN
+ - Time In Force:  TIF_IOC
+ - Display:        DISPLAY_YES
+ - ISO:            ISO_NO
+ - User Tag:       0
+ - Session:        0
+ - Order ID:       1000000
+</code></pre>
+<p>Similarly to verification model, when a software model is stopped, it prints statistics of data (packets and messages) processed through each module of trading pipeline.</p>
+<p>Example output:</p>
+<pre><code>+===============================================================+
+| Statistics of processed data                                  |
++---------------------------------------------+-----------------+
+| Unit                                        | Value           |
++---------------------------------------------+-----------------+
+| Packet Filter    0  - received packets      |           44993 |
+| Packet Filter    0  - discarded packets     |               0 |
+| Packet Filter    0  - bad CRC packets       |               0 |
+| Packet Filter    0  - passed to SW          |               0 |
+| Packet Filter    0  - overflow SW           |               0 |
+| Packet Filter    0  - forwarded market      |           44992 |
+| Packet Filter    0  - overflow market       |               0 |
+| Packet Filter    0  - forwarded ord.dec     |               0 |
+| Packet Filter    1  - forwarded ord.dec     |               0 |
+| Packet Filter    0  - overflow ord.dec      |               0 |
+| Arbitrage A      0  - received packets      |           44993 |
+| Arbitrage A      0  - forwarded packets     |           30722 |
+| Arbitrage A      0  - discarded packets     |           14270 |
+| Arbitrage A      0  - not found packets     |               0 |
+| Recovery buffer  0  - received packets      |           30723 |
+| Recovery buffer  0  - forwarded packets     |           30722 |
+| Recovery buffer  0  - discarded packets     |               0 |
+| Recovery buffer  0  - buffered packets      |               0 |
+| Decoder          0  - received packets      |           30723 |
+| Decoder          0  - exported messages     |           58557 |
+| Decoder          0  - dummy EOP messages    |               0 |
+| Order Decoder    0  - received packets      |               0 |
+| Order Decoder    1  - received packets      |               0 |
+| Order Decoder    0  - exported messages     |               0 |
+| Order Decoder    1  - exported messages     |               0 |
+| Order Decoder    0  - SidMap written        |               0 |
+| Order Decoder    1  - SidMap written        |               0 |
+| Order Decoder    0  - SidMap added          |               0 |
+| Order Decoder    1  - SidMap added          |               0 |
+| Order Decoder    0  - SidMap deleted        |               0 |
+| Order Decoder    1  - SidMap deleted        |               0 |
+| Order Decoder    0  - SidMap searched       |               0 |
+| Order Decoder    1  - SidMap searched       |               0 |
+| Order Decoder    0  - SidMap missed         |               0 |
+| Order Decoder    1  - SidMap missed         |               0 |
+| Seqnum filter    0  - received messages     |           58557 |
+| Seqnum filter    0  - forwarded messages    |           58557 |
+| Seqnum filter    0  - discarded messages    |               0 |
+| Mapping             - search requests       |           29014 |
+| Mapping             - symbol found          |           29014 |
+| Mapping             - symbol missed         |               0 |
+| Book                - received messages     |           58557 |
+| Book                - discarded by OT       |            5915 |
+| Book                - exported updates      |           52642 |
+| Strategy Engine     - book updates          |           52642 |
+| Strategy Engine     - sent feedback         |           52642 |
+| Strategy Engine     - sent orders           |           51480 |
+| Order Sender     0  - requests from HLS     |           51480 |
+| Order Sender     1  - requests from HLS     |               0 |
+| Order Sender     0  - requests from SW      |               0 |
+| Order Sender     1  - requests from SW      |               0 |
+| Order Sender     0  - session disabled      |           51480 |
+| Order Sender     1  - session disabled      |               0 |
+| Order Sender     0  - input fifo full       |               0 |
+| Order Sender     1  - input fifo full       |               0 |
+| Order Sender     0  - TCP window full       |               0 |
+| Order Sender     1  - TCP window full       |               0 |
+| Order Sender     0  - bad requests          |               0 |
+| Order Sender     1  - bad requests          |               0 |
+| Order Sender     0  - generated orders      |               0 |
+| Order Sender     1  - generated orders      |               0 |
++---------------------------------------------+-----------------+
+</code></pre>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="firmware_synthesis.html" class="btn btn-neutral float-left" title="Firmware synthesis"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="about.html" class="btn btn-neutral float-right" title="About">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Copyright &copy; 2022 <a href="https://www.magmio.com/contact">Magmio a.s.</a></p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="firmware_synthesis.html" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="about.html" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '.';</script>
+    <script src="js/theme_extra.js" defer></script>
+    <script src="js/theme.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

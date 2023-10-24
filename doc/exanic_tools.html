@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Magmio a.s." />
+      <link rel="shortcut icon" href="img/favicon.ico" />
+    <title>Exanic tools - Magmio User's Manual</title>
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/theme_extra.css" />
+        <link href="css/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Exanic tools";
+        var mkdocs_page_input_path = "exanic_tools.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+    <![endif]--> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="./index.html">
+          <img src="img/magmio-slogan-logo.png" class="logo" alt="Logo"/>
+        </a>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Magmio User Guide</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="index.html">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="exanic_tools.html">Exanic tools</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#exanic-config">Exanic-config</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#usage-examples-of-exanic-config">Usage examples of exanic-config</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#exanic-fwupdate">Exanic-fwupdate</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#usage-examples-of-exanic-fwupdate">Usage examples of exanic-fwupdate</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#exanic-clock-tools">Exanic-clock tools</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="api.html">API</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="mapping_configuration.html">Mapping and configuration files</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="strategies.html">Writing strategies</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="hls_strategy_simulation.html">Testing strategies in Vivado HLS</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="recovery.html">Recovery</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="book_channel.html">Book Channel</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="strategy_prefilter.html">Strategy Prefilter</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="riskcheck.html">PreTrade Risk Check</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="order_sender.html">Order Sender</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="status_channel.html">Status information</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="firmware_synthesis.html">Firmware synthesis</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="model_verification.html">Software model, simulation and verification</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="about.html">About</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="./index.html">Magmio User's Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><hr/>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="exanic-tools-for-cisco-cards">Exanic tools for Cisco cards</h1>
+<p>Cisco cards are managed in the production machine through tools provided by the <em>exanic-magmio</em> rpm packages. The following sections shortly describe the tools.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Cisco tools require specific rights to be available to normal users, see Magmio <a href="installation.html#prerequisites-production">prerequisites</a> for more information.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not use the official exanic rpm packages, instead use our patched <em>exanic-magmio</em> rpm packages.</p>
+</div>
+<h2 id="exanic-config">Exanic-config</h2>
+<p>The <code>exanic-config</code> shows information about cisco fpga cards plugged into the machine.</p>
+<p>Example of the output:</p>
+<pre><code>Device exanic0:
+   Hardware type: ExaNIC V9P-3
+   Serial number: FOC251370V8
+   Temperature: 44.2 C   VCCint: 0.90 V   VCCaux: 1.80 V
+   Function: customer application
+   Firmware date: 20210429 (Thu Apr 29 03:46:49 2021)
+   Customer version: 1647611902 (62348ffe)
+   Application name: MAGMIO-10G
+   ...
+</code></pre>
+<p>Header lines (first lines until a line starting with &ldquo;Port0&rdquo;) provide information about the fpga card status (model, serial number, temperature) and currently loaded firmware.</p>
+<p>The following lines of <code>exanic-config</code> output represent the current state of individual DMA channels, which correspond to the network interfaces, as well as the physical interface status.</p>
+<pre><code>Port 0:
+   Interface: enp179s0
+   Port speed: 10000 Mbps
+   Port status: disabled, SFP present, no link
+   Promiscuous mode: on
+   Bypass-only mode: on
+   MAC address: bc:d2:95:95:50:00
+   RX packets: 10  ignored: 0  error: 0  dropped: 0
+   TX packets: 42
+   ...
+
+Port 11:
+   Interface: enp179s0d17
+   Port speed: 10000 Mbps
+   Port status: enabled, SFP present, link active
+   Bypass-only mode: on
+   MAC address: bc:d2:95:95:50:0b
+   RX packets: 0  ignored: 0  error: 0  dropped: 0
+   TX packets: 0
+   ...
+</code></pre>
+<p>The <code>exanic-config</code> output in the previous example shows information about two ports: <em>Port0</em> and <em>Port11</em> (from the perspective of the exanic card). The meaning of each line is shortly described in the following list (the self-descriptive fields are omitted):</p>
+<ul>
+<li><em>Interface</em> - network interface as seen by the operating system. If we want to set an IP address and other network parameters, we use the interface name for the port shown at this line.</li>
+<li><em>Port status</em> - enabled/disabled by <code>exanic-config</code> tool, SFP present (L1 status, i.e. physical cable is connected), link active / no link (L2 status). If the port is disabled by <code>exanic-config</code> tool, the link is inactive even if the physical port is connected to the opposite side.</li>
+<li><em>Promiscuous mode</em> - if set to <code>on</code>, all communication traffic is received by the port.</li>
+<li><em>Bypass-only mode</em> - if set to <code>on</code>, then the operating system does not see any data communication through this port, the operating system is bypassed.</li>
+</ul>
+<h3 id="usage-examples-of-exanic-config">Usage examples of exanic-config</h3>
+<p>All following examples point to the first plugged Cisco card <code>exanic0</code>. If several Cisco cards are plugged into to machine, then the particular board identifier <code>exanicN</code> must be used.</p>
+<ul>
+<li><code># exanic-config exanic0:8 up</code> - enable port 8 and activate the corresponding network interface (you do not have to use tools like <code>ip</code> or <code>ifconfig</code> to activate net interface).</li>
+<li><code># exanic-config exanic0:* down</code> - disable all ports</li>
+<li><code># exanic-config exanic0:9</code> - show only status of the port 9</li>
+<li><code># exanic-config exanic0:8 counters reset</code> - reset packet counters for port 8</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All required DMA channel configuration steps, like correct channel setup and activation, are performed automatically by Magmio API according to the configuration in <a href="mapping_configuration.html#configuration-file"><em>api.xml</em></a>.</p>
+</div>
+<h2 id="exanic-fwupdate">Exanic-fwupdate</h2>
+<p>The tool <code>exanic-fwupdate</code> provides functions of loading and booting firmware into the Cisco fpga card.</p>
+<h3 id="usage-examples-of-exanic-fwupdate">Usage examples of exanic-fwupdate</h3>
+<ul>
+<li><code># exanic-fwupdate -r</code> - reload the firmware from <strong>production</strong> partition of exanic flash memory into fpga</li>
+<li><code># exanic-fwupdate -r &lt;*.fw&gt;</code> - store firmware into <strong>production</strong> partition of exanic flash memory and reload the firmware immediately into fpga</li>
+<li><code># exanic-fwupdate -R -r</code> - reload the firmware from <strong>recovery</strong> partition of exanic flash memory into fpga</li>
+</ul>
+<p>If you have several Cisco cards plugged into the server, then you have to specify the particular board identifier by option <code>-d &lt;exanicN&gt;</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All steps related to the firmware loading and booting into the fpga card are performed automatically by Magmio API during initialization.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not shutdown the process or suspend its run during the process of loading firmware into the card.</p>
+</div>
+<h2 id="exanic-clock-tools">Exanic-clock tools</h2>
+<p>Cisco provides <code>exanic-clock-sync</code> to synchronize fpga card clock with the system clock and <code>exanic-clock-check</code> to compare clock on Cisco card with system clock or clock on another Cisco card.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Magmio API is responsible for automatic start of the <code>exanic-clock-sync</code> process in order to synchronize clock of Cisco card with system clock of the server machine.</p>
+</div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="api.html" class="btn btn-neutral float-right" title="API">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Copyright &copy; 2022 <a href="https://www.magmio.com/contact">Magmio a.s.</a></p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="installation.html" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="api.html" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '.';</script>
+    <script src="js/theme_extra.js" defer></script>
+    <script src="js/theme.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

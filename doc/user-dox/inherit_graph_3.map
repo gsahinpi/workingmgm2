@@ -1,0 +1,4 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$class_magmio_1_1_async_queue.html" title="Magmio::AsyncQueue\l\&lt; TEventItem \&gt;" alt="" coords="5,5,168,46"/>
+<area shape="rect" id="node2" href="$class_magmio_1_1_event_queue.html" title="Queue of commands / packets for safe thread crossing. " alt="" coords="217,12,378,39"/>
+</map>

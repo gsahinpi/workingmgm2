@@ -1,0 +1,206 @@
+<decoderTemplate market="bist_itch" endianness="big">
+<!--
+    Specification version: 2102 (2019-05-20)
+    URL: https://www.borsaistanbul.com/files/bistech-itch-protocol-specification09A4C1544AD9.pdf
+
+    MoldUDP64 1.00
+    URL: https://www.borsaistanbul.com/files/moldudp64-protocol-specificationBAE8D35C9350.pdf
+
+    Version checked: 2021-01-13 by MaD
+-->
+    <packetHeader byteLength="20">
+        <field name="Session"                             byteLength="10" />
+        <field name="MsgSeqNum"                           byteLength="8" />
+        <field name="Message Count"                       byteLength="2" pos="18" export="msg_count"/>
+    </packetHeader>
+
+    <converters>
+        <converter target="side" byteLength="1">
+            <entry value="66" converted="0" />  <!-- "B" => 0 -->
+            <entry value="83" converted="1" />  <!-- "S" => 1 -->
+        </converter>
+    </converters>
+
+    <templates>
+        <messageHeader byteLength="3">
+            <field name="Message Length"                  byteLength="2" pos="0" export="msg_len" increment="2" />
+            <tid   name="Message Type"                    byteLength="1" pos="2" export="msg_type" />
+        </messageHeader>
+
+        <template msg_type="T" name="Seconds Message" id="84" disable_send="true">
+            <field  name="Second"                           byteLength="4" pos="3" export="time_sec" />
+        </template>
+
+        <!-- Not Exported at all -->
+        <template msg_type="R" name="Order Book Directory" id="82">
+            <field  name="Timestamp"                        byteLength="4" pos="3" />
+            <field  name="Order Book ID"                    byteLength="4" pos="7" />
+            <string name="Symbol"                           byteLength="32" pos="11" />
+            <string name="Long Name"                        byteLength="32" pos="43" />
+            <string name="ISIN"                             byteLength="12" pos="75" />
+            <field  name="Financial Product"                byteLength="1" pos="87" />
+            <!-- Specific set of values for Financial Product field -->
+            <string name="Trading Currency"                 byteLength="3" pos="88" />
+            <field  name="Number of Decimals in Price"      byteLength="2" pos="91" />
+            <field  name="Number of Decimals in Nominal Value" byteLength="2" pos="93" />
+            <field  name="Odd Lot Size"                     byteLength="4" pos="95" />
+            <field  name="Round Lot Size"                   byteLength="4" pos="99" />
+            <field  name="Block Lot Size"                   byteLength="4" pos="103" />
+            <field  name="Nominal value"                    byteLength="8" pos="107" />
+            <field  name="Number of Legs"                   byteLength="1" pos="115" />
+            <field  name="Underlying Order Book ID"         byteLength="4" pos="116" />
+            <field  name="Strike Price"                     byteLength="4" pos="120" />
+            <field  name="Expiration Date"                  byteLength="4" pos="124" />
+            <!-- Expiration Date is of type Date, but this type is not defined in spec doc -->
+            <field name="Number of Decimals in Strike Price" byteLength="2" pos="128" />
+            <field name="Put or Call"                      byteLength="1" pos="130" />
+            <!-- 0=Undefined,  1=Call, 2=Put -->
+        </template>
+
+        <!-- Not Exported at all -->
+        <template msg_type="M" name="Combination Order Book Leg" id="77">
+            <field  name="Timestamp"                        byteLength="4" pos="3" />
+            <field  name="Combination Order Book ID"        byteLength="4" pos="7" />
+            <field  name="Leg Order Book ID"                byteLength="4" pos="11" />
+            <string name="Leg Side"                         byteLength="1" pos="15" />
+            <!-- B=AsDefined, C=Opposite -->
+            <field  name="Leg Ratio"                        byteLength="4" pos="16" />
+        </template>
+
+        <!-- Not Exported at all -->
+        <template msg_type="L" name="Tick Size Table Entry" id="76">
+            <field name="Timestamp"                        byteLength="4" pos="3" />
+            <field name="Order Book ID"                    byteLength="4" pos="7" />
+            <field name="Tick Size"                        byteLength="8" pos="11" />
+            <field name="Price From"                       byteLength="4" pos="19" />
+            <field name="Price To"                         byteLength="4" pos="23" />
+        </template>
+
+        <template msg_type="S" name="System Event Message" id="83">
+            <field  name="Timestamp"                       byteLength="4" pos="3" export="time_ns" />
+            <string name="Event Code"                      byteLength="1" pos="7" export="decmsg" decmsg_byte="0" />
+            <!-- O=StartOfMessage, C=EndOfMessage -->
+        </template>
+
+        <template msg_type="O" name="Order Book State Message" id="79">
+            <field  name="Timestamp"                       byteLength="4" pos="3" export="time_ns" />
+            <field  name="Order Book ID"                   byteLength="4" pos="7" export="sid" decmsg_byte="0" />
+            <string name="State Name"                      byteLength="20" pos="11" export="decmsg" decmsg_byte="4"/>
+        </template>
+
+        <template msg_type="A" name="Add Order Message - No MPID" id="65">
+            <field  name="Timestamp"                       byteLength="4" pos="3" export="time_ns" />
+            <field  name="Order ID"                        byteLength="8" pos="7" export="order_id" decmsg_byte="0" update_tob="1" insert_lvl="1" />
+            <field  name="Order Book ID"                   byteLength="4" pos="15" export="sid" decmsg_byte="8" />
+            <string name="Side"                            byteLength="1" pos="19" export="side" decmsg_byte="12" />
+            <!-- B=Buy, S=Sell -->
+            <field  name="Order Book Position"             byteLength="4" pos="20" />
+            <field  name="Quantity"                        byteLength="8" pos="24" export="quantity" decmsg_byte="13" />
+            <field  name="Price"                           byteLength="4" pos="32" export="price" decmsg_byte="21" />
+            <field  name="Order Attributes"                byteLength="2" pos="36" />
+            <!-- Bit map - 0=NotApplicable, 8192=Bait/ImpliedOrder -->
+            <field  name="Lot Type"                        byteLength="1" pos="38" />
+            <!-- 2=RoundLot -->
+        </template>
+
+        <template msg_type="F" name="Add Order Message - With MPID" id="70">
+            <field  name="Timestamp"                       byteLength="4" pos="3" export="time_ns" />
+            <field  name="Order ID"                        byteLength="8" pos="7" export="order_id" decmsg_byte="0" update_tob="1" insert_lvl="1" />
+            <field  name="Order Book ID"                   byteLength="4" pos="15" export="sid" decmsg_byte="8" />
+            <string name="Side"                            byteLength="1" pos="19" export="side" decmsg_byte="12" />
+            <!-- B=Buy, S=Sell -->
+            <field  name="Order Book Position"             byteLength="4" pos="20" />
+            <field  name="Quantity"                        byteLength="8" pos="24" export="quantity" decmsg_byte="13" />
+            <field  name="Price"                           byteLength="4" pos="32" export="price" decmsg_byte="21" />
+            <field  name="Order Attributes"                byteLength="2" pos="36" />
+            <!-- Bit map - 0=NotApplicable, 8192=Bait/ImpliedOrder -->
+            <field  name="Lot Type"                        byteLength="1" pos="38" />
+            <string name="Participant ID"                  byteLength="7" pos="39" />
+        </template>
+
+        <template msg_type="E" name="Order Executed Message" id="69">
+            <field  name="Timestamp"                       byteLength="4" pos="3" export="time_ns" />
+            <field  name="Order ID"                        byteLength="8" pos="7" export="order_id" decmsg_byte="0" update_tob="1" delete_lvl="2" />
+            <field  name="Order Book ID"                   byteLength="4" pos="15" export="sid" decmsg_byte="8" />
+            <string name="Side"                            byteLength="1" pos="19" export="side" decmsg_byte="12" />
+            <!-- B=Buy, S=Sell -->
+            <field  name="Executed Quantity"               byteLength="8" pos="20" export="quantity" decmsg_byte="13" />
+            <field  name="Match ID"                        byteLength="8" pos="28" />
+            <field  name="Combo Group ID"                  byteLength="4" pos="36" />
+            <field  name="Reserved"                        byteLength="7" pos="40" />
+            <field  name="Reserved 2"                      byteLength="7" pos="47" />
+        </template>
+
+        <template msg_type="C" name="Order Executed with Price Message" id="67">
+            <field  name="Timestamp"                       byteLength="4" pos="3" export="time_ns" />
+            <field  name="Order ID"                        byteLength="8" pos="7" export="order_id" decmsg_byte="0" update_tob="1" delete_lvl="2" />
+            <field  name="Order Book ID"                   byteLength="4" pos="15" export="sid" decmsg_byte="8" />
+            <string name="Side"                            byteLength="1" pos="19" export="side" decmsg_byte="12" />
+            <!-- B=Buy, S=Sell -->
+            <field  name="Executed Quantity"               byteLength="8" pos="20" export="quantity" decmsg_byte="13" />
+            <field  name="Match ID"                        byteLength="8" pos="28" />
+            <field  name="Combo Group ID"                  byteLength="4" pos="36" />
+            <field  name="Reserved"                        byteLength="7" pos="40" />
+            <field  name="Reserved 2"                      byteLength="7" pos="47" />
+            <field  name="Trade Price"                     byteLength="4" pos="54" export="price" decmsg_byte="21" />
+            <string name="Occurred at Cross"               byteLength="1" pos="58" />
+            <!-- Y=Yes, N=No -->
+            <string name="Printable"                       byteLength="1" pos="59" />
+            <!-- Y=Yes, N=No -->
+        </template>
+
+        <template msg_type="U" name="Order Replace Message" id="85">
+        <!-- Not used currently - waits for future reference -->
+            <field  name="Timestamp"                       byteLength="4" pos="3" export="time_ns" />
+            <field  name="Order ID"                        byteLength="8" pos="7" export="order_id" decmsg_byte="0" />
+            <field  name="Order Book ID"                   byteLength="4" pos="15" export="sid" decmsg_byte="8" update_tob="1" insert_lvl="1" delete_lvl="1" />
+            <string name="Side"                            byteLength="1" pos="19" export="side" decmsg_byte="12" />
+            <!-- B=Buy, S=Sell -->
+            <field  name="New Order Book Position"         byteLength="4" pos="20" />
+            <field  name="Quantity"                        byteLength="8" pos="24" export="quantity" decmsg_byte="13" />
+            <field  name="Price"                           byteLength="4" pos="32" export="price" decmsg_byte="21"/>
+            <field  name="Order Attributes"                byteLength="2" pos="36" />
+            <!-- Bit map - 0=NotApplicable, 8192=Bait/ImpliedOrder -->
+        </template>
+
+        <template msg_type="D" name="Order Delete Message" id="68">
+            <field  name="Timestamp"                       byteLength="4" pos="3" export="time_ns" />
+            <field  name="Order ID"                        byteLength="8" pos="7" export="order_id" decmsg_byte="0" update_tob="1" delete_lvl="1" />
+            <field  name="Order Book ID"                   byteLength="4" pos="15" export="sid" decmsg_byte="8" />
+            <string name="Side"                            byteLength="1" pos="19" export="side" decmsg_byte="12" />
+            <!-- B=Buy, S=Sell -->
+        </template>
+
+        <template msg_type="P" name="Trade Message" id="80">
+            <field  name="Timestamp"                       byteLength="4" pos="3" export="time_ns" />
+            <field  name="Match ID"                        byteLength="8" pos="7" />
+            <field  name="Combo Group ID"                  byteLength="4" pos="15" />
+            <string name="Side"                            byteLength="1" pos="19" export="side" decmsg_byte="0" />
+            <!-- B=Buy, S=Sell -->
+            <field  name="Quantity"                        byteLength="8" pos="20" export="quantity" decmsg_byte="1" />
+            <field  name="Order Book ID"                   byteLength="4" pos="28" export="sid" decmsg_byte="9" />
+            <field  name="Trade Price"                     byteLength="4" pos="32" export="price" decmsg_byte="13" />
+            <field  name="Reserved"                        byteLength="7" pos="36" />
+            <field  name="Reserved 2"                      byteLength="7" pos="43" />
+            <string name="Printable"                       byteLength="1" pos="50" />
+            <!-- Y=Yes, N=No -->
+            <string name="Occurred at Cross"               byteLength="1" pos="51" />
+            <!-- Y=Yes, N=No -->
+        </template>
+
+        <template msg_type="Z" name="Equilibrium Price Update" id="90">
+            <field  name="Timestamp"                        byteLength="4" pos="3" export="time_ns" />
+            <field  name="Order Book ID"                    byteLength="4" pos="7" export="sid" decmsg_byte="0" />
+            <field  name="Available Bid Qty at EqPrice"     byteLength="8" pos="11" export="decmsg" decmsg_byte="28" />
+            <field  name="Available Ask Qty at EqPrice"     byteLength="8" pos="19" export="decmsg" decmsg_byte="36" />
+            <field  name="Equilibrium Price"                byteLength="4" pos="27" export="decmsg" decmsg_byte="44" />
+            <field  name="Best Bid Price"                   byteLength="4" pos="31" export="decmsg" decmsg_byte="4" />
+            <field  name="Best Ask Price"                   byteLength="4" pos="35" export="decmsg" decmsg_byte="8" />
+            <field  name="Best Bid Quantity"                byteLength="8" pos="39" export="decmsg" decmsg_byte="12" />
+            <field  name="Best Ask Quantity"                byteLength="8" pos="47" export="decmsg" decmsg_byte="20" />
+        </template>
+
+    </templates>
+
+</decoderTemplate>
+

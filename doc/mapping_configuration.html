@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Magmio a.s." />
+      <link rel="shortcut icon" href="img/favicon.ico" />
+    <title>Mapping and configuration files - Magmio User's Manual</title>
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/theme_extra.css" />
+        <link href="css/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Mapping and configuration files";
+        var mkdocs_page_input_path = "mapping_configuration.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+    <![endif]--> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="./index.html">
+          <img src="img/magmio-slogan-logo.png" class="logo" alt="Logo"/>
+        </a>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Magmio User Guide</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="index.html">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="exanic_tools.html">Exanic tools</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="api.html">API</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="mapping_configuration.html">Mapping and configuration files</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#mapping-file">Mapping file</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#configuration-file">Configuration file</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#multicast-setting">Multicast setting</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#packet-and-message-feed-rules">Packet and message feed rules</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#feed-type-and-feed-id">Feed type and feed id</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#order-sender-configuration">Order Sender configuration</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="strategies.html">Writing strategies</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="hls_strategy_simulation.html">Testing strategies in Vivado HLS</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="recovery.html">Recovery</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="book_channel.html">Book Channel</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="strategy_prefilter.html">Strategy Prefilter</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="riskcheck.html">PreTrade Risk Check</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="order_sender.html">Order Sender</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="status_channel.html">Status information</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="firmware_synthesis.html">Firmware synthesis</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="model_verification.html">Software model, simulation and verification</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="about.html">About</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="./index.html">Magmio User's Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><hr/>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="mapping-and-configuration-files">Mapping and configuration files</h1>
+<h2 id="mapping-file">Mapping file</h2>
+<p>Every instrument (also called symbol) at a market is identified with unique <em>Symbol ID</em> (SID), which is assigned by the exchange. It is necessary to specify all IDs at the beginning of the trading day and load them as a configuration into the firmware. All messages containing unspecified IDs will be discarded during the trading day.</p>
+<p>All IDs which should be traded during the trading day, have to be specified in a text file. This file has a very simple format. Each ID is on a separate line and contains several columns. All values are separated by semicolon. If SID is not specified in the mapping file, messages related to unspecified SID will be discarded in the book, so strategy will not be trigged.</p>
+<p>The first column is used as the Symbol ID. The second column is the Group ID for pergroup parameters. Other columns are describing traded instrument, they are used by the <a href="order_sender.html#instrument-identification">Order Sender</a>.</p>
+<p>Possible structure of mapping file:</p>
+<ul>
+<li>Symbol ID</li>
+<li>Group ID (for pergroup parameters)</li>
+<li>Symbol name</li>
+<li>Strike Date (format YYYYMMDD)</li>
+<li>Strike Price</li>
+<li>Put/call</li>
+<li>Underlying quantity</li>
+<li>Price scale</li>
+</ul>
+<p>An example of mapping file content:</p>
+<pre><code>39914;1;BBD;20121222;260000;C;100;4
+39915;1;BBD;20121222;270000;C;100;4
+39916;1;BBD;20121222;280000;C;100;4
+39917;2;BBD;20140118;30000;P;100;4
+39918;2;BBD;20140118;50000;P;100;4
+39919;3;BBD;20140118;80000;P;100;4
+</code></pre>
+<p>Maximum number of unique IDs depends on a specific market. <a href="about.html#contact-information">Contact us</a> for details about the limits.</p>
+<p>Exemplar mapping files can be found at <code>~/my-local/configs/&lt;market&gt;/mapping.txt</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Format of the mapping file may differ between markets as the instrument identification varies.</p>
+</div>
+<h2 id="configuration-file">Configuration file</h2>
+<p>Magmio API is configured using XML file. Examples of this file can be found in directories <code>~/my-local/configs/&lt;market&gt;/api.xml</code>. The configuration file is used to setup market, multicast, packet and message filtering rules and order sender settings.</p>
+<h3 id="multicast-setting">Multicast setting</h3>
+<p>To receive multicast data, multicast settings must be filled in <code>api.xml</code> configuration file.</p>
+<pre><code>&lt;magmio&gt;
+   &lt;market type =&quot;nasdaq_ise&quot; portA=&quot;0&quot; portB=&quot;0&quot;&gt;
+      &lt;igmp enabled=&quot;true&quot;&gt;
+         &lt;local_mac&gt;00:AD:FE:45:12:27&lt;/local_mac&gt;
+         &lt;vlan&gt;&lt;/vlan&gt;
+         &lt;local_ip&gt;10.10.10.1&lt;/local_ip&gt;
+      &lt;/igmp&gt;
+      &lt;!-- feed rules placement --&gt;
+   &lt;/market&gt;
+</code></pre>
+<p>When <code>igmp</code> is enabled, Magmio will subscribe multicast groups using built-in IGMPv2 protocol. Groups are subscribed according to IP addresses specified in feed rules. User can specify local hardware address, IP address and VLAN which will be used in subscription messages.</p>
+<p>Messages coming from single or multiple ports are arbitrated, faster channel is preferred. In case of having multiple markets configured, arbitration is done for each market separately.</p>
+<h3 id="packet-and-message-feed-rules">Packet and message feed rules</h3>
+<p>Feed consists of addresses of two channels A and B, each in format <code>ip_address:port</code>. The default maximum count of feeds is 16. The number of maximum feed rules can be increased upon request. Following lines show one filter rule.</p>
+<pre><code>&lt;feed&gt;
+   &lt;ruleA&gt;233.54.12.9:18009&lt;/ruleA&gt;
+   &lt;ruleB&gt;233.54.12.13:18013&lt;/ruleB&gt;
+&lt;/feed&gt;
+</code></pre>
+<h4 id="feed-type-and-feed-id">Feed type and feed id</h4>
+<p>Feed definition in <em>api.xml</em> through <code>feed</code> tag supports two attributes: <code>type</code> and <code>id</code>.</p>
+<p>Magmio product supports the following options for feed <code>type</code> attribute:</p>
+<table>
+<thead>
+<tr>
+<th>Feed type in api.xml</th>
+<th>Feed type in strategy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>No type</em></td>
+<td><code>NORMAL_FEED</code></td>
+</tr>
+<tr>
+<td><code>"incremental"</code> (<code>"incr"</code>)</td>
+<td><code>INCREMENTAL_FEED</code></td>
+</tr>
+<tr>
+<td><code>"snapshot"</code> (<code>"snap"</code>)</td>
+<td><code>SNAPSHOT_FEED</code></td>
+</tr>
+<tr>
+<td><code>"request"</code></td>
+<td><code>REQUEST_FEED</code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>There are only two approaches to <code>type</code> attribute setup for feeds in <em>api.xml</em>. Even none of the feeds have <code>type</code> set (all feeds are reported by a user strategy as <code>NORMAL_FEED</code>), or each feed has set a feed type to one of the supported values (see the table of supported feed types in Magmio). In the second case, a user strategy reports a feed type according to the type specified in <em>api.xml</em> (see table).</p>
+</div>
+<p>Feed <code>id</code> attribute is optional (starting from 0). Channel ID (<code>info.channelId</code>) reported by a user strategy depends directly on the <code>id</code> and <code>type</code> values.</p>
+<p>In the case of <code>normal</code> and <code>incremental</code> feed types, channel ID is given by the following formula:</p>
+<pre><code>RuleA:
+   info.channelId = (feedId * 2)
+RuleB:
+   info.channelId = (feedId * 2) + 1
+</code></pre>
+<p>In the case of <code>request</code> and <code>snapshot</code> feed types, channel ID is given by the following formula regardless of the used primary or secondary (backup) rewinder server:</p>
+<pre><code>info.channelId = (feedId * 2)
+</code></pre>
+<p>Example of a <code>feed</code> tag with set <code>type</code> and <code>id</code> attributes in <em>api.xml</em>:</p>
+<pre><code>&lt;feed type=&quot;incr&quot; id=&quot;0&quot;&gt;
+   &lt;ruleA&gt;233.54.12.9:18009&lt;/ruleA&gt;
+   &lt;ruleB&gt;233.54.12.13:18013&lt;/ruleB&gt;
+&lt;/feed&gt;
+</code></pre>
+<h3 id="order-sender-configuration">Order Sender configuration</h3>
+<p>There can be multiple independent sessions of Order Sender differently configured. During API initialization, API checks the configuration against Order Senders available in firmware and informs user in case there are not enough suitable Order Senders found.</p>
+<pre><code>&lt;order_sender&gt;
+   &lt;session id=&quot;OUCH_port0.0&quot; automap=&quot;true&quot;&gt;
+      &lt;physical_port&gt;0&lt;/physical_port&gt;
+      &lt;protocol type=&quot;nasdaq_ouch&quot;&gt;
+         &lt;username&gt;USER&lt;/username&gt;
+         &lt;password&gt;PASS&lt;/password&gt;
+         &lt;mmid&gt;&lt;/mmid&gt;
+         &lt;firm&gt;FIRM&lt;/firm&gt;
+         &lt;heartbeat_interval&gt;1000&lt;/heartbeat_interval&gt;
+         &lt;order_id&gt;1000000&lt;/order_id&gt;
+      &lt;/protocol&gt;
+
+      &lt;connection&gt;
+         &lt;local_mac&gt;DE:AD:BE:EF:CA:FE&lt;/local_mac&gt;
+         &lt;vlan&gt;162&lt;/vlan&gt;
+         &lt;local_ip&gt;10.10.10.1&lt;/local_ip&gt;
+         &lt;netmask&gt;255.255.255.0&lt;/netmask&gt;
+         &lt;default_gw&gt;&lt;/default_gw&gt;
+         &lt;remote_ip&gt;10.10.10.10&lt;/remote_ip&gt;
+         &lt;remote_port&gt;6666&lt;/remote_port&gt;
+      &lt;/connection&gt;
+   &lt;/session&gt;
+   &lt;!-- multiple sessions are allowed --&gt;
+&lt;/order_sender&gt;
+</code></pre>
+<p>List of Order Sender tags and their brief description:</p>
+<ul>
+<li><code>&lt;order_sender&gt;</code> - Defines section for Order Sender session(s):</li>
+<li><code>&lt;session&gt;</code><ul>
+<li>Configuration of one session.</li>
+<li>Attribute <code>id</code> uniquely identifies each Order Sender session. API will use this value (session ID) to refer to this session and will accept this ID when user wants to interact with this session.</li>
+<li>Attribute <code>automap="false"</code> can be used to disable this session. Then, the API will skip this configuration.</li>
+<li>Attribute <code>decoder_feed="true"</code> can be used to enable order decoder, if any order decoder is included in firmware for the specified order protocol.</li>
+</ul>
+</li>
+<li><code>&lt;physical_port&gt;</code> - Selects on which physical port of the card the session will operate.</li>
+<li><code>&lt;protocol&gt;</code><ul>
+<li>Attribute <code>type</code> selects order entry protocol. Visit <a href="order_sender.html#market-session">Order Sender</a> page to see list of supported protocols.</li>
+<li>Tags in the section are market specific and may vary between different market order protocols. All tags supported by given protocol can be seen in <code>api.xml</code> example configuration file.</li>
+<li>Order ID (ID of generated order) is unique parameter set in API (e.g. <code>&lt;order_id&gt;1000000&lt;/order_id&gt;</code>), it&rsquo;s possible to use internal order ID which is incremented by 1 for each outgoing order and starts at a client defined number or set it yourself in strategy, however in such case uniqness of set order ID must be guaranteed, because it&rsquo;s not verified by Order Sender!</li>
+</ul>
+</li>
+<li><code>&lt;connection&gt;</code><ul>
+<li>Configures parameters of network connection of defined Order Sender session.</li>
+<li>Magmio uses ARP to query for destination hardware address. However, it&rsquo;s possible to force destination MAC address by using optional attribute <code>mac</code> in <code>&lt;remote_ip&gt;</code> tag.</li>
+</ul>
+</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="api.html" class="btn btn-neutral float-left" title="API"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="strategies.html" class="btn btn-neutral float-right" title="Writing strategies">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Copyright &copy; 2022 <a href="https://www.magmio.com/contact">Magmio a.s.</a></p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="api.html" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="strategies.html" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '.';</script>
+    <script src="js/theme_extra.js" defer></script>
+    <script src="js/theme.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
